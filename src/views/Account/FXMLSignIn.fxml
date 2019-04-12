@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.scene.text.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="821.0" prefWidth="480.0" styleClass="log-pane" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <HBox layoutX="41.0" layoutY="234.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
+         <children>
+            <TextField maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Name" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="USER" size="1.5em" text="" textAlignment="JUSTIFY" wrappingWidth="31.678571701049805">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <HBox layoutX="47.0" layoutY="306.0" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
+         <children>
+            <TextField maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="DPI" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="PLUS" size="1.5em" wrappingWidth="30.678571701049805">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <JFXButton layoutX="189.0" layoutY="518.0" prefHeight="49.0" prefWidth="121.0" styleClass="newaccount-buttton" text="Get Access" />
+      <ImageView fitHeight="182.0" fitWidth="248.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../../resources/logo.png" />
+         </image>
+      </ImageView>
+      <Label layoutX="171.0" layoutY="195.0" prefHeight="39.0" prefWidth="157.0" text="Create a new Account">
+         <font>
+            <Font size="20.0" />
+         </font>
+      </Label>
+      <HBox layoutX="48.0" layoutY="376.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
+         <children>
+            <TextField maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="User name" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </TextField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="USER" size="1.5em" text="" textAlignment="JUSTIFY" wrappingWidth="31.678571701049805">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+      <HBox layoutX="51.0" layoutY="438.0" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
+         <children>
+            <PasswordField prefHeight="49.0" prefWidth="384.0" promptText="Password" styleClass="tf">
+               <font>
+                  <Font size="19.0" />
+               </font>
+            </PasswordField>
+            <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="LOCK" size="1.5em" wrappingWidth="26.464285850524902">
+               <HBox.margin>
+                  <Insets top="18.0" />
+               </HBox.margin>
+            </FontAwesomeIcon>
+         </children>
+      </HBox>
+   </children>
+</AnchorPane>

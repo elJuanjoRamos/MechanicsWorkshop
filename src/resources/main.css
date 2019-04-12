@@ -1,0 +1,73 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : Apr 12, 2019, 12:15:02 PM
+    Author     : Juan José Ramos
+*/
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('Roboto-Medium.ttf');
+}
+
+.text {
+    -fx-font-family: "Roboto";
+}
+
+
+.pane{
+    -fx-background-color:#6200EE;
+}
+
+.Parent {
+    -fx-background-color:transparent;
+}
+
+
+
+.transparet-buttton{
+    -fx-background-color:transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: white;
+    -fx-border-radius:5px;
+    -fx-border-width:1px;
+    -fx-text-fill:white;
+}
+
+.account-buttton{
+    -fx-background-color:transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #6200EE;
+    -fx-border-radius:5px;
+    -fx-border-width:1px;
+    -fx-text-fill:#6200EE;
+}
+
+.newaccount-buttton{
+    -fx-background-color:transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #B00020;
+    -fx-border-radius:5px;
+    -fx-border-width:1px;
+    -fx-text-fill:#B00020;
+}
+
+
+.log-pane{
+    -fx-background-color:white
+}
+
+.tf-box{
+    -fx-background-color:transparent;
+    -fx-border-color: #DEDEE4;
+    -fx-border-width:0px 0px 1px 0px;
+        
+}
+
+.tf{
+    -fx-background-color:transparent;
+    
+}
