@@ -5,6 +5,8 @@
  */
 package views.Account;
 
+import beans.Employee;
+import controllers.EmployeeController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -28,12 +30,35 @@ public class AuthController implements Initializable {
         // TODO
     }
     
+    
+        
     @FXML
     private void authenticate(ActionEvent event) {
-        if (user.getText().equals("admin") && pass.getText().equals("admin")) {
-            System.out.println(user.getText());
-        }
+        
+        EmployeeController.getInstance().add("uno", "admin", "admin", "amdmin");
+        EmployeeController.getInstance().add("dos", "d", "d", "t");
+        EmployeeController.getInstance().add("tres", "t", "t", "d");
+        EmployeeController.getInstance().add("cuatro", "c", "v", "t");
+        EmployeeController.getInstance().add("cinco", "d", "d", "t");
+        
+        
+        EmployeeController.getInstance().show();
+        
+        
+        EmployeeController.getInstance().edit(3, "Juan", "admon", "LordSith", "dvader");
+        
+        System.out.println("\n");
+        EmployeeController.getInstance().showNormal();
+        
+        System.out.println("\n");
+        EmployeeController.getInstance().delete(2);
+        EmployeeController.getInstance().showNormal();
+         
+       
+        
         
     }
+    
+    
     
 }

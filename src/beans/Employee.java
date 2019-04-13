@@ -10,12 +10,16 @@ package beans;
  * @author Juan José Ramos
  */
 public class Employee {
+    
     private int id;
     private String name;
     private String role;
     private String username;
     private String password;
-
+    public Employee previous;
+    public  Employee next;
+    
+    
     public Employee() {
     }
 
@@ -66,8 +70,7 @@ public class Employee {
     public void setPassword(String password) {
         this.password = password;
     }
-    
-    
+
             
     
 }
