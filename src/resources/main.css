@@ -17,12 +17,12 @@ and open the template in the editor.
     -fx-font-family: "Roboto";
 }
 
-
+//azulito cool #6200EE
 .pane{
-    -fx-background-color:#6200EE;
+    -fx-background-color:black;
 }
 
-.Parent {
+.fxml {
     -fx-background-color:transparent;
 }
 
@@ -40,10 +40,10 @@ and open the template in the editor.
 .account-buttton{
     -fx-background-color:transparent;
     -fx-background-radius: 5px;
-    -fx-border-color: #6200EE;
+    -fx-border-color: black;
     -fx-border-radius:5px;
     -fx-border-width:1px;
-    -fx-text-fill:#6200EE;
+    -fx-text-fill:black;
 }
 
 .newaccount-buttton{

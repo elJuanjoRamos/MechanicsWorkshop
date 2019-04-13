@@ -5,28 +5,35 @@
  */
 package views.Account;
 
-import java.awt.TextField;
+import java.net.URL;
+import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.PasswordField;
-import javafx.scene.layout.VBox;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TextField;
 
 /**
+ * FXML Controller class
  *
  * @author Juan José Ramos
  */
-public class AuthController {
+public class AuthController implements Initializable {
+
     /*VARIABLES*/
     @FXML
-    private TextField username;
-    private PasswordField password;
+    private TextField user, pass, name, dpi, user2, pass2;
     
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        // TODO
+    }
     
-    
-    /*METODO AUTENTICAR*/
     @FXML
     private void authenticate(ActionEvent event) {
-        System.out.println(password.getText());
-        System.out.println(username.getText());
+        if (user.getText().equals("admin") && pass.getText().equals("admin")) {
+            System.out.println(user.getText());
+        }
+        
     }
+    
 }

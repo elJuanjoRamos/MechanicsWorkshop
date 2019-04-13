@@ -5,18 +5,17 @@
  */
 package views.Account;
 
+import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
  *
  * @author Juan José Ramos
  */
-public class Account {
- 
+public class Account extends Application {
     /*SINGLETON*/
     private static final Account instance = new Account();
     
@@ -30,14 +29,14 @@ public class Account {
     }
     
     
-    /*Inicio de aplicacion*/
+    @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("FXMLAccount.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
         
         Scene scene = new Scene(root);
-        scene.setFill(Color.TRANSPARENT);
-        stage.setScene(scene);
         
+        stage.setScene(scene);
         stage.show();
     }
+
 }

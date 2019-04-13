@@ -11,11 +11,11 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="821.0" prefWidth="480.0" styleClass="log-pane" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1">
-   <children>
+<AnchorPane id="AnchorPane" prefHeight="736.0" prefWidth="506.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="views.Account.AuthController">
+       <children>
       <HBox layoutX="41.0" layoutY="234.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
          <children>
-            <TextField maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Name" styleClass="tf">
+            <TextField fx:id="name" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Name" styleClass="tf">
                <font>
                   <Font size="19.0" />
                </font>
@@ -29,7 +29,7 @@
       </HBox>
       <HBox layoutX="47.0" layoutY="306.0" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
          <children>
-            <TextField maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="DPI" styleClass="tf">
+            <TextField fx:id="dpi" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="DPI" styleClass="tf">
                <font>
                   <Font size="19.0" />
                </font>
@@ -41,7 +41,7 @@
             </FontAwesomeIcon>
          </children>
       </HBox>
-      <JFXButton layoutX="189.0" layoutY="518.0" prefHeight="49.0" prefWidth="121.0" styleClass="newaccount-buttton" text="Get Access" />
+      <JFXButton layoutX="189.0" layoutY="553.0" prefHeight="49.0" prefWidth="121.0" styleClass="newaccount-buttton" text="Get Access" />
       <ImageView fitHeight="182.0" fitWidth="248.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/logo.png" />
@@ -54,7 +54,7 @@
       </Label>
       <HBox layoutX="48.0" layoutY="376.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
          <children>
-            <TextField maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="User name" styleClass="tf">
+            <TextField fx:id="user2" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="User name" styleClass="tf">
                <font>
                   <Font size="19.0" />
                </font>
@@ -68,7 +68,7 @@
       </HBox>
       <HBox layoutX="51.0" layoutY="438.0" prefHeight="50.0" prefWidth="379.0" styleClass="tf-box">
          <children>
-            <PasswordField prefHeight="49.0" prefWidth="384.0" promptText="Password" styleClass="tf">
+            <PasswordField fx:id="pass2" prefHeight="49.0" prefWidth="384.0" promptText="Password" styleClass="tf">
                <font>
                   <Font size="19.0" />
                </font>

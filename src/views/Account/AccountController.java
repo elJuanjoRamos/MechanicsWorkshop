@@ -5,7 +5,6 @@
  */
 package views.Account;
 
-import java.awt.TextField;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -17,7 +16,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
-import javafx.scene.control.PasswordField;
+import javafx.scene.control.TextField;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -26,18 +25,12 @@ import javafx.util.Duration;
  *
  * @author Juan José Ramos
  */
-public class FXMLAccountController implements Initializable {
+public class AccountController implements Initializable {
 
     @FXML
     private VBox vbox;
-    private TextField username;
-    private PasswordField password;
     
-    
-    /**
-     * Initializes the controller class.
-     */
-    
+    @FXML
     private Parent fxml;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
@@ -46,11 +39,12 @@ public class FXMLAccountController implements Initializable {
         t.play();
         t.setOnFinished((e) -> {
             try {
-                fxml = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+                fxml = (Parent) FXMLLoader.load(getClass().getResource("/views/Account/Login.fxml"));
                 vbox.getChildren().removeAll();
                 vbox.getChildren().setAll(fxml);
             } catch (IOException ex) {
-                Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         });
@@ -62,32 +56,32 @@ public class FXMLAccountController implements Initializable {
         t.play();
         t.setOnFinished((e) -> {
             try {
-                fxml = FXMLLoader.load(getClass().getResource("FXMLLogin.fxml"));
+                fxml = (Parent) FXMLLoader.load(getClass().getResource("/views/Account/Login.fxml"));
                 vbox.getChildren().removeAll();
                 vbox.getChildren().setAll(fxml);
             } catch (IOException ex) {
-                Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                System.out.println(ex);
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         });
     }
     @FXML
     private void open_signIn(ActionEvent event) {
-         TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
-        t.setToX(14);
+        TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
+        t.setToX(30);
         t.play();
         t.setOnFinished((e) -> {
             try {
-                fxml = FXMLLoader.load(getClass().getResource("FXMLSignIn.fxml"));
+                fxml = (Parent)FXMLLoader.load(getClass().getResource("/views/Account/SignIn.fxml"));
                 vbox.getChildren().removeAll();
                 vbox.getChildren().setAll(fxml);
             } catch (IOException ex) {
-                Logger.getLogger(FXMLAccountController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         });
     }
-    
     
     
 }
