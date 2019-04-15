@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane id="AnchorPane" prefHeight="953.0" prefWidth="1678.0" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.AdminController">
+   <children>
+      <BorderPane layoutY="-1.0" prefHeight="953.0" prefWidth="1678.0">
+         <top>
+            <HBox prefHeight="108.0" prefWidth="1374.0" BorderPane.alignment="CENTER">
+               <children>
+                  <HBox alignment="CENTER" maxWidth="-Infinity" prefHeight="108.0" prefWidth="213.0" style="-fx-background-color: #0fbcf9;">
+                     <children>
+                        <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="LASTFM" size="2.5em" />
+                        <Text strokeType="OUTSIDE" strokeWidth="0.0" style="-fx-font-family: Quicksand; -fx-font-weight: bold; -fx-fill: white;" text="Workshop" wrappingWidth="78.7001953125">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </Text>
+                     </children>
+                     <padding>
+                        <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                     </padding>
+                  </HBox>
+                  <HBox alignment="CENTER_RIGHT" style="-fx-background-color: white;" HBox.hgrow="ALWAYS">
+                     <children>
+                        <JFXTextField prefHeight="31.0" prefWidth="401.0" promptText="Search" style="-fx-background-color: transparent; -fx-prompt-text-fill: #485460;">
+                           <HBox.margin>
+                              <Insets left="50.0" right="10.0" />
+                           </HBox.margin>
+                        </JFXTextField>
+                        <FontAwesomeIcon iconName="SEARCH" />
+                        <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" HBox.hgrow="ALWAYS">
+                           <children>
+                              <FontAwesomeIcon />
+                           </children></HBox>
+                     </children>
+                  </HBox>
+               </children>
+            </HBox>
+         </top>
+         <right>
+            <VBox prefHeight="845.0" prefWidth="1465.0" BorderPane.alignment="CENTER">
+               <children>
+                  <VBox fx:id="vbox" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="743.0" prefWidth="1359.0" style="-fx-background-color: blue;">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                     <VBox.margin>
+                        <Insets bottom="50.0" left="50.0" right="50.0" top="50.0" />
+                     </VBox.margin>
+                  </VBox>
+               </children>
+            </VBox>
+         </right>
+         <left>
+            <VBox prefHeight="845.0" prefWidth="212.0" style="-fx-background-color: WHITE;" BorderPane.alignment="CENTER">
+               <children>
+                  <JFXButton buttonType="RAISED" prefHeight="94.0" prefWidth="250.0" ripplerFill="#b21515" styleClass="hoover_border" text="HOME">
+                     <graphic>
+                        <FontAwesomeIcon glyphStyle="-fx-fill:black" iconName="HOME" size="2em" />
+                     </graphic>
+                     <font>
+                        <Font name="Corbel" size="15.0" />
+                     </font>
+                  </JFXButton>
+                  <JFXButton buttonType="RAISED" prefHeight="94.0" prefWidth="212.0" styleClass="hoover_border" />
+               </children>
+            </VBox>
+         </left>
+      </BorderPane>
+   </children>
+</AnchorPane>

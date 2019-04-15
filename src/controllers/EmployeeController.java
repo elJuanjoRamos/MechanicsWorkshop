@@ -33,7 +33,6 @@ public class EmployeeController {
     public EmployeeController(){
         first = null;
         last = null;
-        
     }
     
     public void add(String name, String role, String username, String password){
@@ -68,7 +67,10 @@ public class EmployeeController {
            e = e.next;
        }
    }
-    /*BUSCAR EMPLEADO*/
+    
+    
+                    
+    /*------------BUSCAR EMPLEADO---------------*/
     public Employee search(int id){
         Employee actual = new Employee();
         actual = first;
@@ -80,6 +82,20 @@ public class EmployeeController {
         }
         return null;
     }
+    
+    public Employee authenticate(String username, String password){
+        Employee actual = new Employee();
+        actual = first;
+        while(actual != null){
+            if (actual.getUsername().equals(username) && actual.getPassword().equals(password)) {
+                return actual;
+            }
+            actual = actual.next;
+        }
+        return null;
+    }
+    /*---------------------------*/
+    
     
     
     public void edit(int id, String name, String role, String username, String password ){

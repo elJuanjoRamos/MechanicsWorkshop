@@ -15,6 +15,8 @@ public class Client {
     private String username;
     private String password;
     private String role;
+    public Client previous;
+    public Client next;
 
     public Client() {
     }

@@ -16,21 +16,27 @@ import javafx.stage.Stage;
  * @author Juan José Ramos
  */
 public class Account extends Application {
+
+    /*Variables*/
+    public static Stage s;
     /*SINGLETON*/
-    private static final Account instance = new Account();
-    
-    
-    private Account(){
-        
-    }
-    
+    private static Account instance;
     public static Account getInstance(){
+        if(instance == null){
+            instance = new Account();
+        }
         return instance;
     }
+    /*---------------*/
+
+    public Account() {
+    }
+    
     
     
     @Override
     public void start(Stage stage) throws Exception {
+        s = stage;
         Parent root = FXMLLoader.load(getClass().getResource("Account.fxml"));
         
         Scene scene = new Scene(root);
