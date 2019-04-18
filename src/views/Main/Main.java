@@ -5,12 +5,11 @@
  */
 package views.Main;
 
+import controllers.EmployeesController;
 import views.Admin.EmployeeController;
 import views.Account.Account;
 import javafx.application.Application;
 import javafx.stage.Stage;
-import views.Admin.Admin;
-
 
 /**
  *
@@ -21,12 +20,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
        
-        /*ENVIO EMPLEADOS POR DEFECTO*/
-        EmployeeController.getInstance().add("Employee0", "Administrator", "admin", "admin");
-        EmployeeController.getInstance().add("Employee1", "Seller", "user1", "password1");
-        EmployeeController.getInstance().add("Employee2", "Seller", "user2", "password2");
-        EmployeeController.getInstance().add("Employee3", "Packer", "user3", "password3");
-        
+        EmployeesController.getInstance().initEmployee();
         Account.getInstance().start(stage);
     }
 

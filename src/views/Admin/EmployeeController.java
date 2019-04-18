@@ -1,19 +1,28 @@
-
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package views.Admin;
 
+import controllers.EmployeesController;
 import java.net.URL;
-import java.util.ResourceBundle;
-import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
-import javafx.scene.control.TableView;
-import beans.Employee;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import beans.Employee;
 
-
+/**
+ * FXML Controller class
+ *
+ * @author Juan José Ramos
+ */
 public class EmployeeController implements Initializable {
 
     
@@ -32,47 +41,28 @@ public class EmployeeController implements Initializable {
     @FXML TableView<Employee> tableView;
     @FXML TableColumn<Employee, Integer> id;
     @FXML TableColumn<Employee, String> name;
-    public ArrayList<Employee> array = new ArrayList<>();
-    public int count = 0;
+    public ArrayList<Employee> array;
+    private ObservableList<Employee> observableList;
+    public int count = 1;
     
     /*CONSTRUCTOR*/
     public EmployeeController() {
-       
+        array = new ArrayList<>();
     }
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        id.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
-        
-        tableView.setItems(getEmployee());
-        
-        
+        initTableView();
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
     }    
+    
+    /*INICIALIZAR TABLA*/
+    public void initTableView() {
+        observableList = FXCollections.observableArrayList(EmployeesController.getInstance().getEmployees());
+        tableView.setItems(observableList);
+    }
      
-    
-    public void add(String name, String role, String username, String password){
-        array.add(new Employee(count, name,role,username,password));
-        count++;
-    }
-    
-    
-    /*METODO PARA AUTENTICAR*/
-    public Employee authenticate(String username, String password){
-        for (Employee e : array) {
-            if (e.getUsername().equals(username) && e.getPassword().equals(password)) {
-                return e;
-            }
-        }
-        return null;
-    }
-
-    
-    public ObservableList<Employee> getEmployee(){
-        
-        ObservableList<Employee> list = FXCollections.observableArrayList(this.array);
-        return list;
-    }
     
 }

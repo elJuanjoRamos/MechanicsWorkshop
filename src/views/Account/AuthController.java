@@ -6,6 +6,7 @@
 package views.Account;
 
 import beans.Employee;
+import controllers.EmployeesController;
 import views.Admin.EmployeeController;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -36,8 +37,8 @@ public class AuthController implements Initializable {
     @FXML
     private void authenticate(ActionEvent event) {
         
-        
-        Employee emp = EmployeeController.getInstance().authenticate(user.getText(), pass.getText());
+        //CAMBIO DE CONTROLADOR
+        Employee emp = EmployeesController.getInstance().authenticate(user.getText(), pass.getText());
         if (emp != null) {
             if (emp.getRole().equals("Administrator")) {
                 Admin.getInstance().start(Account.s);
