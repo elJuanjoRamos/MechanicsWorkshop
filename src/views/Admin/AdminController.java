@@ -57,12 +57,6 @@ public class AdminController implements Initializable {
                 System.out.println(ex);
                 Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             }
-        /*TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
-        t.setToX(vbox.getLayoutX());
-        t.play();
-        t.setOnFinished((e) -> {
-            
-            
-        });*/
+        
     }
 }
