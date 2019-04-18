@@ -53,7 +53,7 @@ public class EmployeeController implements Initializable {
         
         id.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
-        tableView.setItems(getEmployee2());
+        tableView.setItems(getEmployee());
         
         
     }    
