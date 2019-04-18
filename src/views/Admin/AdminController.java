@@ -44,7 +44,7 @@ public class AdminController implements Initializable {
     }
     @FXML
     private void open_home(ActionEvent event) {
-       // transition("/views/Admin/Home.fxml");
+        transition("/views/Admin/Home.fxml");
         
     }
     
@@ -57,12 +57,15 @@ public class AdminController implements Initializable {
                 System.out.println(ex);
                 Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             }
+        
         /*TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
-        t.setToX(vbox.getLayoutX());
+        t.setToX(vbox.getLayoutX()*31);
         t.play();
         t.setOnFinished((e) -> {
-            
+           
             
         });*/
+        
+        
     }
 }
