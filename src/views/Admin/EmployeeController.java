@@ -41,7 +41,7 @@ public class EmployeeController implements Initializable {
     @FXML TableColumn<Employee, Integer> id;
     @FXML TableColumn<Employee, String> name;
     public ArrayList<Employee> array = new ArrayList<>();
-    public int count = 0;
+    public int count = 1;
     
     /*CONSTRUCTOR*/
     public EmployeeController() {
@@ -53,7 +53,13 @@ public class EmployeeController implements Initializable {
         
         id.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("id"));
         name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
-        tableView.setItems(getEmployee2());
+        add("Employee0", "Administrator", "user1", "password1");
+        add("Employee1", "Seller", "user1", "password1");
+        add("Employee2", "Seller", "user1", "password1");
+        add("Employee3", "Packer", "user1", "password1");
+        ObservableList<Employee> list = FXCollections.observableArrayList(getArray());
+        tableView.setItems(list);
+        //tableView.setItems(getEmployee2());
         
         
     }    
@@ -80,9 +86,14 @@ public class EmployeeController implements Initializable {
         }
         return null;
     }
+    
+    /*NUEVO METODO GET EMPLOYEE*/
+    public ArrayList<Employee> getArray() {
+        return array;
+    }
 
     /*AQUI ES DONDE SE SUPONE OBTENGO LA INFORMACION PARA MOSTRAR*/
-    public ObservableList<Employee> getEmployee(){
+    public ObservableList<Employee> getEmployeeTest(){
         
         /*SI SOLO LO HAGO ASÍ, LA TABLA APARECE VACÍA*/
         ObservableList<Employee> list = FXCollections.observableArrayList(this.array);
