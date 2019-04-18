@@ -60,6 +60,7 @@ public class EmployeeController implements Initializable {
         ObservableList<Employee> list = FXCollections.observableArrayList(getArray());
         tableView.setItems(list);
         //tableView.setItems(getEmployee2());
+        //tableView.setItems(getEmployee());
         
         
     }    
