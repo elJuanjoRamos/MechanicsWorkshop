@@ -94,3 +94,137 @@ and open the template in the editor.
     -fx-cursor: hand;
     -fx-fill:white;
 }
+
+
+
+
+
+/*-------------------------------------*/
+/** TableView**/
+
+.table-view{
+    -fx-table-cell-border-color:  #fff;
+    -fx-effect: dropshadow( gaussian,rgba(0,0,0,0.16),5,0,0,2);
+    -fx-background-radius: 3px;
+    -fx-background-color: white;
+    -fx-background-insets: 0;
+
+}
+
+.table-view .column-header, .table-view .filler {
+    -fx-background-color: white;
+}
+.table-view .column-header:last-visible{
+    -fx-border-width: 0 0 1 0;
+}
+.table-view .column-header-background{
+    -fx-background-color: transparent;
+}
+
+.table-view .column-header{
+    -fx-border-width: 0 0 1 0;
+    -fx-border-color: rgba(1,1,1,0.15);
+}
+
+
+.table-view .column-header .label{
+    -fx-font-size:16px;
+    -fx-text-fill: #757575;
+    -fx-padding:16 0 16 0;
+    -fx-alignment:CENTER;
+    -fx-font-weight:400;
+    -fx-font-family: "Corbel";
+}
+
+.table-view .table-row-cell .table-cell{
+    -fx-border-width: 0 16 0 16;
+    
+}
+
+
+
+
+
+
+
+
+.table-view .table-row-cell:selected .table-cell{
+    -fx-text-fill: #3F51B5;
+    -fx-border-width: 0 0 0 0;
+}
+.table-view .table-row-cell:selected{
+    -fx-background-color: rgba(0,0,0,0.04);
+    -fx-background-insets:0;
+}
+
+
+.table-view .table-row-cell{
+    -fx-background-color:transparent;
+    -fx-background-insets:0;
+}
+
+.table-view .table-column{
+    -fx-padding:16 0 16 0;
+}
+
+.table-view .table-cell{
+    -fx-font-size: 16px;
+}
+.table-view .table-cell .ripple-circle{
+    -fx-fill:#2196F3;
+}
+.table-view .table-cell > .text-field{
+    -fx-background-color:transparent;
+    
+    -fx-padding:0 8 8 8;
+    -fx-background-insets: 0;
+    -fx-border-width:0 0 2 0;
+    -fx-border-color: #3F51B5;
+}
+
+.table-view .corner{
+    -fx-background-color:transparent;
+}
+
+
+
+/*ComboBox*/
+
+.combo-box > .list-cell {
+   
+    -fx-background-color: white;
+   -fx-padding: 8; /* 4 8 5 8 */
+}
+
+.combo-box-base{
+    -fx-background-color:white;
+    -fx-border-radius:0px;
+    -fx-background-insets:0;
+    -fx-font-size:16px;
+}
+
+.combo-box-base .list-view{
+    -fx-effect: dropshadow( gaussian,rgba(0,0,0,0.30),13,0,0,6);
+    -fx-background-radius: 3px;
+    -fx-background-color: white;
+}
+.combo-box-base .list-view .list-cell{
+    -fx-padding: 4px;
+}
+.combo-box-popup .list-view .list-cell:filled:selected
+{
+    -fx-background-color: white;
+    -fx-text-fill: #F44336;
+    -fx-background-color: rgba(0,0,0,0.06);
+
+}
+
+.combo-box-popup .list-view .list-cell:filled:selected .label{
+    -fx-font-weigth: bold;
+}
+.combo-box-popup .list-view .list-cell:filled:selected:hover,
+.combo-box-popup .list-view .list-cell:hover 
+{
+    -fx-background-color: rgba(0,0,0,0.06);
+    -fx-text-fill: #3F51B5;
+}

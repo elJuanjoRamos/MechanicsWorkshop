@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox prefHeight="853.0" prefWidth="1278.0" style="-fx-background-color: white;" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.EmployeeViewController">
+               <children>
+                  <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #6200EE;">
+                     <children>
+            <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="USER" size="3.5em">
+              
+            </FontAwesomeIcon>
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EMPLOYESS SYSTEM">
+                           <font>
+                              <Font name="Corbel Bold" size="40.0" />
+                           </font>
+               <HBox.margin>
+                  <Insets left="5.0" />
+               </HBox.margin>
+                        </Text>
+                     </children>
+         <opaqueInsets>
+            <Insets />
+         </opaqueInsets>
+         <VBox.margin>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </VBox.margin>
+         <padding>
+            <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+         </padding>
+                  </HBox>
+                  <HBox prefHeight="723.0" prefWidth="1278.0">
+                     <children>
+                        <VBox alignment="CENTER" prefHeight="500.0" prefWidth="1216.0" HBox.hgrow="ALWAYS">
+                           <effect>
+                              <DropShadow color="#bbbbbb" height="10.0" radius="4.5" width="10.0" />
+                           </effect>
+                           <padding>
+                              <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                           </padding>
+                           <HBox.margin>
+                              <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+                           </HBox.margin>
+               <children>
+                  <HBox prefHeight="32.0" prefWidth="814.0">
+                     <children>
+                        <JFXTextField prefHeight="31.0" prefWidth="315.0" promptText="Search" style="-: red;" />
+                        <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="SEARCH" size="1.5em" />
+                        <JFXButton fx:id="eliminar" onAction="#getSelection" prefHeight="31.0" prefWidth="117.0" text="Eliminar" />
+                     </children>
+                     <VBox.margin>
+                        <Insets />
+                     </VBox.margin>
+                     <padding>
+                        <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
+                     </padding>
+                  </HBox>
+                  <TableView fx:id="tableView" prefHeight="556.0" prefWidth="814.0" VBox.vgrow="ALWAYS">
+                    <columns>
+                      <TableColumn fx:id="id" prefWidth="75.0" text="ID" />
+                      <TableColumn fx:id="name" prefWidth="248.0" text="NAME" />
+                        <TableColumn fx:id="role" prefWidth="148.0" text="ROLE" />
+                        <TableColumn fx:id="username" prefWidth="199.0" text="USERNAME" />
+                        <TableColumn fx:id="password" prefWidth="113.0" text="PASSWORD" />
+                    </columns>
+                  </TableView>
+               </children>
+                        </VBox>
+            <VBox alignment="CENTER" prefHeight="547.0" prefWidth="727.0" style="-fx-background-color: white;">
+               <effect>
+                  <DropShadow color="#bbbbbb" height="10.0" radius="4.5" width="10.0" />
+               </effect>
+               <HBox.margin>
+                  <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
+               </HBox.margin>
+               <children>
+                  <Text fx:id="texto" strokeType="OUTSIDE" strokeWidth="0.0">
+                     <font>
+                        <Font name="Corbel" size="30.0" />
+                     </font>
+                  </Text>
+                  <VBox prefHeight="388.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="52.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="48.61669921875" />
+                              <JFXTextField fx:id="eName">
+                                 
+                              </JFXTextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="52.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" wrappingWidth="59.61669921875">
+                                 <HBox.margin>
+                                    <Insets />
+                                 </HBox.margin>
+                              </Text>
+                              <JFXComboBox fx:id="combo">
+                                
+                              </JFXComboBox>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="52.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="74.61669921875" />
+                              <JFXTextField fx:id="eUsername">
+                                 
+                              </JFXTextField>
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="52.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="77.61669921875" />
+                              <JFXPasswordField fx:id="ePassword" />
+                           </children>
+                           <VBox.margin>
+                              <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                           </VBox.margin>
+                        </HBox>
+                     </children>
+                  </VBox>
+                  <HBox alignment="CENTER" prefHeight="52.0">
+                     <children>
+                        <JFXButton fx:id="aceptar" onAction="#add_Employee" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Aceptar" />
+                     </children>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="52.0">
+                     <children>
+                        <JFXButton fx:id="editar" onAction="#add_Employee" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Editar" />
+                     </children>
+                  </HBox>
+               </children>
+            </VBox>
+                     </children>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
+                  </HBox>
+               </children>
+            </VBox>

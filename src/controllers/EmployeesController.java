@@ -1,27 +1,20 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+
 package controllers;
 
 import beans.Employee;
-import java.util.ArrayList;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
 
-/**
- *
- * @author Jose Morente
- */
 public class EmployeesController {
     private static EmployeesController instance;
-    private ArrayList<Employee> employees;
+    private ObservableList<Employee> employees;
     private int count = 1;
     private Employee first = null;
     private Employee last= null;
     
     
     public EmployeesController() {
-        employees = new ArrayList<>();
+        employees = FXCollections.observableArrayList();
         first = null;
         last = null;
     }
@@ -35,19 +28,22 @@ public class EmployeesController {
     }
     
     public void initEmployee() {
-        add("Employee0", "Administrator", "admin", "admin");
+        add("Juan Ramos", "Administrator", "admin", "admin");
+        add("Rafael Morente", "Administrator", "rmorente", "admin");
+        add("Luis Velasquez", "Administrator", "lvelasquez", "admin");
         add("Employee1", "Seller", "user1", "password1");
         add("Employee2", "Seller", "user2", "password2");
         add("Employee3", "Packer", "user3", "password3");
     }
 
-    public ArrayList<Employee> getEmployees() {
+    public ObservableList<Employee> getEmployees() {
+        this.employees.clear();
         Employee actual = new Employee();
-        actual = last;
+        actual = first;
         
         while (actual != null) {
             employees.add(actual);
-            actual = actual.previous;
+            actual = actual.next;
         }
         
         return employees;
@@ -67,6 +63,8 @@ public class EmployeesController {
             e.previous = last;
             e.next = null;
             this.last = e;
+            
+            
         }
         count++;
     }
@@ -74,7 +72,6 @@ public class EmployeesController {
     public void show(){
         Employee actual = new Employee();
         actual = last;
-        
         while (actual != null) {
             System.out.println( "esto es mostrar"+ actual.getName());
             actual = actual.previous;
@@ -113,39 +110,58 @@ public class EmployeesController {
     public void delete(int id){
         Employee actual = new Employee();
         Employee temp = new Employee();
-        temp = null;
         actual = first;
-        while(actual != null){
-            if (actual.getId() == id) {
-                if (actual == first) {
-                    first = first.next;
-                    first.previous = null;
-                } else {
-                    temp.next = actual.next;
-                    actual.next.previous = actual.previous; 
+        temp = null;
+        if (actual != null && actual.next == null && actual.previous == null) {
+                actual = null;
+                first = null;
+                last = null;
+                this.employees.clear();
+
+        } else {
+            while(actual != null){
+                if (actual.getId() == id) {
+                    if (actual == first) {
+                        first = first.next;
+                        first.previous = null;
+                    } else if(actual == last){
+                        temp = actual.previous;
+                        temp.next = null;
+                        last = temp;
+                    } else {
+                        temp.next = actual.next;
+                        actual.next.previous = actual.previous; 
+                    } 
                 }
+                temp = actual;
+                actual = actual.next;
             }
-            temp = actual;
-            actual = actual.next;
         }
+        
     }
     
     
     
     
     
-    /*METODO PARA AUTENTICAR*/
-    public Employee authenticate(String username, String password){
+    /*METODO PARA AUTENTICAR Y VERIFICAR SI EL USERNAME YA EXISTE EXISTE*/
+    public Employee authenticate(String[] data){
         Employee actual = new Employee();
         actual = first;
         while(actual != null){
-            if (actual.getUsername().equals(username) && actual.getPassword().equals(password)) {
-                return actual;
+            if (data.length == 2) {
+                if (actual.getUsername().equals(data[0]) && actual.getPassword().equals(data[1])) {
+                    return actual;
+                }
+            } else {
+                if (actual.getUsername().equals(data[0])) {
+                    return actual;
+                }
             }
             actual = actual.next;
+            
         }
         return null;
     }
-    
     
 }

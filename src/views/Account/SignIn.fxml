@@ -11,7 +11,7 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="736.0" prefWidth="506.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/8" fx:controller="views.Account.AuthController">
+<AnchorPane id="AnchorPane" prefHeight="736.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Account.AuthController">
        <children>
       <HBox layoutX="41.0" layoutY="234.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
          <children>
@@ -41,7 +41,7 @@
             </FontAwesomeIcon>
          </children>
       </HBox>
-      <JFXButton layoutX="189.0" layoutY="553.0" prefHeight="49.0" prefWidth="121.0" styleClass="newaccount-buttton" text="Get Access" />
+      <JFXButton layoutX="189.0" layoutY="553.0" onAction="#getAccess" prefHeight="49.0" prefWidth="121.0" styleClass="newaccount-buttton" text="Get Access" />
       <ImageView fitHeight="182.0" fitWidth="248.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
          <image>
             <Image url="@../../resources/logo.png" />
