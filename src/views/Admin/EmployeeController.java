@@ -11,6 +11,7 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TableView;
 import beans.Employee;
+import controllers.EmployeesController;
 import java.util.ArrayList;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -40,30 +41,34 @@ public class EmployeeController implements Initializable {
     @FXML TableView<Employee> tableView;
     @FXML TableColumn<Employee, Integer> id;
     @FXML TableColumn<Employee, String> name;
-    public ArrayList<Employee> array = new ArrayList<>();
+    public ArrayList<Employee> array;
+    private ObservableList<Employee> observableList;
     public int count = 1;
     
     /*CONSTRUCTOR*/
     public EmployeeController() {
-       
+        array = new ArrayList<>();
     }
  
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         
-        id.setCellValueFactory(new PropertyValueFactory<Employee, Integer>("id"));
-        name.setCellValueFactory(new PropertyValueFactory<Employee, String>("name"));
-        add("Employee0", "Administrator", "user1", "password1");
+        /*add("Employee0", "Administrator", "user1", "password1");
         add("Employee1", "Seller", "user1", "password1");
         add("Employee2", "Seller", "user1", "password1");
-        add("Employee3", "Packer", "user1", "password1");
-        ObservableList<Employee> list = FXCollections.observableArrayList(getArray());
-        tableView.setItems(list);
+        add("Employee3", "Packer", "user1", "password1");*/
         //tableView.setItems(getEmployee2());
         //tableView.setItems(getEmployee());
-        
-        
+        initTableView();
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        name.setCellValueFactory(new PropertyValueFactory<>("name"));
     }    
+    
+    /*INICIALIZAR TABLA*/
+    public void initTableView() {
+        observableList = FXCollections.observableArrayList(EmployeesController.getInstance().getEmployees());
+        tableView.setItems(observableList);
+    }
      
     /**********************************/
     /*  RAFA LEE LOS COMENTARIOS, ES IMPORTANTE*/
@@ -97,25 +102,25 @@ public class EmployeeController implements Initializable {
     public ObservableList<Employee> getEmployeeTest(){
         
         /*SI SOLO LO HAGO ASÍ, LA TABLA APARECE VACÍA*/
-        ObservableList<Employee> list = FXCollections.observableArrayList(this.array);
+        ObservableList<Employee> observableList = FXCollections.observableArrayList(this.array);
         
-        return list;
+        return observableList;
     }
     
     
     /*SI EN EL EL METODO initialize() LLAMAS ESTE METODO */
     public ObservableList<Employee> getEmployee2(){
         
-        ObservableList<Employee> list = FXCollections.observableArrayList();
+        ObservableList<Employee> observableList = FXCollections.observableArrayList();
         
         /*AQUI AGREGO EMPLEDOS DIRECTAMENTE Y ESTOS SI LOS MUESTRA*/
-        list.add(new Employee(0,"Employee0", "Administrator", "user1", "password1"));
-        list.add(new Employee(1,"Employee1", "Seller", "user1", "password1"));
-        list.add(new Employee(2,"Employee2", "Seller", "user1", "password1"));
-        list.add(new Employee(3,"Employee3", "Packer", "user1", "password1"));
+        observableList.add(new Employee(0,"Employee0", "Administrator", "user1", "password1"));
+        observableList.add(new Employee(1,"Employee1", "Seller", "user1", "password1"));
+        observableList.add(new Employee(2,"Employee2", "Seller", "user1", "password1"));
+        observableList.add(new Employee(3,"Employee3", "Packer", "user1", "password1"));
         
         
-        return list;
+        return observableList;
     }
     
     
