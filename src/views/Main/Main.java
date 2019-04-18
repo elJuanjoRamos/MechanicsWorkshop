@@ -21,6 +21,7 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
        
+        /*ENVIO EMPLEADOS POR DEFECTO*/
         EmployeeController.getInstance().add("Employee0", "Administrator", "admin", "admin");
         EmployeeController.getInstance().add("Employee1", "Seller", "user1", "password1");
         EmployeeController.getInstance().add("Employee2", "Seller", "user2", "password2");

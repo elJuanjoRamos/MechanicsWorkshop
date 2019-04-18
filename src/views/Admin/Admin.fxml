@@ -54,7 +54,7 @@
                   <Insets top="40.0" />
                </VBox.margin>
             </JFXButton>
-            <JFXButton onAction="#open_employee" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="USERS">
+            <JFXButton onAction="#open_employee" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="EMPLOYEE">
                <font>
                   <Font name="Corbel" size="20.0" />
                </font>

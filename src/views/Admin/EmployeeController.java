@@ -58,15 +58,20 @@ public class EmployeeController implements Initializable {
         
     }    
      
+    /**********************************/
+    /*  RAFA LEE LOS COMENTARIOS, ES IMPORTANTE*/
+    /**********************************/
     
     
+    
+    /*AQUI CREE UN METODO A MODO DE PRUEBA DONDE SE GUARDAN EMPLEADOS, LOS RECIBO DESDE LA MAIN VIEWS/MAIN*/
     public void add(String name, String role, String username, String password){
         array.add(new Employee(count, name,role,username,password));
         count++;
     }
     
     
-    
+    /*METODO PARA AUTENTICAR*/
     public Employee authenticate(String username, String password){
         for (Employee e : array) {
             if (e.getUsername().equals(username) && e.getPassword().equals(password)) {
@@ -76,11 +81,22 @@ public class EmployeeController implements Initializable {
         return null;
     }
 
-    
+    /*AQUI ES DONDE SE SUPONE OBTENGO LA INFORMACION PARA MOSTRAR*/
     public ObservableList<Employee> getEmployee(){
         
+        /*SI SOLO LO HAGO ASÍ, LA TABLA APARECE VACÍA*/
         ObservableList<Employee> list = FXCollections.observableArrayList(this.array);
         
+        return list;
+    }
+    
+    
+    /*SI EN EL EL METODO initialize() LLAMAS ESTE METODO */
+    public ObservableList<Employee> getEmployee2(){
+        
+        ObservableList<Employee> list = FXCollections.observableArrayList();
+        
+        /*AQUI AGREGO EMPLEDOS DIRECTAMENTE Y ESTOS SI LOS MUESTRA*/
         list.add(new Employee(0,"Employee0", "Administrator", "user1", "password1"));
         list.add(new Employee(1,"Employee1", "Seller", "user1", "password1"));
         list.add(new Employee(2,"Employee2", "Seller", "user1", "password1"));
@@ -89,5 +105,6 @@ public class EmployeeController implements Initializable {
         
         return list;
     }
+    
     
 }
