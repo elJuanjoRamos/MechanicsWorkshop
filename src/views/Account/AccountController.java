@@ -34,54 +34,37 @@ public class AccountController implements Initializable {
     private Parent fxml;
     @Override
     public void initialize(URL url, ResourceBundle rb) {
+        int a = (int) vbox.getLayoutX() * 31;
+        transition("/views/Account/Login.fxml", (a));
+    }    
+    @FXML
+    private void open_logIn(ActionEvent event) {
+        int a = (int) vbox.getLayoutX() * 31;
+        transition("/views/Account/Login.fxml", (a));
+        
+    }
+    @FXML
+    private void open_signIn(ActionEvent event) {
+        transition("/views/Account/SignIn.fxml",30) ;
+    }
+    
+    
+    
+    public void transition(String route, int position){
         TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
-        t.setToX(vbox.getLayoutX() * 31);
+        t.setToX(position);
         t.play();
         t.setOnFinished((e) -> {
             try {
-                fxml = (Parent) FXMLLoader.load(getClass().getResource("/views/Account/Login.fxml"));
+                fxml = (Parent)FXMLLoader.load(getClass().getResource(route));
                 vbox.getChildren().removeAll();
                 vbox.getChildren().setAll(fxml);
             } catch (IOException ex) {
-                System.out.println(ex);
                 Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
             }
             
         });
     }    
-    @FXML
-    private void open_logIn(ActionEvent event) {
-         TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
-        t.setToX(vbox.getLayoutX() * 31);
-        t.play();
-        t.setOnFinished((e) -> {
-            try {
-                fxml = (Parent) FXMLLoader.load(getClass().getResource("/views/Account/Login.fxml"));
-                vbox.getChildren().removeAll();
-                vbox.getChildren().setAll(fxml);
-            } catch (IOException ex) {
-                System.out.println(ex);
-                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        });
-    }
-    @FXML
-    private void open_signIn(ActionEvent event) {
-        TranslateTransition t = new TranslateTransition(Duration.seconds(1), vbox);
-        t.setToX(30);
-        t.play();
-        t.setOnFinished((e) -> {
-            try {
-                fxml = (Parent)FXMLLoader.load(getClass().getResource("/views/Account/SignIn.fxml"));
-                vbox.getChildren().removeAll();
-                vbox.getChildren().setAll(fxml);
-            } catch (IOException ex) {
-                Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
-            }
-            
-        });
-    }
     
     
 }

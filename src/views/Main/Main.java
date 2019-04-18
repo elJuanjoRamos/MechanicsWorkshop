@@ -5,7 +5,7 @@
  */
 package views.Main;
 
-import controllers.EmployeeController;
+import views.Admin.EmployeeController;
 import views.Account.Account;
 import javafx.application.Application;
 import javafx.stage.Stage;
@@ -20,15 +20,16 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
-        //Account.getInstance().start(stage);
-        Admin.getInstance().start(stage);
+       
+        EmployeeController.getInstance().add("Employee0", "Administrator", "admin", "admin");
+        EmployeeController.getInstance().add("Employee1", "Seller", "user1", "password1");
+        EmployeeController.getInstance().add("Employee2", "Seller", "user2", "password2");
+        EmployeeController.getInstance().add("Employee3", "Packer", "user3", "password3");
+        
+        Account.getInstance().start(stage);
     }
 
-    /**
-     * @param args the command line arguments
-     */
     public static void main(String[] args) {
-        EmployeeController.getInstance().add("Juan Ramos", "Administrator", "admin", "admin");
         
         launch(args);
     }

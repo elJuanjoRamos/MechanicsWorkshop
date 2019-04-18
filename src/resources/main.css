@@ -79,13 +79,18 @@ and open the template in the editor.
      height:94;
 }
 
+
+.hoover_fade:hover{
+    -fx-background-color:#e2e2e2 !important;
+    -fx-cursor: hand;
+}
+
 .hoover_border:hover {
     -fx-background-color:#6200EE;
     -fx-background-radius: 5px;
     -fx-border-color: #6200EE;
     -fx-border-width:1px;
     -fx-text-fill:white;
-    -fx-border-width: 0px 0px 0px 4px;
     -fx-cursor: hand;
     -fx-fill:white;
 }
