@@ -54,6 +54,22 @@ and open the template in the editor.
     -fx-border-width:1px;
     -fx-text-fill:#B00020;
 }
+.update-buttton{
+    -fx-background-color:transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #ffc107;
+    -fx-border-radius:5px;
+    -fx-border-width:1px;
+    -fx-text-fill:#ffc107;
+}
+.add-buttton{
+    -fx-background-color:transparent;
+    -fx-background-radius: 5px;
+    -fx-border-color: #007bff;
+    -fx-border-radius:5px;
+    -fx-border-width:1px;
+    -fx-text-fill:#007bff;
+}
 
 
 .log-pane{

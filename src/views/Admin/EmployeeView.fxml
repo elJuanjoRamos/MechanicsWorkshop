@@ -19,7 +19,7 @@
             <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="USER" size="3.5em">
               
             </FontAwesomeIcon>
-                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="EMPLOYESS SYSTEM">
+                        <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKSHOP EMPLOYEES">
                            <font>
                               <Font name="Corbel Bold" size="40.0" />
                            </font>
@@ -53,9 +53,39 @@
                <children>
                   <HBox prefHeight="32.0" prefWidth="814.0">
                      <children>
-                        <JFXTextField prefHeight="31.0" prefWidth="315.0" promptText="Search" style="-: red;" />
+                        <JFXTextField fx:id="filter" prefHeight="31.0" prefWidth="315.0" promptText="Search" style="-: red;" />
                         <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="SEARCH" size="1.5em" />
-                        <JFXButton fx:id="eliminar" onAction="#getSelection" prefHeight="31.0" prefWidth="117.0" text="Eliminar" />
+                        <HBox prefHeight="53.0" prefWidth="473.0">
+                           <children>
+                              <JFXButton fx:id="eliminar" onAction="#getSelection" prefHeight="31.0" prefWidth="117.0" styleClass="newaccount-buttton" text="Delete">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphStyle="-fx-fill:#B00020" iconName="TRASH" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton onAction="#update" prefHeight="31.0" prefWidth="116.0" styleClass="update-buttton" text="Update">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphStyle="-fx-fill:#ffc107" iconName="UNDO" />
+                                 </graphic>
+                              </JFXButton>
+                              <JFXButton onAction="#bulkLoad" prefHeight="31.0" prefWidth="99.0" styleClass="add-buttton" text="Add">
+                                 <HBox.margin>
+                                    <Insets bottom="10.0" right="10.0" top="10.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphStyle="-fx-fill:#007bff" iconName="PLUS" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets left="200.0" />
+                           </HBox.margin>
+                        </HBox>
                      </children>
                      <VBox.margin>
                         <Insets />
@@ -140,12 +170,17 @@
                   </VBox>
                   <HBox alignment="CENTER" prefHeight="52.0">
                      <children>
-                        <JFXButton fx:id="aceptar" onAction="#add_Employee" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Aceptar" />
+                        <JFXButton fx:id="aceptar" onAction="#add_Employee" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Acept" />
                      </children>
                   </HBox>
                   <HBox alignment="CENTER" prefHeight="52.0">
                      <children>
-                        <JFXButton fx:id="editar" onAction="#add_Employee" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Editar" />
+                        <JFXButton fx:id="editar" onAction="#update_Employee" prefHeight="52.0" prefWidth="116.0" styleClass="newaccount-buttton" text="Edit" />
+                        <JFXButton fx:id="cancelar" onAction="#cancel" prefHeight="53.0" prefWidth="116.0" styleClass="update-buttton" text="Cancel">
+                           <HBox.margin>
+                              <Insets left="20.0" />
+                           </HBox.margin>
+                        </JFXButton>
                      </children>
                   </HBox>
                </children>

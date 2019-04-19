@@ -19,10 +19,12 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import beans.Employee;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.*;
+import javafx.stage.StageStyle;
 
 public class EmployeeViewController implements Initializable {
 
@@ -49,10 +51,8 @@ public class EmployeeViewController implements Initializable {
     
     
     @FXML ComboBox combo;
-    @FXML TextField eName;
-    @FXML TextField eUsername;
-    @FXML TextField ePassword;
-    @FXML Button aceptar, editar, eliminar;
+    @FXML TextField eName, eUsername, ePassword, filter;
+    @FXML Button aceptar, editar, eliminar, cancelar;
     @FXML Text texto;
     
     public int count = 1;
@@ -65,6 +65,7 @@ public class EmployeeViewController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         editar.setVisible(false);
+        cancelar.setVisible(false);
         texto.setText("Add a new Employee");
         String[] array = {"Administrator", "Mechanic", "Payer"};
         roles = FXCollections.observableArrayList(array);
@@ -89,21 +90,30 @@ public class EmployeeViewController implements Initializable {
     /*METODO AGREGAR DEL BOTON*/
     @FXML
     private void add_Employee(ActionEvent event) {
-         if (!eName.getText().isEmpty() && !eUsername.getText().isEmpty() &&
-                 !ePassword.getText().isEmpty() && combo.getSelectionModel().getSelectedItem() != null) {
-             String[] data = {eUsername.getText()};
-             Employee e = EmployeesController.getInstance().authenticate(data);
-             if (e == null) {
-                 EmployeesController.getInstance().add(eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText());
-                 eName.clear();
-                 ePassword.clear();
-                 eUsername.clear();
-                 initTableView();
-             }
-         }
-  
+        if (getValidations() == true) {
+            EmployeesController.getInstance().add(eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText());
+            eName.clear();
+            combo.getSelectionModel().clearSelection();
+            ePassword.clear();
+            eUsername.clear();
+            initTableView();
+        }
     }
-    
+    @FXML
+    private void update_Employee(ActionEvent event) {
+        if (getValidations() == true) {
+            EmployeesController.getInstance().edit(tableView.getSelectionModel().getSelectedItem().getId(),  eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText());
+            eName.clear();
+            ePassword.clear();
+            eUsername.clear();
+            combo.getSelectionModel().clearSelection();
+            initTableView();
+            aceptar.setVisible(true);
+            editar.setVisible(false);
+            cancelar.setVisible(false);
+            texto.setText("Add a new Employee");
+        }
+    }
     
             
    @FXML
@@ -115,6 +125,71 @@ public class EmployeeViewController implements Initializable {
         }
     } 
     
+   /*UPDATE*/
+    @FXML
+    private void update(ActionEvent event) {
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            Employee e = EmployeesController.getInstance().search(tableView.getSelectionModel().getSelectedItem().getId());
+            if (e != null) {
+                aceptar.setVisible(false);
+                editar.setVisible(true);
+                cancelar.setVisible(true);
+                texto.setText("Edit a user");
+
+                eName.setText(e.getName());
+                eUsername.setText(e.getUsername());
+                ePassword.setText(e.getPassword());
+                
+            }
+        }
+    }
+    
+    @FXML
+    private void cancel(ActionEvent event) {
+        eName.clear();
+        ePassword.clear();
+        eUsername.clear();
+        combo.getSelectionModel().clearSelection();
+        initTableView();
+        aceptar.setVisible(true);
+        editar.setVisible(false);
+        cancelar.setVisible(false);
+        texto.setText("Add a new Employee");
+    }
+    @FXML
+    private void bulkLoad(ActionEvent event) {
+        
+    }
     
     
+    
+    /*VALIDA SI YA EXISTE EL NOMBRE DE USUARIO O SI DEJA CAMPOS EN BLANCO*/
+    public boolean getValidations(){
+        if(!eName.getText().isEmpty() && !eUsername.getText().isEmpty() &&
+                 !ePassword.getText().isEmpty() && combo.getSelectionModel().getSelectedItem() != null){
+            String[] data = {eUsername.getText()};
+             Employee e = EmployeesController.getInstance().authenticate(data);
+             if (e == null) {
+                 return true;
+             } else {
+                 getAlert("Username already exist");
+                 return false;
+             }
+        } else {
+            getAlert("You can not leave fields blank.");
+            return false;
+            
+         }
+    }
+    
+
+    public void getAlert(String content) {
+        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
+        alerta.setTitle("Error!");
+        alerta.setHeaderText(null);
+        alerta.setContentText(content);
+        alerta.initStyle(StageStyle.UTILITY);
+        alerta.showAndWait();
+
+    }
 }
