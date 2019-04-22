@@ -37,6 +37,19 @@ public class AdminController implements Initializable {
         changeView("/views/Admin/Home.fxml");
         
     }
+    @FXML
+    private void open_Services(ActionEvent event) {
+        changeView("/views/Admin/ServicesView.fxml");
+        
+    }
+    @FXML
+    private void open_parts(ActionEvent event) {
+        changeView("/views/Admin/SpearePartsView.fxml");
+        
+    }
+    
+    
+    
     
     public void changeView(String component){
         try {

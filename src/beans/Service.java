@@ -5,7 +5,7 @@
  */
 package beans;
 
-import java.util.List;
+import java.util.Stack;
 
 /**
  *
@@ -16,15 +16,15 @@ public class Service {
     private String name;
     private String mark;
     private String model;
-    private List sparePartList;
+    private Stack sparePartList;
     private Double workPrice;
     private Double sparePartsPrice;
     private Double total;
-
+    public Service next;
     public Service() {
     }
 
-    public Service(int id, String name, String mark, String model, List sparePartList, Double workPrice, Double sparePartsPrice, Double total) {
+    public Service(int id, String name, String mark, String model, Stack sparePartList, Double workPrice, Double sparePartsPrice, Double total) {
         this.id = id;
         this.name = name;
         this.mark = mark;
@@ -67,11 +67,11 @@ public class Service {
         this.model = model;
     }
 
-    public List getSparePartList() {
+    public Stack getSparePartList() {
         return sparePartList;
     }
 
-    public void setSparePartList(List sparePartList) {
+    public void setSparePartList(Stack sparePartList) {
         this.sparePartList = sparePartList;
     }
 

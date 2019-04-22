@@ -7,6 +7,7 @@ package views.Admin;
 
 
 import controllers.EmployeesController;
+import controllers.InterpreterController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -17,14 +18,26 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import beans.Employee;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import java.io.BufferedReader;
 import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
 import javafx.scene.text.*;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 import javafx.stage.StageStyle;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import javafx.event.EventHandler;
+import javafx.scene.layout.StackPane;
 
 public class EmployeeViewController implements Initializable {
 
@@ -54,8 +67,12 @@ public class EmployeeViewController implements Initializable {
     @FXML TextField eName, eUsername, ePassword, filter;
     @FXML Button aceptar, editar, eliminar, cancelar;
     @FXML Text texto;
+    @FXML StackPane stackPane;
     
     public int count = 1;
+    private File file;
+    private InputStream inputStream;
+    private BufferedReader bufferedReader;
     
     /*CONSTRUCTOR*/
     public EmployeeViewController() {
@@ -99,6 +116,7 @@ public class EmployeeViewController implements Initializable {
             initTableView();
         }
     }
+    /*METODO EDITAR DEL BOTON*/
     @FXML
     private void update_Employee(ActionEvent event) {
         if (getValidations() == true) {
@@ -115,17 +133,19 @@ public class EmployeeViewController implements Initializable {
         }
     }
     
-            
+   /*METODO ELIMINAR*/         
    @FXML
-   private void getSelection(ActionEvent event) {
+   private void delete_Employee(ActionEvent event) {
        if (tableView.getSelectionModel().getSelectedItem() != null) {
             EmployeesController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getId());
             tableView.getSelectionModel().clearSelection();
             initTableView();
-        }
+        } else {
+           getAlert(" No items have been selected.");
+       }
     } 
     
-   /*UPDATE*/
+   /*LLENA LOS CAMPOS CON EL OBJETO SELECCIONADO*/
     @FXML
     private void update(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
@@ -141,7 +161,9 @@ public class EmployeeViewController implements Initializable {
                 ePassword.setText(e.getPassword());
                 
             }
-        }
+        } else {
+           getAlert(" No items have been selected.");
+       }
     }
     
     @FXML
@@ -158,9 +180,34 @@ public class EmployeeViewController implements Initializable {
     }
     @FXML
     private void bulkLoad(ActionEvent event) {
-        
+        Stage stage = new Stage();
+        FileChooser fileChooser = new FileChooser();
+        fileChooser.setTitle("Open Resource File");
+        fileChooser.getExtensionFilters().addAll(
+                new FileChooser.ExtensionFilter("IPC Files", "*.tme"));
+        File selectedFile = fileChooser.showOpenDialog(stage);
+        if (selectedFile != null) {
+            try {
+                String linea;
+                BufferedReader bf = read(selectedFile.toString());
+                while((linea = bf.readLine()) != null ) {
+                    InterpreterController.getInstance().interpret(linea);
+                }
+            } catch (IOException e) {
+                
+            }
+        }
     }
-    
+    public BufferedReader read(String nombre) {
+	try {
+            file = new File(nombre);
+            inputStream = new FileInputStream(file);
+            bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+	} catch (IOException ex) {
+			
+	}
+	return bufferedReader;
+    }
     
     
     /*VALIDA SI YA EXISTE EL NOMBRE DE USUARIO O SI DEJA CAMPOS EN BLANCO*/
@@ -184,12 +231,21 @@ public class EmployeeViewController implements Initializable {
     
 
     public void getAlert(String content) {
-        Alert alerta = new Alert(Alert.AlertType.INFORMATION);
-        alerta.setTitle("Error!");
-        alerta.setHeaderText(null);
-        alerta.setContentText(content);
-        alerta.initStyle(StageStyle.UTILITY);
-        alerta.showAndWait();
-
+        
+        JFXDialogLayout c = new JFXDialogLayout(); 
+        JFXDialog dialog = new JFXDialog(stackPane, c, JFXDialog.DialogTransition.CENTER);
+        c.setHeading(new Text("Error!"));
+        c.setBody(new Text(content));
+        JFXButton button = new JFXButton("Close");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });;
+        c.setActions(button);
+        
+        dialog.show();
+        
     }
 }

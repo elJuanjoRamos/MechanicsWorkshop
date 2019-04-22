@@ -1,6 +1,7 @@
 package views.Main;
 
 import controllers.EmployeesController;
+import controllers.ServicesController;
 import views.Admin.EmployeeViewController;
 import views.Account.Account;
 import javafx.application.Application;
@@ -12,8 +13,10 @@ public class Main extends Application {
     @Override
     public void start(Stage stage) throws Exception {
         EmployeesController.getInstance().initEmployee();
-        //Account.getInstance().start(stage);
-        Admin.getInstance().start(stage);
+        ServicesController.getInstance().initServices();
+        
+        Account.getInstance().start(stage);
+        //Admin.getInstance().start(stage);
     }
 
     public static void main(String[] args) {

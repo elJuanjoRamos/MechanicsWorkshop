@@ -62,6 +62,22 @@
                   <FontAwesomeIcon iconName="USER" size="1.5em" />
                </graphic>
             </JFXButton>
+            <JFXButton onAction="#open_Services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICE">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_parts" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="PARTES">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
+               </graphic>
+            </JFXButton>
          </children>
       </VBox>
    </left>

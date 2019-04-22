@@ -28,6 +28,7 @@ public class EmployeesController {
     }
     
     public void initEmployee() {
+        add("Juan Ramos", "Client", "c", "c");
         add("Juan Ramos", "Administrator", "admin", "admin");
         add("Rafael Morente", "Administrator", "rmorente", "admin");
         add("Luis Velasquez", "Administrator", "lvelasquez", "admin");

@@ -16,6 +16,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import views.Admin.Admin;
+import views.Client.Client;
 
 /**
  * FXML Controller class
@@ -53,9 +54,12 @@ public class AuthController implements Initializable {
         Employee emp = EmployeesController.getInstance().authenticate(data);
         
         if (emp == null) {
-            EmployeesController.getInstance().add(name.getText(), "Administrator", user2.getText(), pass2.getText());
-            Admin.getInstance().start(Account.s);
-            
+            if (emp.getRole().equals("Administrator")) {
+                EmployeesController.getInstance().add(name.getText(), "Administrator", user2.getText(), pass2.getText());
+                Admin.getInstance().start(Account.s);
+            } else if(emp.getRole().equals("Client")) {
+                Client.getInstance().start(Account.s);
+            }
         }   
     }
     
