@@ -29,7 +29,7 @@ public class AdminController implements Initializable {
     }    
     @FXML
     private void open_employee(ActionEvent event) {
-      changeView("/views/Admin/EmployeeView.fxml");
+      changeView("/views/Admin/Employee/EmployeeView.fxml");
         
     }
     @FXML
@@ -39,12 +39,12 @@ public class AdminController implements Initializable {
     }
     @FXML
     private void open_Services(ActionEvent event) {
-        changeView("/views/Admin/ServicesView.fxml");
+        changeView("/views/Admin/Service/ServicesView.fxml");
         
     }
     @FXML
     private void open_parts(ActionEvent event) {
-        changeView("/views/Admin/SpearePartsView.fxml");
+        changeView("/views/Admin/SpareParts/SparePartsView.fxml");
         
     }
     

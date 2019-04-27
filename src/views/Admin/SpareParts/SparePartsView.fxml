@@ -1,25 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.EmployeeViewController">
-   <children>
-      <VBox prefHeight="853.0" prefWidth="1278.0" style="-fx-background-color: white;" stylesheets="@../../resources/main.css">
+<StackPane id="AnchorPane" fx:id="stackPane" prefHeight="845.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.SpareParts.SparePartsViewController">
+       <children>
+      <VBox style="-fx-background-color: white;" stylesheets="@../../../resources/main.css">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #6200EE;">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #B00020;">
                <children>
                   <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="USER" size="3.5em" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKSHOP EMPLOYEES">
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKSHOP SPARE PARTS">
                      <font>
                         <Font name="Corbel Bold" size="40.0" />
                      </font>
@@ -48,7 +47,7 @@
                               <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="SEARCH" size="1.5em" />
                               <HBox prefHeight="53.0" prefWidth="473.0">
                                  <children>
-                                    <JFXButton fx:id="eliminar" onAction="#delete_Employee" prefHeight="31.0" prefWidth="117.0" styleClass="danget-buttton" text="Delete">
+                                    <JFXButton fx:id="eliminar" onAction="#delete" prefHeight="31.0" prefWidth="117.0" styleClass="danget-buttton" text="Delete">
                                        <graphic>
                                           <FontAwesomeIcon glyphStyle="-fx-fill:#B00020" iconName="TRASH" />
                                        </graphic>
@@ -56,7 +55,7 @@
                                           <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#update" prefHeight="31.0" prefWidth="116.0" styleClass="warning-buttton" text="Update">
+                                    <JFXButton onAction="#getSpare" prefHeight="31.0" prefWidth="116.0" styleClass="warning-buttton" text="Update">
                                        <graphic>
                                           <FontAwesomeIcon glyphStyle="-fx-fill:#ffc107" iconName="UNDO" />
                                        </graphic>
@@ -64,7 +63,7 @@
                                           <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton onAction="#bulkLoad" prefHeight="31.0" prefWidth="99.0" styleClass="primary-buttton" text="Add">
+                                    <JFXButton prefHeight="31.0" prefWidth="99.0" styleClass="primary-buttton" text="Add">
                                        <graphic>
                                           <FontAwesomeIcon glyphStyle="-fx-fill:#007bff" iconName="PLUS" />
                                        </graphic>
@@ -87,11 +86,12 @@
                         </HBox>
                         <TableView fx:id="tableView" prefHeight="556.0" VBox.vgrow="ALWAYS">
                            <columns>
-                              <TableColumn fx:id="id" prefWidth="95.0" text="ID" />
-                              <TableColumn fx:id="name" prefWidth="256.0" text="NAME" />
-                              <TableColumn fx:id="role" minWidth="0.0" prefWidth="168.0" text="ROLE" />
-                              <TableColumn fx:id="username" prefWidth="149.0" text="USERNAME" />
-                              <TableColumn fx:id="password" minWidth="0.0" prefWidth="145.0" text="PASSWORD" />
+                              <TableColumn fx:id="id" prefWidth="49.0" text="ID" />
+                              <TableColumn fx:id="name" prefWidth="248.0" text="NAME" />
+                              <TableColumn fx:id="mark" minWidth="0.0" prefWidth="131.0" text="MARK" />
+                              <TableColumn fx:id="model" prefWidth="160.0" text=" MODEL" />
+                              <TableColumn fx:id="stock" minWidth="0.0" prefWidth="95.0" text="STOCK" />
+                              <TableColumn fx:id="price" prefWidth="177.0" text="PRICE" />
                            </columns>
                         </TableView>
                      </children>
@@ -125,45 +125,38 @@
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Role:" wrappingWidth="59.61669921875">
-                                       <HBox.margin>
-                                          <Insets />
-                                       </HBox.margin>
-                                    </Text>
-                                    <JFXComboBox fx:id="combo" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mark:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="eMark" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </VBox.margin>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Username:" wrappingWidth="74.61669921875" />
-                                    <JFXTextField fx:id="eUsername" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Model:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="eModel" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </VBox.margin>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Password:" wrappingWidth="77.61669921875" />
-                                    <JFXPasswordField fx:id="ePassword" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="ePrice" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
-                                 </VBox.margin>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="52.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Stock:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="eStock" />
+                                 </children>
                               </HBox>
                            </children>
                         </VBox>
                         <HBox alignment="CENTER" prefHeight="52.0">
                            <children>
-                              <JFXButton fx:id="aceptar" onAction="#add_Employee" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Acept" />
+                              <JFXButton fx:id="aceptar" onAction="#add" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Acept" />
                            </children>
                         </HBox>
                         <HBox alignment="CENTER" prefHeight="52.0">
                            <children>
-                              <JFXButton fx:id="editar" onAction="#update_Employee" prefHeight="52.0" prefWidth="116.0" styleClass="danget-buttton" text="Edit" />
+                              <JFXButton fx:id="editar" onAction="#update" prefHeight="52.0" prefWidth="116.0" styleClass="danget-buttton" text="Edit" />
                               <JFXButton fx:id="cancelar" onAction="#cancel" prefHeight="53.0" prefWidth="116.0" styleClass="warning-buttton" text="Cancel">
                                  <HBox.margin>
                                     <Insets left="20.0" />

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.*?>
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<StackPane alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="476.0" prefWidth="1001.0" stylesheets="@../../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.Service.ViewInsertServiceController">
+      <children>
+      <VBox alignment="TOP_CENTER" prefHeight="473.0" prefWidth="657.0">
+         <children>
+            <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Insert spare parts to the list" textAlignment="CENTER">
+               <font>
+                  <Font name="Corbel Bold" size="30.0" />
+               </font>
+            </Text>
+            <VBox prefHeight="391.0" prefWidth="1001.0">
+               <children>
+                  <HBox alignment="CENTER" prefHeight="45.0" prefWidth="600.0">
+                     <VBox.margin>
+                        <Insets top="20.0" />
+                     </VBox.margin>
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="45.0" prefWidth="772.0">
+                           <children>
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Search the spare part" />
+                              <JFXComboBox fx:id="list" prefHeight="41.0" prefWidth="153.0" />
+                              <JFXButton onAction="#add" prefHeight="33.0" prefWidth="75.0" styleClass="primary-buttton" text="Add" />
+                              <JFXButton onAction="#addFinalSparePartsList" prefHeight="33.0" prefWidth="72.0" styleClass="success-buttton" text="Ok">
+                                 <HBox.margin>
+                                    <Insets left="20.0" />
+                                 </HBox.margin></JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                        <HBox alignment="CENTER_RIGHT" prefHeight="45.0" prefWidth="600.0">
+                           <children>
+                              <JFXButton alignment="CENTER" prefHeight="33.0" prefWidth="101.0" styleClass="danget-buttton" text="Delete">
+                                 <HBox.margin>
+                                    <Insets right="50.0" />
+                                 </HBox.margin>
+                                 <graphic>
+                                    <FontAwesomeIcon glyphStyle="-fx-fill:#B00020" iconName="TRASH" />
+                                 </graphic>
+                              </JFXButton>
+                           </children>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
+                        </HBox>
+                     </children>
+                  </HBox>
+                  <TableView fx:id="tableView" prefHeight="323.0" prefWidth="871.0">
+                    <columns>
+                      <TableColumn fx:id="id" prefWidth="100.0" text="ID" />
+                      <TableColumn fx:id="name" prefWidth="473.0" text="NAME" />
+                        <TableColumn fx:id="price" prefWidth="427.0" text="Price" />
+                    </columns>
+                  </TableView>
+               </children>
+            </VBox>
+         </children>
+      </VBox>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+   <padding>
+      <Insets top="50.0" />
+   </padding>
+</StackPane>

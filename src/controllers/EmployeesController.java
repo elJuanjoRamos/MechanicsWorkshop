@@ -28,13 +28,13 @@ public class EmployeesController {
     }
     
     public void initEmployee() {
-        add("Juan Ramos", "Client", "c", "c");
-        add("Juan Ramos", "Administrator", "admin", "admin");
-        add("Rafael Morente", "Administrator", "rmorente", "admin");
-        add("Luis Velasquez", "Administrator", "lvelasquez", "admin");
-        add("Employee1", "Seller", "user1", "password1");
-        add("Employee2", "Seller", "user2", "password2");
-        add("Employee3", "Packer", "user3", "password3");
+        addLast("Juan Ramos", "Client", "c", "c");
+        addLast("Juan Ramos", "Administrator", "admin", "admin");
+        addLast("Rafael Morente", "Administrator", "rmorente", "admin");
+        addLast("Luis Velasquez", "Administrator", "lvelasquez", "admin");
+        addLast("Employee1", "Seller", "user1", "password1");
+        addLast("Employee2", "Seller", "user2", "password2");
+        addLast("Employee3", "Packer", "user3", "password3");
     }
 
     public ObservableList<Employee> getEmployees() {
@@ -50,11 +50,42 @@ public class EmployeesController {
         return employees;
     }
 
-    /*METODO AGREGAR*/
-    public void add(String name, String role, String username, String password){
+    /*-----------METODO AGREGAR------*/
+    
+    
+    /*AGREGAR AL INICIO*/
+    public void addFirst(String name, String role, String username, String password){
+            Employee e = new Employee(count, name, role, username, password);
+            
+            if(first==null){
+                first=e;
+            }else{
+                e.setNext(first);
+                first.setPrevious(e);
+                first=e;
+            }
+            
+    }
+    
+    
+    
+    public void addLast(String name, String role, String username, String password){
         Employee e = new Employee(count, name, role, username, password);
         
         if (first == null) {
+            first = e;
+        } else {
+            Employee aux = first;
+            while (aux.getNext() != null) {
+                aux = aux.getNext();
+            }
+            aux.setNext(e);
+            e.setPrevious(aux);
+
+        }
+
+        
+        /*if (first == null) {
             this.first = e;
             first.next = null;
             first.previous = null;
@@ -66,9 +97,12 @@ public class EmployeesController {
             this.last = e;
             
             
-        }
+        }*/
         count++;
     }
+    
+    
+    
     /*METODO MOSTRAR */
     public void show(){
         Employee actual = new Employee();
@@ -91,6 +125,8 @@ public class EmployeesController {
         }
         return null;
     }
+    
+    
     /*METODO EDITAR*/
     public void edit(int id, String name, String role, String username, String password ){
         Employee actual = new Employee();
@@ -104,11 +140,39 @@ public class EmployeesController {
         
             }
             actual = actual.next;
-        }
-        
+        }    
     }
+    
     /*METODO ELIMINAR*/
     public void delete(int id){
+                
+        if (first != null) {
+            Employee aux = first;
+            Employee temp = null;
+            while (aux != null) {
+                if (aux.getId()== id) {
+                    if (temp == null) {
+                        first = first.getNext();
+                        aux.setNext(null);
+                        aux = first;
+
+                    } else {
+                        temp.setNext(aux.getNext());
+                        aux.setNext(null);
+                        aux = temp.getNext();
+                    }
+                } else {
+                    temp = aux;
+                    aux = aux.getNext();
+                }
+            }
+        }
+
+        
+        
+        
+        /*
+        
         Employee actual = new Employee();
         Employee temp = new Employee();
         actual = first;
@@ -137,7 +201,7 @@ public class EmployeesController {
                 temp = actual;
                 actual = actual.next;
             }
-        }
+        }*/
         
     }
     

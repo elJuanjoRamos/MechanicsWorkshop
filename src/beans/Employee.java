@@ -16,7 +16,7 @@ public class Employee {
     private String role;
     private String username;
     private String password;
-    public Employee previous;
+    public  Employee previous;
     public  Employee next;
     
     
@@ -29,6 +29,8 @@ public class Employee {
         this.role = role;
         this.username = username;
         this.password = password;
+        this.previous = null;
+        this.next = null;
     }
 
     public int getId() {
@@ -69,6 +71,22 @@ public class Employee {
 
     public void setPassword(String password) {
         this.password = password;
+    }
+
+    public Employee getPrevious() {
+        return previous;
+    }
+
+    public void setPrevious(Employee previous) {
+        this.previous = previous;
+    }
+
+    public Employee getNext() {
+        return next;
+    }
+
+    public void setNext(Employee next) {
+        this.next = next;
     }
 
             

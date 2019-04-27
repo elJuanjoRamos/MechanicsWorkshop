@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Admin;
+package views.Admin.Employee;
 
 
 import controllers.EmployeesController;
@@ -108,7 +108,7 @@ public class EmployeeViewController implements Initializable {
     @FXML
     private void add_Employee(ActionEvent event) {
         if (getValidations() == true) {
-            EmployeesController.getInstance().add(eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText());
+            EmployeesController.getInstance().addLast(eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText());
             eName.clear();
             combo.getSelectionModel().clearSelection();
             ePassword.clear();
@@ -180,6 +180,9 @@ public class EmployeeViewController implements Initializable {
     }
     @FXML
     private void bulkLoad(ActionEvent event) {
+        
+        
+        
         Stage stage = new Stage();
         FileChooser fileChooser = new FileChooser();
         fileChooser.setTitle("Open Resource File");
@@ -197,6 +200,9 @@ public class EmployeeViewController implements Initializable {
                 
             }
         }
+        
+        
+        
     }
     public BufferedReader read(String nombre) {
 	try {

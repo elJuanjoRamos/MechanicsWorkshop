@@ -16,7 +16,8 @@ public class SpareParts {
     private String model;
     private int stock;
     private Double price;
-
+    private SpareParts next;
+    
     public SpareParts() {
     }
 
@@ -27,6 +28,7 @@ public class SpareParts {
         this.model = model;
         this.stock = stock;
         this.price = price;
+        this.next = null;
     }
 
     public int getId() {
@@ -75,6 +77,14 @@ public class SpareParts {
 
     public void setPrice(Double price) {
         this.price = price;
+    }
+
+    public SpareParts getNext() {
+        return next;
+    }
+
+    public void setNext(SpareParts next) {
+        this.next = next;
     }
     
     

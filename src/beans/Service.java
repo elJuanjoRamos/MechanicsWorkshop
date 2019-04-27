@@ -19,12 +19,13 @@ public class Service {
     private Stack sparePartList;
     private Double workPrice;
     private Double sparePartsPrice;
+    private Boolean state;
     private Double total;
     public Service next;
     public Service() {
     }
 
-    public Service(int id, String name, String mark, String model, Stack sparePartList, Double workPrice, Double sparePartsPrice, Double total) {
+    public Service(int id, String name, String mark, String model, Stack sparePartList, Double workPrice, Double sparePartsPrice, Double total, Boolean state) {
         this.id = id;
         this.name = name;
         this.mark = mark;
@@ -33,6 +34,7 @@ public class Service {
         this.workPrice = workPrice;
         this.sparePartsPrice = sparePartsPrice;
         this.total = total;
+        this.state = state;
     }
 
     public int getId() {
@@ -97,6 +99,22 @@ public class Service {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public Service getNext() {
+        return next;
+    }
+
+    public void setNext(Service next) {
+        this.next = next;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
     }
 
      

@@ -7,7 +7,7 @@ package views.Account;
 
 import beans.Employee;
 import controllers.EmployeesController;
-import views.Admin.EmployeeViewController;
+import views.Admin.Employee.EmployeeViewController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -55,7 +55,7 @@ public class AuthController implements Initializable {
         
         if (emp == null) {
             if (emp.getRole().equals("Administrator")) {
-                EmployeesController.getInstance().add(name.getText(), "Administrator", user2.getText(), pass2.getText());
+                EmployeesController.getInstance().addLast(name.getText(), "Administrator", user2.getText(), pass2.getText());
                 Admin.getInstance().start(Account.s);
             } else if(emp.getRole().equals("Client")) {
                 Client.getInstance().start(Account.s);
