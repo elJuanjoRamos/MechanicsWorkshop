@@ -62,7 +62,7 @@
                   <FontAwesomeIcon iconName="USER" size="1.5em" />
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#open_Services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICE">
+            <JFXButton onAction="#open_services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICE">
                <font>
                   <Font name="Corbel" size="20.0" />
                </font>
@@ -76,6 +76,14 @@
                </font>
                <graphic>
                   <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_cars" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="AUTOMOVILES">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="CAR" size="1.5em" />
                </graphic>
             </JFXButton>
          </children>

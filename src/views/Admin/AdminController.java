@@ -38,7 +38,7 @@ public class AdminController implements Initializable {
         
     }
     @FXML
-    private void open_Services(ActionEvent event) {
+    private void open_services(ActionEvent event) {
         changeView("/views/Admin/Service/ServicesView.fxml");
         
     }
@@ -47,9 +47,10 @@ public class AdminController implements Initializable {
         changeView("/views/Admin/SpareParts/SparePartsView.fxml");
         
     }
-    
-    
-    
+    @FXML
+    private void open_cars(ActionEvent event) {
+        changeView("/views/Admin/Car/FXMLCarView.fxml");
+    }
     
     public void changeView(String component){
         try {
