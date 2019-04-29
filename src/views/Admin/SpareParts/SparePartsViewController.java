@@ -9,6 +9,7 @@ import beans.SpareParts;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import controllers.InterpreterController;
 import controllers.SparesPartsController;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -75,9 +76,15 @@ public class SparePartsViewController implements Initializable {
     
     /*INICIALIZAR TABLA*/
     public void initTableView() {
+        
+        try {
+            ObservableList<SpareParts> observableList = SparesPartsController.getInstance().getSpareParts();
+            tableView.setItems(observableList);
+        
+        } catch (Exception e){
             
-        ObservableList<SpareParts> observableList = SparesPartsController.getInstance().getSpareParts();
-        tableView.setItems(observableList);
+        }
+        
     }
     
     
@@ -128,7 +135,11 @@ public class SparePartsViewController implements Initializable {
         }
     }
    
-   
+    @FXML
+    private void bulkLoad(ActionEvent event) {
+        InterpreterController.getInstance().openSelecFile("*.tmr");
+       
+    }
    
    @FXML
     private void cancel(ActionEvent event) {

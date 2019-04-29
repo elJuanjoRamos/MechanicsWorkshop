@@ -9,8 +9,10 @@ import beans.Service;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
+import controllers.InterpreterController;
 import controllers.ServicesController;
 import java.io.IOException;
+import java.util.Stack;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -99,11 +101,17 @@ public class ServicesViewController implements Initializable {
     @FXML
     private void add_Service() {
         if (getValidations()) {
-            ServicesController.getInstance().add(sName.getText(), sMark.getText(), sModel.getText(), Double.parseDouble(sPrice.getText()), 0.0);
+            
+            ServicesController.getInstance().add(sName.getText(), sMark.getText(), sModel.getText(),new Stack() ,  Double.parseDouble(sPrice.getText()), 0.0);
             initTableView();
         }
     }
 
+    @FXML
+    private void bulkLoad(ActionEvent event) {
+        InterpreterController.getInstance().openSelecFile("*.tms");
+       
+    }
     @FXML
     private void open_Dialog(ActionEvent event) throws IOException {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
@@ -153,6 +161,9 @@ public class ServicesViewController implements Initializable {
 
         }
     }
+    
+    
+    
     /*MUESTRA UNA ALERTA CUANDO UN ELEMNTO NO SE HA SELECCIONADO*/
 
     public void getAlert(String content) {

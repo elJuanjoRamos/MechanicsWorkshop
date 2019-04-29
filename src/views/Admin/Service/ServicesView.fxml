@@ -62,7 +62,7 @@
                                           <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXButton>
-                                    <JFXButton prefHeight="31.0" prefWidth="99.0" styleClass="primary-buttton" text="Add">
+                                    <JFXButton onAction="#bulkLoad" prefHeight="31.0" prefWidth="99.0" styleClass="primary-buttton" text="Add">
                                        <graphic>
                                           <FontAwesomeIcon glyphStyle="-fx-fill:#007bff" iconName="PLUS" />
                                        </graphic>

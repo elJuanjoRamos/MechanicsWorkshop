@@ -97,7 +97,7 @@ public class SparesPartsController {
         // llegar al final de la lista.
         while (aux != null) {
             // Consulta si el valor del nodo es igual al de referencia.
-            if (aux.getName().equals(name)) {
+            if (aux.getName().equalsIgnoreCase(name)) {
                 return aux;
             }
             aux = aux.getNext();
@@ -167,7 +167,7 @@ public class SparesPartsController {
         // Posicion de los elementos de la lista.
         // Recorre la lista hasta el final.
         while (aux != null) {
-            if (aux.getModel().equals(model) && aux.getMark().equals(mark) && aux.getStock() > 0) {
+            if (aux.getModel().equalsIgnoreCase(model) && aux.getMark().equalsIgnoreCase(mark) && aux.getStock() > 0) {
                 partsName.add(aux.getName());
             }
             aux = aux.getNext();

@@ -28,13 +28,9 @@ public class EmployeesController {
     }
     
     public void initEmployee() {
-        addLast("Juan Ramos", "Client", "c", "c");
         addLast("Juan Ramos", "Administrator", "admin", "admin");
         addLast("Rafael Morente", "Administrator", "rmorente", "admin");
         addLast("Luis Velasquez", "Administrator", "lvelasquez", "admin");
-        addLast("Employee1", "Seller", "user1", "password1");
-        addLast("Employee2", "Seller", "user2", "password2");
-        addLast("Employee3", "Packer", "user3", "password3");
     }
 
     public ObservableList<Employee> getEmployees() {
@@ -43,6 +39,7 @@ public class EmployeesController {
         actual = first;
         
         while (actual != null) {
+            
             employees.add(actual);
             actual = actual.next;
         }

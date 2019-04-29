@@ -129,7 +129,7 @@ public class ViewInsertServiceController implements Initializable {
                 
                
                 ServicesController.getInstance().edit(serviceAux.getId(), serviceAux.getName() , serviceAux.getMark() , serviceAux.getModel(), 
-                stack, serviceAux.getWorkPrice() , price);
+                stack, serviceAux.getWorkPrice() , price, true);
                 
                 
                 
@@ -152,7 +152,7 @@ public class ViewInsertServiceController implements Initializable {
     public void updateInfo(ActionEvent event){
         if (getValidations()) {
             ServicesController.getInstance().edit(serviceAux.getId(), sName.getText() , sMark.getText() , sModel.getText() , 
-                    serviceAux.getSparePartList(), Double.parseDouble(sPrice.getText()) , serviceAux.getSparePartsPrice());
+                    serviceAux.getSparePartList(), Double.parseDouble(sPrice.getText()) , serviceAux.getSparePartsPrice(), false);
             
             ServicesViewController.getInstance().initTableView();
             

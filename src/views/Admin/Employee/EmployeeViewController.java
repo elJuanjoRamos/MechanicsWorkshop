@@ -99,9 +99,13 @@ public class EmployeeViewController implements Initializable {
     
     /*INICIALIZAR TABLA*/
     public void initTableView() {
+        try{
+            ObservableList<Employee> observableList = EmployeesController.getInstance().getEmployees();        
+            tableView.setItems(observableList);
+ 
+        } catch(Exception e){
             
-        ObservableList<Employee> observableList = EmployeesController.getInstance().getEmployees();
-        tableView.setItems(observableList);
+        }
     }
     
     /*METODO AGREGAR DEL BOTON*/
@@ -180,29 +184,8 @@ public class EmployeeViewController implements Initializable {
     }
     @FXML
     private void bulkLoad(ActionEvent event) {
-        
-        
-        
-        Stage stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("IPC Files", "*.tme"));
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        if (selectedFile != null) {
-            try {
-                String linea;
-                BufferedReader bf = read(selectedFile.toString());
-                while((linea = bf.readLine()) != null ) {
-                    InterpreterController.getInstance().interpret(linea);
-                }
-            } catch (IOException e) {
-                
-            }
-        }
-        
-        
-        
+        InterpreterController.getInstance().openSelecFile("*.tme");
+       
     }
     public BufferedReader read(String nombre) {
 	try {

@@ -6,6 +6,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import controllers.ClientController;
+import controllers.InterpreterController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -171,7 +172,7 @@ public class FXMLClientViewController implements Initializable {
     
     @FXML
     public void bulkLoad(ActionEvent event) {
-        
+        InterpreterController.getInstance().openSelecFile("*.tmca");
     }
     
     /*VALIDA SI YA EXISTE EL NOMBRE DE USUARIO O SI DEJA CAMPOS EN BLANCO*/

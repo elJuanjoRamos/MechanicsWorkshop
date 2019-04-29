@@ -62,6 +62,7 @@ public class ClientController {
      * @param role
      */
     public void addAtEnd(String fullName, String username, String password, String role) {
+        
         String id = String.valueOf(dpi).concat("0101");
         Client c = new Client(Long.parseLong(id), fullName, username, password, role);
         if(isEmpty()) {
