@@ -20,6 +20,7 @@ public class CarController {
     private Car start;
     private Car latest;
     private int size;
+    
     public CarController() {
         cars = FXCollections.observableArrayList();
         initCar();
@@ -36,7 +37,7 @@ public class CarController {
     }
     
     /**
-     *
+     * INICIALIZAR DATOS
     **/
     public void initCar() {
         addAtEnd("0123456", "Honda", "CR-V", "resources/img/car.png");
@@ -55,7 +56,6 @@ public class CarController {
     public boolean isEmpty() {
         return start == null;
     }
-    
     
     /**
      * MÉTODO PARA RETORNAR LOS NODOS DE LA LISTA CIRUCLAR SIMPLE

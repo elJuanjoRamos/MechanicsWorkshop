@@ -3,82 +3,95 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package views.Admin.Car;
+package views.Admin.Client;
 
-import beans.Car;
+import beans.Client;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import controllers.CarController;
-import java.io.File;
+import controllers.ClientController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
-import javafx.stage.FileChooser;
-import javafx.stage.Stage;
 
 /**
  * FXML Controller class
  *
  * @author Jose Morente
  */
-public class FXMLCarViewController implements Initializable {
-    private static FXMLCarViewController instance;
-    @FXML TableView<Car> tableView;
-    @FXML TableColumn<Car, String> tableColumnPlate;
-    @FXML TableColumn<Car, String> tableColumnBrand;
-    @FXML TableColumn<Car, String> tableColumnModel;
-    @FXML TableColumn<Car, String> tableColumnPath;
+public class FXMLClientViewController implements Initializable {    
+    private static FXMLClientViewController instance;
+    private ObservableList<String> observableRoles;
+    @FXML TableView<Client> tableView;
+    @FXML TableColumn<Client, Long> dpi;
+    @FXML TableColumn<Client, String> fullname;
+    @FXML TableColumn<Client, String> username;
+    @FXML TableColumn<Client, String> password;
+    @FXML TableColumn<Client, String> role;
     
+    @FXML ComboBox combo;
     @FXML TextField ePlate, eBrand, eModel, ePath, filter;
+    @FXML TextField eName, eUsername, ePassword;
     @FXML Button aceptar, editar, eliminar, cancelar, subir;
     @FXML Text texto;
-    @FXML ImageView imageView;
     @FXML StackPane stackPane;
+
+    public FXMLClientViewController() {
+    }
     
     
     /**
      * @return the instance
     **/
-    public static FXMLCarViewController getInstance(){
+    public static FXMLClientViewController getInstance(){
         if(instance == null){
-            instance = new FXMLCarViewController();
+            instance = new FXMLClientViewController();
         }
         return instance;
     }
-    
+
+    public ObservableList<String> getObservableRoles() {
+        String[] array = {"Oro", "Normal"};
+        observableRoles = FXCollections.observableArrayList(array);
+        return observableRoles;
+    }
+        
+    /**
+     * Initializes the controller class.
+     */
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        ePath = new TextField();
+        combo.setItems(getObservableRoles());
+        //ePath = new TextField();
         editar.setVisible(false);
         cancelar.setVisible(false);
         texto.setText("Add a new Spear Part");
         initTableView();
-        tableColumnPlate.setCellValueFactory(new PropertyValueFactory<>("plate"));
-        tableColumnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
-        tableColumnModel.setCellValueFactory(new PropertyValueFactory<>("model"));
-        tableColumnPath.setCellValueFactory(new PropertyValueFactory<>("path"));
-        Image image = new Image("resources/img/car1.png");
-        imageView.setImage(image);
+        dpi.setCellValueFactory(new PropertyValueFactory<>("dpi"));
+        fullname.setCellValueFactory(new PropertyValueFactory<>("fullName"));
+        username.setCellValueFactory(new PropertyValueFactory<>("username"));
+        password.setCellValueFactory(new PropertyValueFactory<>("password"));
+        role.setCellValueFactory(new PropertyValueFactory<>("role"));
     }    
     
     /**
      * INICIALIZAR DATOS EN TABLA 
      */
     public void initTableView() {
-        ObservableList<Car> observableList = CarController.getInstance().getCars();
+        ObservableList<Client> observableList = ClientController.getInstance().getClients();
         tableView.setItems(observableList);
     }
     
@@ -88,7 +101,7 @@ public class FXMLCarViewController implements Initializable {
    @FXML
    private void delete(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            CarController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getPlate());
+            ClientController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getDpi());
             tableView.getSelectionModel().clearSelection();
             initTableView();
         } else {
@@ -102,7 +115,7 @@ public class FXMLCarViewController implements Initializable {
    @FXML
    private void add(ActionEvent event) {
         if (getValidations() == true) {
-            CarController.getInstance().addAtEnd(ePlate.getText(), eBrand.getText(), eModel.getText(), ePath.getText());
+            ClientController.getInstance().addAtEnd(eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
             clearFields();
             initTableView();
         }
@@ -114,7 +127,11 @@ public class FXMLCarViewController implements Initializable {
     @FXML
     private void update(ActionEvent event) {
         if (getValidations() == true) {
-            CarController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getPlate(), eBrand.getText(), eModel.getText(), ePath.getText());
+            ClientController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getDpi(), 
+                eName.getText(), 
+                eUsername.getText(), 
+                ePassword.getText(), 
+                combo.getSelectionModel().getSelectedItem().toString());
             clearFields();
             initTableView();
             aceptar.setVisible(true);
@@ -134,22 +151,22 @@ public class FXMLCarViewController implements Initializable {
        texto.setText("Add a new Spare Part");
     }
    
-    /*Actualizar*/
+    /**
+     * OBTENER DATOS
+     */ 
     @FXML
     private void getSpare(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Car c = CarController.getInstance().getCar(tableView.getSelectionModel().getSelectedItem().getPlate());
-            if (c != null) {
+            Client c = ClientController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getDpi());
+            if(c != null) {
                 aceptar.setVisible(false);
                 editar.setVisible(true);
                 cancelar.setVisible(true);
                 texto.setText("Edit the Spare Part");
-                ePlate.setText(c.getPlate());
-                ePlate.setDisable(true);
-                eBrand.setText(c.getBrand());
-                eModel.setText(c.getModel());
-                ePath.setText(c.getPath());
-                imageView.setImage(new Image(c.getPath()));
+                eName.setText(c.getFullName());
+                ePassword.setText(c.getPassword());
+                eUsername.setText(c.getUsername());
+                combo.getSelectionModel().select(c.getRole());
             }
         } else {
            getAlert(" No items have been selected.");
@@ -157,26 +174,14 @@ public class FXMLCarViewController implements Initializable {
     }
     
     @FXML
-    private void subir(ActionEvent event) {
-        Stage stage = new Stage();
-        FileChooser fileChooser = new FileChooser();
-        fileChooser.setTitle("Open Resource File");
-        fileChooser.getExtensionFilters().addAll(
-                new FileChooser.ExtensionFilter("JPG imagenes", "*.JPG"));
-        File selectedFile = fileChooser.showOpenDialog(stage);
-        if (selectedFile != null) {
-            System.out.println(selectedFile);
-            String path = "file:///" + selectedFile.toString().replace("/", File.separator);
-            ePath.setText(path);
-            imageView.setImage(new Image(path));
-        }
+    public void bulkLoad(ActionEvent event) {
+        
     }
-   
-   
+    
     /*VALIDA SI YA EXISTE EL NOMBRE DE USUARIO O SI DEJA CAMPOS EN BLANCO*/
     public boolean getValidations(){
-        if(!ePlate.getText().isEmpty() && !eBrand.getText().isEmpty() &&
-            !eModel.getText().isEmpty() && !ePath.getText().isEmpty()){
+        if(!eName.getText().isEmpty() && !eUsername.getText().isEmpty() &&
+            !ePassword.getText().isEmpty() && combo.getSelectionModel().getSelectedItem() != null){
             return true;
         }
         getAlert("You can not leave fields blank.");
@@ -184,16 +189,16 @@ public class FXMLCarViewController implements Initializable {
     }
     
     public boolean isNumber(String option, String option2){
-       boolean resultado;
+       /*boolean resultado;
         try {
             Double.parseDouble(option);
             Integer.parseInt(option2);
             resultado = true;
         } catch (NumberFormatException e) {
             resultado = false;
-        }
+        }*/
         
-        return resultado;   
+        return false;   
     }
     
     public void getAlert(String content) {
@@ -213,10 +218,10 @@ public class FXMLCarViewController implements Initializable {
      * LIMPIAR CAMPOS DE TEXTO
      */
     public void clearFields(){
-       ePlate.clear();
-       eBrand.clear();
-       eModel.clear();
-       ePath.clear();
+       eName.clear();
+       ePassword.clear();
+       eUsername.clear();
+       combo.getSelectionModel().clearSelection();
     }
     
 }
