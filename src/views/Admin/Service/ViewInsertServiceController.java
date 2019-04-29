@@ -52,23 +52,31 @@ public class ViewInsertServiceController implements Initializable {
     @FXML TableColumn<SpareParts, Integer> id;
     @FXML TableColumn<SpareParts, String> name;
     @FXML TableColumn<SpareParts, String> price;
-    @FXML TextField sName, sMark, sModel, sPrice;
+    @FXML TableColumn<SpareParts, String> quantity;
+    @FXML TextField sName, sMark, sModel, sPrice, sQuantity;
     @FXML StackPane stackPane;
     @FXML Text textInfo;
     
-    private Service serviceAux = ServicesController.getInstance().getAux();
+    private Service serviceAux;
+    ObservableList observable;
+        Stack stack = new Stack();
+            
     
     public ViewInsertServiceController() {
+        serviceAux = ServicesController.getInstance().search(ServicesController.getInstance().getIdAux());
+        observable = FXCollections.observableArrayList();
     }
     
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         list.setItems(null);
-        list.setItems(SparesPartsController.getInstance().getSparePartsName());
+        
+        list.setItems(SparesPartsController.getInstance().getSparePartsName(serviceAux.getModel(), serviceAux.getMark()));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
+        quantity.setCellValueFactory(new PropertyValueFactory<>("stock"));
         initTableView();
         loadService();
     }    
@@ -86,51 +94,59 @@ public class ViewInsertServiceController implements Initializable {
     
      /*INICIALIZAR TABLA*/
     public void initTableView() {
-        ObservableList observable = FXCollections.observableArrayList();
-        
-        
-            for (int i = 0; i < serviceAux.getSparePartList().size(); i++) {
-                if (serviceAux.getSparePartList().get(i) != serviceAux.getSparePartList().get(0)) {
-                    
-                    observable.add(serviceAux.getSparePartList().get(i));
-
-                }
-    
-                
-            }
-            tableView.setItems(observable);
-        
-        
-        
+        observable.clear();
+        for (int i = 0; i < serviceAux.getSparePartList().size(); i++) {
+            SpareParts s = (SpareParts)serviceAux.getSparePartList().get(i);
+            observable.add(s);
+        }
+        tableView.setItems(observable);
+       
     }
     
     @FXML
     public void addPartsToTable(ActionEvent event){
-        if (list.getSelectionModel().getSelectedItem() != null) {
-            Stack stackAux = serviceAux.getSparePartList();
-            stackAux.push(SparesPartsController.getInstance().searchForName(list.getSelectionModel().getSelectedItem().toString()));
-            serviceAux.setSparePartList(stackAux);
-        } 
-        initTableView();
-    } 
-    @FXML
-    public void addFinalSparePartsList(ActionEvent event){
-        if (serviceAux.getSparePartList().size() > 1) {
+        if (list.getSelectionModel().getSelectedItem() != null && !sQuantity.getText().isEmpty()) {
             
-            Double price = serviceAux.getSparePartsPrice();
-            
-            for (int i = 0; i < serviceAux.getSparePartList().size(); i++) {
-                SpareParts o = (SpareParts)serviceAux.getSparePartList().get(i);
-                price = price + o.getPrice();
+            int quantiyParts = Integer.parseInt(sQuantity.getText());
+            int tempStock = 0;
+            Double tempPrice = 0.0;
+            if (serviceAux.getSparePartList().size() != 0) {
+                stack = serviceAux.getSparePartList();
+            }  else {
+                serviceAux.setSparePartList(stack);                
             }
             
-            ServicesController.getInstance().edit(serviceAux.getId(), serviceAux.getName() , serviceAux.getMark() , serviceAux.getModel(), 
-                    serviceAux.getSparePartList(), Double.parseDouble(sPrice.getText()) , price);
+            SpareParts s = new SpareParts();
+            s = SparesPartsController.getInstance().searchForName(list.getSelectionModel().getSelectedItem().toString());
             
-            ServicesViewController.getInstance().initTableView();
+            if ( quantiyParts > 0 && s.getStock() >=  quantiyParts) {
+                tempStock = s.getStock();
+                tempPrice = s.getPrice();
+                stack.push(s);
             
-        }
-    }
+                
+                Double price = serviceAux.getSparePartsPrice() + (s.getPrice() * quantiyParts);
+                
+               
+                ServicesController.getInstance().edit(serviceAux.getId(), serviceAux.getName() , serviceAux.getMark() , serviceAux.getModel(), 
+                stack, serviceAux.getWorkPrice() , price);
+                
+                
+                
+                
+                ServicesViewController.getInstance().initTableView();
+           
+                int newStock = tempStock - quantiyParts;
+                SparesPartsController.getInstance().edit(s.getId(), s.getName(), s.getMark(), s.getModel(), newStock, tempPrice);
+        
+            }
+            
+
+        } 
+                
+        initTableView();
+    } 
+
     
     @FXML
     public void updateInfo(ActionEvent event){

@@ -24,22 +24,21 @@ public class ServicesController {
     private ObservableList<Service> services;
     private int count = 1;
     private Service first;
-    private Service aux;
+    private int aux;
     Stack a = new Stack();
         
     public ServicesController() {
-        a.push(new SpareParts(0, "-", "-", "-", 0, 0.0));
-
+        
         services = FXCollections.observableArrayList();
         first = null;
         
     }
     
     public void initServices(){
-        add("Motor: Engine oil and refill", "Toyota", "Corolla", 150.5, 130.75);
-        add("Motor: Replace oil filter.", "Audi", "A3", 10.5, 500.00);
-        add("Motor: Check for general oil leaks.", "Toyota", "Corolla",150.5, 130.75);
-        add("Motor: Check radiator condition, security and report any leaks", "Ferrary", "195 Inter", 1000.0, 1050.75);
+        add("Motor: Engine oil and refill", "Toyota", "Corolla", 150.5, 0.0);
+        add("Motor: Replace oil filter.", "Audi", "A3", 10.5, 0.00);
+        add("Motor: Check for general oil leaks.", "Toyota", "Corolla",150.5, 0.0);
+        add("Motor: Check radiator condition, security and report any leaks", "Ferrary", "195 Inter", 1000.0, 0.0);
 
     }
     /*CONSULTA SI ESTA VACIA LA LISTA*/
@@ -107,6 +106,7 @@ public class ServicesController {
     
     /*MODIFICAR SERVICIO*/
     public void edit(int id, String name, String mark, String model, Stack list, Double workPrice, Double spPrice) {
+        //System.out.println(id + " " + name + " " +  mark + " " +  model + " " +  list.size() + " " + workPrice + " " + spPrice );
         Service actual = new Service();
         actual = first;
         while( actual != null ) {
@@ -115,13 +115,18 @@ public class ServicesController {
                 actual.setName(name);
                 actual.setModel(model);
                 actual.setMark(mark);
+                actual.setSparePartList(list);
                 actual.setSparePartsPrice(spPrice);
                 actual.setWorkPrice(workPrice);
                 actual.setTotal(spPrice+workPrice);
+                
+            
             }
+            System.out.println("el numero de partes de Servicio" + actual.getId() + " es " + actual.getSparePartList().size() );
             
             actual = actual.next;
         }
+        
     }
     
     /*ELIMINAR SERVICIO*/
@@ -163,11 +168,11 @@ public class ServicesController {
     }
 
     
-    public void change(Service s){
-        this.aux = s;
+    public void change(int id){
+        this.aux = id;
     }
     
-    public Service getAux(){
+    public int getIdAux(){
         return aux;
     }
     

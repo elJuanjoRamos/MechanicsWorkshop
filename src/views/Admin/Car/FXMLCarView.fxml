@@ -1,26 +1,25 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import de.jensd.fx.glyphs.fontawesome.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import com.jfoenix.controls.*?>
 <?import java.lang.*?>
-<?import java.net.*?>
 <?import java.util.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.effect.*?>
-<?import javafx.scene.image.*?>
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.text.*?>
-<?import de.jensd.fx.glyphs.fontawesome.*?>
 
-<StackPane fx:id="stackPane" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.Service.ServicesViewController">
-   <children>
-      <VBox prefHeight="853.0" prefWidth="1278.0" style="-fx-background-color: white;" stylesheets="@../../../resources/main.css">
+<StackPane id="AnchorPane" fx:id="stackPane" prefHeight="845.0" prefWidth="1372.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.Car.FXMLCarViewController">
+       <children>
+      <VBox style="-fx-background-color: white;" stylesheets="@../../../resources/main.css">
          <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #ffc107;">
+            <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #4E0857;">
                <children>
-                  <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="WRENCH" size="3.5em" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKSHOP SERVICES">
+                  <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="CAR" size="3.5em" />
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKSHOP CARS">
                      <font>
                         <Font name="Corbel Bold" size="40.0" />
                      </font>
@@ -41,25 +40,28 @@
             </HBox>
             <HBox prefHeight="723.0" prefWidth="1278.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="660.0" prefWidth="1314.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="500.0" prefWidth="1216.0" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox prefHeight="32.0" prefWidth="814.0">
                            <children>
                               <JFXTextField fx:id="filter" prefHeight="31.0" prefWidth="315.0" promptText="Search" style="-: red;" />
                               <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="SEARCH" size="1.5em" />
-                              <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="473.0" HBox.hgrow="ALWAYS">
+                              <HBox prefHeight="53.0" prefWidth="473.0">
                                  <children>
-                                    <JFXButton onAction="#open_Dialog" prefHeight="31.0" prefWidth="117.0" styleClass="success-buttton" text="Details">
-                                       <graphic>
-                                          <FontAwesomeIcon glyphStyle="-fx-fill: #28a745" iconName="CHECK" />
-                                       </graphic>
-                                    </JFXButton>
-                                    <JFXButton fx:id="eliminar" onAction="#delete_Service" prefHeight="31.0" prefWidth="117.0" styleClass="danget-buttton" text="Delete">
+                                    <JFXButton fx:id="eliminar" onAction="#delete" prefHeight="31.0" prefWidth="117.0" styleClass="danget-buttton" text="Delete">
                                        <graphic>
                                           <FontAwesomeIcon glyphStyle="-fx-fill:#B00020" iconName="TRASH" />
                                        </graphic>
                                        <HBox.margin>
                                           <Insets bottom="10.0" left="30.0" right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </JFXButton>
+                                    <JFXButton onAction="#getSpare" prefHeight="31.0" prefWidth="116.0" styleClass="warning-buttton" text="Update">
+                                       <graphic>
+                                          <FontAwesomeIcon glyphStyle="-fx-fill:#ffc107" iconName="UNDO" />
+                                       </graphic>
+                                       <HBox.margin>
+                                          <Insets bottom="10.0" left="10.0" right="10.0" top="10.0" />
                                        </HBox.margin>
                                     </JFXButton>
                                     <JFXButton prefHeight="31.0" prefWidth="99.0" styleClass="primary-buttton" text="Add">
@@ -83,18 +85,12 @@
                               <Insets />
                            </VBox.margin>
                         </HBox>
-                        <TableView fx:id="tableView" prefHeight="589.0" prefWidth="906.0" VBox.vgrow="ALWAYS">
+                        <TableView fx:id="tableView" prefHeight="556.0" VBox.vgrow="ALWAYS">
                            <columns>
-                              <TableColumn fx:id="id" prefWidth="94.0" text="ID" />
-                              <TableColumn fx:id="name" maxWidth="313.0" prefWidth="313.0" text="NAME" />
-                              <TableColumn fx:id="mark" maxWidth="223.0" minWidth="0.0" prefWidth="166.0" text="MARK" />
-                              <TableColumn fx:id="model" maxWidth="317.0" minWidth="0.0" prefWidth="177.0" text="MODEL" />
-                              <TableColumn maxWidth="301.0" minWidth="0.0" prefWidth="0.0" text="TOTAL">
-                                 <columns>
-                                    <TableColumn fx:id="workPrice" prefWidth="126.0" text="WP" />
-                                    <TableColumn fx:id="spPrice" prefWidth="99.0" text="PP" />
-                                 </columns>
-                              </TableColumn>
+                              <TableColumn fx:id="tableColumnPlate" prefWidth="100.0" text="PLATE" />
+                              <TableColumn fx:id="tableColumnBrand" prefWidth="200.0" text="BRAND" />
+                              <TableColumn fx:id="tableColumnModel" prefWidth="200.0" text="MODEL" />
+                              <TableColumn fx:id="tableColumnPath" prefWidth="200.0" text="PICTURE PATH" />
                            </columns>
                         </TableView>
                      </children>
@@ -105,77 +101,76 @@
                         <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                      </padding>
                      <HBox.margin>
-                        <Insets bottom="30.0" left="30.0" top="30.0" />
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                      </HBox.margin>
                   </VBox>
                   <VBox alignment="CENTER" prefHeight="547.0" prefWidth="727.0" style="-fx-background-color: white;">
                      <children>
-                        <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Insert a new Service">
+                        <Text fx:id="texto" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>
                               <Font name="Corbel" size="30.0" />
                            </font>
                         </Text>
-                        <VBox prefHeight="290.0" prefWidth="311.0">
+                        <VBox prefHeight="388.0">
                            <children>
-                              <HBox alignment="CENTER">
+                              <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="48.61669921875" />
-                                    <JFXTextField fx:id="sName" prefHeight="31.0" prefWidth="215.0" />
+                                    <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="350.0" layoutX="29.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+                                        <image>
+                                          <Image url="@../../resources/img/car.png" />
+                                        </image>
+                                    </ImageView>
                                  </children>
                                  <VBox.margin>
-                                    <Insets top="20.0" />
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
                                  </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER">
+                              <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mark:" wrappingWidth="48.61669921875" />
-                                    <JFXTextField fx:id="sMark" prefHeight="31.0" prefWidth="215.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Plate:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="ePlate" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets top="50.0" />
-                                 </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER">
+                              <HBox alignment="CENTER" prefHeight="52.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Brand:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="eBrand" />
+                                 </children>
+                              </HBox>
+                              <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Model:" wrappingWidth="48.61669921875" />
-                                    <JFXTextField fx:id="sModel" prefHeight="31.0" prefWidth="215.0" />
+                                    <JFXTextField fx:id="eModel" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets top="50.0" />
-                                 </VBox.margin>
                               </HBox>
-                              <HBox alignment="CENTER">
+                              <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Price:" wrappingWidth="48.61669921875" />
-                                    <JFXTextField fx:id="sPrice" prefWidth="215.0" />
+                                    <JFXButton fx:id="subir" onAction="#subir" prefHeight="30.0" prefWidth="150.0" styleClass="account-buttton" text="Upload" />
                                  </children>
-                                 <VBox.margin>
-                                    <Insets top="50.0" />
-                                 </VBox.margin>
                               </HBox>
                            </children>
-                           <VBox.margin>
-                              <Insets top="20.0" />
-                           </VBox.margin>
                         </VBox>
                         <HBox alignment="CENTER" prefHeight="52.0">
                            <children>
-                              <JFXButton fx:id="aceptar" onAction="#add_Service" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Acept">
+                              <JFXButton fx:id="aceptar" onAction="#add" prefHeight="53.0" prefWidth="150.0" styleClass="account-buttton" text="Acept" />
+                           </children>
+                        </HBox>
+                        <HBox alignment="CENTER" prefHeight="52.0">
+                           <children>
+                              <JFXButton fx:id="editar" onAction="#update" prefHeight="52.0" prefWidth="116.0" styleClass="danget-buttton" text="Edit" />
+                              <JFXButton fx:id="cancelar" onAction="#cancel" prefHeight="53.0" prefWidth="116.0" styleClass="warning-buttton" text="Cancel">
                                  <HBox.margin>
-                                    <Insets />
+                                    <Insets left="20.0" />
                                  </HBox.margin>
                               </JFXButton>
                            </children>
-                           <VBox.margin>
-                              <Insets top="30.0" />
-                           </VBox.margin>
                         </HBox>
                      </children>
                      <effect>
                         <DropShadow color="#bbbbbb" height="10.0" radius="4.5" width="10.0" />
                      </effect>
                      <HBox.margin>
-                        <Insets bottom="30.0" left="10.0" right="30.0" top="30.0" />
+                        <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                      </HBox.margin>
                   </VBox>
                </children>

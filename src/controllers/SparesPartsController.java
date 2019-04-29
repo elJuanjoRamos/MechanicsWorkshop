@@ -43,10 +43,10 @@ public class SparesPartsController {
     
 
     public void initSpareParts() {
-        add("a", "a", "a", 0, 150.5);
-        add("b", "b", "a", 0, 150.5);
-        add("c", "v", "a", 0, 150.5);
-        add("d", "d", "a", 0, 150.5);
+        add("a", "Toyota", "Corolla", 10, 150.5);
+        add("b", "Audi", "A3", 10, 150.5);
+        add("c", "v", "a", 10, 150.5);
+        add("d", "d", "a", 10, 150.5);
 
     }
 
@@ -159,7 +159,7 @@ public class SparesPartsController {
         }
         return parts;
     }
-    public ObservableList<String> getSparePartsName() {
+    public ObservableList<String> getSparePartsName(String model, String mark) {
         ObservableList<String> partsName = FXCollections.observableArrayList();
 
         // Crea una copia de la lista.
@@ -167,7 +167,9 @@ public class SparesPartsController {
         // Posicion de los elementos de la lista.
         // Recorre la lista hasta el final.
         while (aux != null) {
-            partsName.add(aux.getName());
+            if (aux.getModel().equals(model) && aux.getMark().equals(mark) && aux.getStock() > 0) {
+                partsName.add(aux.getName());
+            }
             aux = aux.getNext();
 
         }

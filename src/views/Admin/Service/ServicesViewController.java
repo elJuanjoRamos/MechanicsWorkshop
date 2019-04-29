@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package views.Admin.Service;
 
 import java.net.URL;
@@ -15,7 +10,6 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import controllers.ServicesController;
-import controllers.SparesPartsController;
 import java.io.IOException;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -23,11 +17,9 @@ import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 
@@ -115,7 +107,7 @@ public class ServicesViewController implements Initializable {
     @FXML
     private void open_Dialog(ActionEvent event) throws IOException {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            ServicesController.getInstance().change(tableView.getSelectionModel().getSelectedItem());
+            ServicesController.getInstance().change(tableView.getSelectionModel().getSelectedItem().getId());
             JFXDialogLayout content = new JFXDialogLayout();
             JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
             try {
