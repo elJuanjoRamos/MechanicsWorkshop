@@ -219,3 +219,5 @@ public class FXMLClientViewController implements Initializable {
        eUsername.clear();
        combo.getSelectionModel().clearSelection();
     }
+    
+  }
