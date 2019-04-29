@@ -30,7 +30,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 public class FXMLCarViewController implements Initializable {
-private static FXMLCarViewController instance;
+    private static FXMLCarViewController instance;
     @FXML TableView<Car> tableView;
     @FXML TableColumn<Car, String> tableColumnPlate;
     @FXML TableColumn<Car, String> tableColumnBrand;
@@ -126,7 +126,8 @@ private static FXMLCarViewController instance;
        aceptar.setVisible(true);
        editar.setVisible(false);
        cancelar.setVisible(false);
-       texto.setText("Add a new Car");
+
+       texto.setText("Add a new Spare Part");
     }
    
     /*Actualizar*/
@@ -138,7 +139,8 @@ private static FXMLCarViewController instance;
                 aceptar.setVisible(false);
                 editar.setVisible(true);
                 cancelar.setVisible(true);
-                texto.setText("Edit the Car");
+
+                texto.setText("Edit the Spare Part");
                 ePlate.setText(c.getPlate());
                 ePlate.setDisable(true);
                 eBrand.setText(c.getBrand());

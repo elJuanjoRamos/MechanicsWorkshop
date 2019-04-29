@@ -1,5 +1,15 @@
+
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package beans;
 
+/**
+ *
+ * @author Jose Morente
+ */
 public class Car {
     private String plate;
     private String brand;
@@ -91,5 +101,6 @@ public class Car {
     public String toString() {
         return "Car{" + "plate=" + plate + ", brand=" + brand + ", model=" + model + ", path=" + path + ", next=" + next + '}';
     }
-        
+       
 }
+

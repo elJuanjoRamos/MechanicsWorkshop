@@ -10,7 +10,10 @@ import beans.Client;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-
+/**
+ *
+ * @author Jose Morente
+ */
 public class ClientController {
     private static ClientController instance;
     private ObservableList<Client> clients;

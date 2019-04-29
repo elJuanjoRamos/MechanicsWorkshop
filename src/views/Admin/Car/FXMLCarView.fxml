@@ -19,7 +19,8 @@
             <HBox alignment="CENTER_LEFT" prefHeight="50.0" prefWidth="1238.0" style="-fx-background-color: #4E0857;">
                <children>
                   <FontAwesomeIcon glyphStyle="-fx-fill:white" iconName="CAR" size="3.5em" />
-                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="WORKSHOP CARS">
+
+                  <Text fill="WHITE" strokeType="OUTSIDE" strokeWidth="0.0" text="AUTOMOVILES">
                      <font>
                         <Font name="Corbel Bold" size="40.0" />
                      </font>
@@ -115,7 +116,8 @@
                            <children>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <ImageView fx:id="imageView" fitHeight="200.0" fitWidth="350.0" layoutX="29.0" layoutY="44.0" pickOnBounds="true" preserveRatio="true">
+
+                                    <ImageView fx:id="imageView" layoutX="29.0" layoutY="44.0" fitHeight="200.0" fitWidth="350.0" pickOnBounds="true" preserveRatio="true">
                                         <image>
                                           <Image url="@../../resources/img/car.png" />
                                         </image>

@@ -1,3 +1,8 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
 package controllers;
 
 import beans.Car;
@@ -5,6 +10,10 @@ import beans.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+/**
+ *
+ * @author Jose Morente
+ */
 public class CarController {
     private static CarController instance;
     private ObservableList<Car> cars;

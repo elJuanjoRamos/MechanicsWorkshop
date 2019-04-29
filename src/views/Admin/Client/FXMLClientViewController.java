@@ -1,3 +1,4 @@
+
 package views.Admin.Client;
 
 import beans.Client;
@@ -218,5 +219,3 @@ public class FXMLClientViewController implements Initializable {
        eUsername.clear();
        combo.getSelectionModel().clearSelection();
     }
-    
-}
