@@ -1,12 +1,15 @@
 package views.Main;
 
+import controllers.ClientsController;
 import controllers.EmployeesController;
 import controllers.ServicesController;
 import controllers.SparesPartsController;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
+import views.Account.Account;
 import views.Admin.Admin;
+import views.Client.ClientView;
 
 public class Main extends Application {
     
@@ -18,6 +21,7 @@ public class Main extends Application {
         
         //Account.getInstance().start(stage);
         Admin.getInstance().start(stage);
+        //ClientView.getInstance().start(stage, ClientsController.getInstance().searchClient(123456));
     }
 
     public static void main(String[] args) {

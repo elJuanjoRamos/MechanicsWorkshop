@@ -1,0 +1,166 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package views.Admin.WorkOrder;
+
+import beans.Employee;
+import beans.WorkOrder;
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDialog;
+import com.jfoenix.controls.JFXDialogLayout;
+import controllers.EmployeesController;
+import controllers.TDAQueueCarsInProcess;
+import controllers.WorkOrderController;
+import java.net.URL;
+import java.util.ResourceBundle;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
+
+
+public class WorkOrderViewController implements Initializable {
+
+    
+    /*VARIABLES*/
+    private ObservableList<String> employees;
+    @FXML ComboBox list;
+    @FXML Text clientName, carD, serviceName;
+    @FXML TableView<WorkOrder> tableView;
+    @FXML TableColumn<WorkOrder, Integer> id;
+    @FXML TableColumn<WorkOrder, String> client;
+    @FXML TableColumn<WorkOrder, String> car;
+    @FXML TableColumn<WorkOrder, String> service;
+    @FXML TableColumn<WorkOrder, String> state;
+    @FXML TableColumn<WorkOrder, String> date;
+    @FXML ImageView imageView;
+    @FXML StackPane stackPane;
+    WorkOrder workOrder;
+    
+    
+    @Override
+    public void initialize(URL url, ResourceBundle rb) {
+        
+        initMechanics();
+        initTableView();
+        id.setCellValueFactory(new PropertyValueFactory<>("id"));
+        client.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+        car.setCellValueFactory(new PropertyValueFactory<>("carDetails"));
+        service.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
+        state.setCellValueFactory(new PropertyValueFactory<>("state"));
+        date.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
+    }    
+    
+    /*INICIALIZAR TABLA*/
+    public void initTableView() {
+        try {
+            ObservableList<WorkOrder> observableList = WorkOrderController.getInstance().getOrders();
+            tableView.setItems(observableList);
+        } catch (Exception e) {
+
+        }
+    }
+    
+    public void initMechanics(){
+        list.setItems(EmployeesController.getInstance().getMechanics());
+    }
+    
+    @FXML
+    public void getOrderWork(){
+        
+          WorkOrder wo =tableView.getSelectionModel().getSelectedItem();
+        
+        if (wo != null) {
+            if (wo.getState().equalsIgnoreCase("UNATTENDED")) {
+                workOrder = tableView.getSelectionModel().getSelectedItem();
+                clientName.setText(workOrder.getClientName());
+                carD.setText(workOrder.getCarDetails());
+                serviceName.setText(workOrder.getServiceName());
+                imageView.setImage( new Image(workOrder.getImagePath()));
+            } else {
+                getAlert("This work order was already authorized");
+            }
+        }else {
+            getAlert(" No items have been selected.");
+        }
+    }
+    
+    
+    @FXML 
+    public void sendToService(){
+        
+        
+        
+        
+        String texto = "";
+        if (list.getSelectionModel().getSelectedItem() != null) {
+            if (!list.getSelectionModel().getSelectedItem().equals("Waiting list")) {
+                Employee e = EmployeesController.getInstance().searchForName(list.getSelectionModel().getSelectedItem().toString());
+                EmployeesController.getInstance().edit(e.getId(), e.getName(), e.getRole(), e.getUsername(), e.getPassword(), false);
+                workOrder.setEmployee(e);
+                workOrder.setMechaic(e.getName());
+                workOrder.setState("Being attended");
+                
+                WorkOrder selected = workOrder;
+                WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), 
+                        selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState());
+
+
+                TDAQueueCarsInProcess.getInstance().push(te);
+
+                
+                
+                
+                texto = "The client's car is being serviced";
+                initMechanics();
+                initTableView();
+            }
+            getAlert(texto);
+            clear();
+        }
+        
+        
+    }
+    
+    public void clear(){
+        list.getSelectionModel().clearSelection();
+        clientName.setText("");
+        carD.setText("");
+        serviceName.setText("");
+        imageView.setImage(new Image("resources/img/car2.png"));
+    }
+    
+    
+     /*MUESTRA UNA ALERTA CUANDO UN ELEMNTO NO SE HA SELECCIONADO*/
+    public void getAlert(String content) {
+
+        JFXDialogLayout c = new JFXDialogLayout();
+        JFXDialog dialog = new JFXDialog(stackPane, c, JFXDialog.DialogTransition.CENTER);
+        c.setHeading(new Text("Information"));
+        c.setBody(new Text(content));
+        JFXButton button = new JFXButton("Close");
+        button.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event) {
+                dialog.close();
+            }
+        });;
+        c.setActions(button);
+
+        dialog.show();
+    }
+}
+

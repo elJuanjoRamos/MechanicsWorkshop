@@ -5,9 +5,19 @@
  */
 package views.Client;
 
+import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
+import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.layout.VBox;
+import views.Account.Account;
+import views.Account.AccountController;
 
 /**
  * FXML Controller class
@@ -16,12 +26,45 @@ import javafx.fxml.Initializable;
  */
 public class ClientViewController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    
+    @FXML 
+    private VBox vbox;
+    @FXML
+    private Parent fxml;
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
-    }    
+        changeView("/views/Client/DashboardView.fxml");
+    }  
     
+    @FXML 
+    public void add_myCars( ActionEvent event ) {
+        changeView("/views/Client/MyCars/MyCars.fxml");
+    }
+    @FXML 
+    public void send_toService( ActionEvent event ) {
+        changeView("/views/Client/CarToService/SendCarToService.fxml");
+    }
+    
+    
+    @FXML 
+    public void logOut( ActionEvent event ) throws Exception {
+        Account.getInstance().start(ClientView.getInstance().getStage());
+        ClientView.client = null;
+    }
+    
+    
+    
+    public void changeView(String component){
+        try {
+            fxml = (Parent) FXMLLoader.load(getClass().getResource(component));
+            vbox.getChildren().removeAll();
+            vbox.getChildren().setAll(fxml);
+        } catch (IOException ex) {
+            System.out.println(ex);
+            Logger.getLogger(AccountController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+    }
 }

@@ -5,6 +5,8 @@
  */
 package views.Client;
 
+import beans.Client;
+import controllers.ClientsController;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -14,29 +16,42 @@ import javafx.stage.Stage;
  *
  * @author Juan José Ramos
  */
-public class Client {
+public class ClientView {
+    
+    public static Client client;
+    
      /*SINGLETON*/
-    private static Client instance;
-    public static Client getInstance(){
+    private static ClientView instance;
+    public static ClientView getInstance(){
         if(instance == null){
-            instance = new Client();
+            instance = new ClientView();
         }
         return instance;
     }
     /*---------------*/
 
-    public Client() {
+    /*VARIABLES*/
+    Stage stageView;
+    
+    public ClientView() {
     }
     
 
-    public void start(Stage stage) {
+    public void start(Stage stage, Client cln) {
+        
+        stageView = stage;
+        client = cln;
+        
         try {
-            Parent root = FXMLLoader.load(getClass().getResource("Client.fxml"));
+            Parent root = FXMLLoader.load(getClass().getResource("ClientView.fxml"));
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.show();
         } catch(Exception e) {}
     }
     
+    public Stage getStage(){
+        return this.stageView;
+    }
     
 }

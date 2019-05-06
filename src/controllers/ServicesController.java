@@ -35,10 +35,11 @@ public class ServicesController {
     }
     
     public void initServices(){
-        add("Motor: Engine oil and refill", "Toyota", "Corolla", a, 150.5, 0.0);
-        add("Motor: Replace oil filter.", "Audi", "A3",a, 10.5, 0.00);
-        add("Motor: Check for general oil leaks.", "Toyota", "Corolla",a, 150.5, 0.0);
-        add("Motor: Check radiator condition, security and report any leaks", "Honda", "Civic 2005", a, 1000.0, 0.0);
+        add("Diagnostic", "Any", "Any", a, 500.00, 0.0, true);
+        add("Motor: Engine oil and refill", "Toyota", "Corolla", a, 150.5, 0.0, false);
+        add("Motor: Replace oil filter.", "Audi", "A3",a, 10.5, 0.00, false);
+        add("Motor: Check for general oil leaks.", "Toyota", "Corolla",a, 150.5, 0.0, false);
+        add("Motor: Check radiator condition, security and report any leaks", "Honda", "Civic 2005", a, 1000.0, 0.0, false);
 
     }
     /*CONSULTA SI ESTA VACIA LA LISTA*/
@@ -46,9 +47,9 @@ public class ServicesController {
         return first == null;
     }
     /*METODO AGREGAR*/
-    public void add(String name, String mark, String model, Stack stack,  Double workPrice, Double spPrice){
+    public void add(String name, String mark, String model, Stack stack,  Double workPrice, Double spPrice, boolean state){
     
-        Service newService = new Service(count, name, mark, model, stack, workPrice, spPrice, (workPrice+ spPrice), false);
+        Service newService = new Service(count, name, mark, model, stack, workPrice, spPrice, (workPrice+ spPrice), state);
         
          if (isNull()) {
             // Inicializa la lista agregando como inicio al nuevo nodo.
@@ -111,61 +112,68 @@ public class ServicesController {
         actual = first;
         while( actual != null ) {
             
-            if (actual.getId() == id) {
-                actual.setName(name);
-                actual.setModel(model);
-                actual.setMark(mark);
-                actual.setSparePartList(list);
-                actual.setSparePartsPrice(spPrice);
-                actual.setWorkPrice(workPrice);
-                actual.setTotal(spPrice+workPrice);
-                actual.setState(state);
+            if (id != 1 ) {
+                if (actual.getId() == id) {
+                    actual.setName(name);
+                    actual.setModel(model);
+                    actual.setMark(mark);
+                    actual.setSparePartList(list);
+                    actual.setSparePartsPrice(spPrice);
+                    actual.setWorkPrice(workPrice);
+                    actual.setTotal(spPrice+workPrice);
+                    actual.setState(state);
+                }
             
             }
-            System.out.println("el numero de partes de Servicio" + actual.getId() + " es " + actual.getSparePartList().size() );
-            
             actual = actual.next;
         }
         
     }
     
     /*ELIMINAR SERVICIO*/
-    public void delete(int id){
-         if (search(id) != null) {
-            // Consulta si el nodo a eliminar es el pirmero
-            if (first.getId() == id) {
-                // El primer nodo apunta al siguiente.
-                first = first.getNext();
-            } else {
+    public void delete(int id) {
+        if (id != 1) {
+            if (search(id) != null) {
+                // Consulta si el nodo a eliminar es el pirmero
+                if (first.getId() == id) {
+                    // El primer nodo apunta al siguiente.
+                    first = first.getNext();
+                } else {
 
-                Service aux = first;
+                    Service aux = first;
 
-                while (aux.getNext().getId() != id) {
-                    aux = aux.getNext();
-                }
-                // Guarda el nodo siguiente del nodo a eliminar.
-                Service next = aux.getNext().getNext();
+                    while (aux.getNext().getId() != id) {
+                        aux = aux.getNext();
+                    }
+                    // Guarda el nodo siguiente del nodo a eliminar.
+                    Service next = aux.getNext().getNext();
                 // Enlaza el nodo anterior al de eliminar con el 
-                // sguiente despues de el.
-                aux.setNext(next);
+                    // sguiente despues de el.
+                    aux.setNext(next);
+                }
             }
         }
-        /*Service actual = new Service();
-        Service temp = new Service();
-        actual = first;
-        temp = null;
-        while(actual != null){
-            if (actual.getId() == id) {
-                if (actual == first) {
-                    first = first.next;
-                } else {
-                    temp.next = actual.next;
+    }
+    
+    public ObservableList<String> getServiceName(String model, String mark) {
+        ObservableList<String> serviceName = FXCollections.observableArrayList();
+
+        // Crea una copia de la lista.
+        Service aux = first;
+        // Posicion de los elementos de la lista.
+        // Recorre la lista hasta el final.
+        while (aux != null) {
+            if (aux.getModel().equalsIgnoreCase(model) && aux.getMark().equalsIgnoreCase(mark) || aux.getModel().equals("Any")   ) {
+                if (aux.getState() == true) {
+                    serviceName.add(aux.getName());
                 }
             }
-            temp = actual;
-            actual = actual.next;
-        }*/
+            aux = aux.getNext();
+        }
+        return serviceName;
     }
+    
+    
 
     
     public void change(int id){

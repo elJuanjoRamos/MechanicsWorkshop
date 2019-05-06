@@ -11,11 +11,23 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
+import views.Account.Account;
 import views.Account.AccountController;
 
 
 public class AdminController implements Initializable {
 
+    /*SINGLETON*/
+    private static AdminController instance;
+    public static AdminController getInstance(){
+        if(instance == null){
+            instance = new AdminController();
+        }
+        return instance;
+    }
+    /*---------------*/
+    
+    
     @FXML 
     private VBox vbox;
     @FXML
@@ -24,7 +36,6 @@ public class AdminController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         changeView("/views/Admin/Home.fxml");
-        
     }    
     @FXML
     private void open_employee(ActionEvent event) {
@@ -54,7 +65,18 @@ public class AdminController implements Initializable {
     private void open_clients(ActionEvent event) {
         changeView("/views/Admin/Client/FXMLClientView.fxml");
     }
-    
+    @FXML
+    private void open_workOrder(ActionEvent event) {
+        changeView("/views/Admin/WorkOrder/WorkOrderView.fxml");
+    }
+    @FXML
+    private void open_processesView(ActionEvent event) {
+        changeView("/views/Admin/Processes/ProcessesView.fxml");
+    }
+    @FXML 
+    public void logOut( ActionEvent event ) throws Exception {
+        Account.getInstance().start(Admin.s);
+    }
     public void changeView(String component){
         try {
             fxml = (Parent) FXMLLoader.load(getClass().getResource(component));

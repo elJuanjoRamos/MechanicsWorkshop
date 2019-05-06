@@ -103,7 +103,7 @@ public class InterpreterController {
                                     sPrice = sPrice + s.getPrice();
                                 }
                             }
-                            ServicesController.getInstance().add(fields[i], fields[i+1], fields[i+2],  a, Double.parseDouble(fields[i+4]), sPrice);
+                            ServicesController.getInstance().add(fields[i], fields[i+1], fields[i+2],  a, Double.parseDouble(fields[i+4]), sPrice, false);
                             ServicesViewController.getInstance().initTableView();
             
                         } else if(text.equals("*.tmca")){

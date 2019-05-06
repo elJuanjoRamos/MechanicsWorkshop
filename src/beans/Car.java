@@ -11,16 +11,19 @@ package beans;
  * @author Jose Morente
  */
 public class Car {
+    private int id;
     private String plate;
     private String brand;
     private String model;
     private String path;
     private Car next;
+    
 
     public Car() {
     }
 
-    public Car(String plate, String brand, String model, String path) {
+    public Car(int id, String plate, String brand, String model, String path) {
+        this.id = id;
         this.plate = plate;
         this.brand = brand;
         this.model = model;
@@ -101,6 +104,15 @@ public class Car {
     public String toString() {
         return "Car{" + "plate=" + plate + ", brand=" + brand + ", model=" + model + ", path=" + path + ", next=" + next + '}';
     }
-       
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
 }
 

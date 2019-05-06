@@ -5,7 +5,7 @@
  */
 package controllers;
 
-import beans.Car;
+import beans.*;
 import beans.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -17,13 +17,13 @@ import javafx.collections.ObservableList;
 public class CarController {
     private static CarController instance;
     private ObservableList<Car> cars;
+    private int size;
+    public Car carClient;
     private Car start;
     private Car latest;
-    private int size;
     
     public CarController() {
-        cars = FXCollections.observableArrayList();
-        initCar();
+        cars = FXCollections.observableArrayList();   
     }
 
     /**
@@ -39,15 +39,21 @@ public class CarController {
     /**
      * INICIALIZAR DATOS
     **/
-    public void initCar() {
-        addAtEnd("0123456", "Honda", "CR-V", "resources/img/car.png");
-        addAtEnd("AB90123", "Honda", "Civic Sedan", "resources/img/car1.png");
-        addAtEnd("PV45612", "Honda", "City", "resources/img/car1.png");
-        addAtEnd("AR4525X", "Honda", "Fit", "resources/img/car1.png");
-        addAtEnd("XF4524S", "Volkswagen", "Polo Sedan", "resources/img/car1.png");
-        addAtEnd("A54X7S1", "Volkswagen", "Beetle", "resources/img/car1.png");
-        addAtEnd("PO54X12", "Chevrolet", "Colorado", "resources/img/car1.png");
+    
+    
+    
+    public Car returnCars(){
+        getAll();
+        
+        return start;
+        
     }
+    /*SETEA EN LA LISTA LOS CARROS DE UN CLIENTE EN ESPECIFICO PARA TRABAJAS LOS */
+    /*METODOS DE LA LISTA SOLO CON ESOS CARROS*/
+    public void setCarClient(Car c){
+        this.start = c;
+    }
+    
     
     /**
      * MÉTODO PARA VERIFICAR SI ESTA VACÍA LA LISTA
@@ -80,7 +86,6 @@ public class CarController {
         if(!isEmpty()) {
             Car aux = start;
             do {
-                System.out.println(aux.getPlate());
                 aux = aux.getNext();
             } while(aux != start);
         }
@@ -92,8 +97,8 @@ public class CarController {
      * @param model
      * @param path
      */
-    public void addAtEnd(String plate, String brand, String model, String path) {
-        Car c = new Car(plate, brand, model, path);
+    public void addAtEnd(int id, String plate, String brand, String model, String path) {
+        Car c = new Car(id, plate, brand, model, path);
         if(isEmpty()) {
             start = c;
             latest = c;
@@ -115,7 +120,7 @@ public class CarController {
      * @param path
      */
     public void addAtStart(String plate, String brand, String model, String path) {
-        Car c = new Car(plate, brand, model, path);
+        /*Car c = new Car(plate, brand, model, path);
         if(isEmpty()) {
             start = c;
             latest = c;
@@ -125,7 +130,7 @@ public class CarController {
             start = c;
             latest.setNext(start);
         }
-        size++;
+        size++;*/
     }
     
     /**
@@ -133,10 +138,11 @@ public class CarController {
      * @param plate
      * @return found
      */
-    public boolean search(String plate){
+    public boolean search(int id){
         Car aux = start;
         do{
-            if (aux.getPlate().equals(plate)){
+            if (aux.getId() == id){
+                System.out.println("lo encontro");
                 return true;
             }
             else{
@@ -168,14 +174,14 @@ public class CarController {
      * ELIMINAR NODO DE LA LISTA CIRCULAR SIMPLE
      * @param plate
      */
-    public void delete(String plate) {
-        if(search(plate)) {
-            if(start.getPlate().equals(plate)) {
+    public void delete(int id) {
+        if(search(id)) {
+            if(start.getId() == id) {
                 start = start.getNext();
                 latest.setNext(start);
             } else {
                 Car aux = start;
-                while(!aux.getNext().getPlate().equals(plate)) {
+                while(aux.getNext().getId() != id) {
                     aux = aux.getNext();
                 }
                 if(aux.getNext() == latest) {
@@ -197,18 +203,26 @@ public class CarController {
      * @param model
      * @param path
      */
-    public void update(String plate, String brand, String model, String path) {
-        if(search(plate)) {
+    public void update(int id, String plate, String brand, String model, String path) {
+        if(search(id)) {
             Car aux = start;
             do {
-                if(aux.getPlate().equals(plate)) {
+                if(aux.getId()== id) {
                     aux.setBrand(brand);
                     aux.setModel(model);
                     aux.setPath(path);
+                    aux.setPlate(plate);
                 }
                 aux = aux.getNext();
             } while(aux != start);
         }
+    }
+    
+    
+    
+    public void cleanList(){
+        start = null;
+        latest = null;
     }
 
 }

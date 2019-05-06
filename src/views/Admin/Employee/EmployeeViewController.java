@@ -124,7 +124,8 @@ public class EmployeeViewController implements Initializable {
     @FXML
     private void update_Employee(ActionEvent event) {
         if (getValidations() == true) {
-            EmployeesController.getInstance().edit(tableView.getSelectionModel().getSelectedItem().getId(),  eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText());
+            EmployeesController.getInstance().edit(tableView.getSelectionModel().getSelectedItem().getId(),  
+                    eName.getText(), combo.getSelectionModel().getSelectedItem().toString(), eUsername.getText(), ePassword.getText(), true);
             eName.clear();
             ePassword.clear();
             eUsername.clear();

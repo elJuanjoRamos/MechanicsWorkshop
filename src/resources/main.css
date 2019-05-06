@@ -166,13 +166,6 @@ and open the template in the editor.
     
 }
 
-
-
-
-
-
-
-
 .table-view .table-row-cell:selected .table-cell{
     -fx-text-fill: #3F51B5;
     -fx-border-width: 0 0 0 0;
@@ -252,4 +245,31 @@ and open the template in the editor.
 {
     -fx-background-color: rgba(0,0,0,0.06);
     -fx-text-fill: #3F51B5;
+}
+
+
+/*TABPANE*/
+
+#tabPane {
+    -fx-background-color: #FFFFFF;
+}
+
+#tabPane .tab-header-background {
+    -fx-background-color: #FFFFFF;
+}
+
+#tabPane .tab {
+    -fx-background-color: #d0d0d0;
+    -fx-background-radius: 0;
+    -fx-padding: 5 10 10 10;
+}
+
+#tabPane .tab:selected {
+    -fx-background-color: #007bff;
+    -fx-focus-color: transparent;
+}
+
+#tabPane .tab-label {
+    -fx-text-fill: #FFFFFF;
+    -fx-font-size: 18px;
 }

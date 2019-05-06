@@ -89,9 +89,15 @@ public class ServicesViewController implements Initializable {
     /*ELIMINA UN SERVICIO*/
     private void delete_Service(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            ServicesController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getId());
-            tableView.getSelectionModel().clearSelection();
-            initTableView();
+            
+            if (tableView.getSelectionModel().getSelectedItem().getId() != 1) {
+                ServicesController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getId());
+                tableView.getSelectionModel().clearSelection();
+                initTableView();
+            } else {
+                getAlert(" You can not delete this service.");
+            }
+       
         } else {
             getAlert(" No items have been selected.");
         }
@@ -102,7 +108,7 @@ public class ServicesViewController implements Initializable {
     private void add_Service() {
         if (getValidations()) {
             
-            ServicesController.getInstance().add(sName.getText(), sMark.getText(), sModel.getText(),new Stack() ,  Double.parseDouble(sPrice.getText()), 0.0);
+            ServicesController.getInstance().add(sName.getText(), sMark.getText(), sModel.getText(),new Stack() ,  Double.parseDouble(sPrice.getText()), 0.0, false);
             initTableView();
         }
     }
@@ -115,7 +121,8 @@ public class ServicesViewController implements Initializable {
     @FXML
     private void open_Dialog(ActionEvent event) throws IOException {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            ServicesController.getInstance().change(tableView.getSelectionModel().getSelectedItem().getId());
+            if (tableView.getSelectionModel().getSelectedItem().getId() != 1) {
+                ServicesController.getInstance().change(tableView.getSelectionModel().getSelectedItem().getId());
             JFXDialogLayout content = new JFXDialogLayout();
             JFXDialog dialog = new JFXDialog(stackPane, content, JFXDialog.DialogTransition.CENTER);
             try {
@@ -136,6 +143,10 @@ public class ServicesViewController implements Initializable {
             content.setActions(button);
 
             dialog.show();
+            } else {
+                getAlert("You can not edit this service.");
+            }
+            
         } else {
             getAlert(" No items have been selected.");
         }

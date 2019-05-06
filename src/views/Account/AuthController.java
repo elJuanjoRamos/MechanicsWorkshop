@@ -5,7 +5,9 @@
  */
 package views.Account;
 
+import beans.Client;
 import beans.Employee;
+import controllers.ClientsController;
 import controllers.EmployeesController;
 import views.Admin.Employee.EmployeeViewController;
 import java.net.URL;
@@ -16,7 +18,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import views.Admin.Admin;
-import views.Client.Client;
+import views.Client.ClientView;
 
 /**
  * FXML Controller class
@@ -40,11 +42,15 @@ public class AuthController implements Initializable {
         
         String[] data = {user.getText(), pass.getText()};
         Employee emp = EmployeesController.getInstance().authenticate(data);
-        if (emp != null) {
+        Client cln = ClientsController.getInstance().authenticate(user.getText(), pass.getText());
+        
+        if (emp != null && cln == null) {
             if (emp.getRole().equals("Administrator")) {
                 Admin.getInstance().start(Account.s);
             }
-        }   
+        } else if(emp == null && cln != null){
+            ClientView.getInstance().start(Account.s, cln);
+        } 
     }
     
     @FXML
@@ -57,8 +63,6 @@ public class AuthController implements Initializable {
             if (emp.getRole().equals("Administrator")) {
                 EmployeesController.getInstance().addLast(name.getText(), "Administrator", user2.getText(), pass2.getText());
                 Admin.getInstance().start(Account.s);
-            } else if(emp.getRole().equals("Client")) {
-                Client.getInstance().start(Account.s);
             }
         }   
     }

@@ -5,7 +5,7 @@ import beans.Client;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
-import controllers.ClientController;
+import controllers.ClientsController;
 import controllers.InterpreterController;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -41,7 +41,7 @@ public class FXMLClientViewController implements Initializable {
     
     @FXML ComboBox combo;
     @FXML TextField ePlate, eBrand, eModel, ePath, filter;
-    @FXML TextField eName, eUsername, ePassword;
+    @FXML TextField eName, eUsername, ePassword, eDpi;
     @FXML Button aceptar, editar, eliminar, cancelar, subir;
     @FXML Text texto;
     @FXML StackPane stackPane;
@@ -75,7 +75,7 @@ public class FXMLClientViewController implements Initializable {
         //ePath = new TextField();
         editar.setVisible(false);
         cancelar.setVisible(false);
-        texto.setText("Add a new Spear Part");
+        texto.setText("Add a new Client");
         initTableView();
         dpi.setCellValueFactory(new PropertyValueFactory<>("dpi"));
         fullname.setCellValueFactory(new PropertyValueFactory<>("fullName"));
@@ -88,7 +88,7 @@ public class FXMLClientViewController implements Initializable {
      * INICIALIZAR DATOS EN TABLA 
      */
     public void initTableView() {
-        ObservableList<Client> observableList = ClientController.getInstance().getClients();
+        ObservableList<Client> observableList = ClientsController.getInstance().getClients();
         tableView.setItems(observableList);
     }
     
@@ -98,7 +98,7 @@ public class FXMLClientViewController implements Initializable {
    @FXML
    private void delete(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            ClientController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getDpi());
+            ClientsController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getDpi());
             tableView.getSelectionModel().clearSelection();
             initTableView();
         } else {
@@ -112,7 +112,7 @@ public class FXMLClientViewController implements Initializable {
    @FXML
    private void add(ActionEvent event) {
         if (getValidations() == true) {
-            ClientController.getInstance().addAtEnd(eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
+            ClientsController.getInstance().addAtEnd( eDpi.getText(),eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
             clearFields();
             initTableView();
         }
@@ -124,11 +124,11 @@ public class FXMLClientViewController implements Initializable {
     @FXML
     private void update(ActionEvent event) {
         if (getValidations() == true) {
-            ClientController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getDpi(), 
+            ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getDpi(), 
                 eName.getText(), 
                 eUsername.getText(), 
                 ePassword.getText(), 
-                combo.getSelectionModel().getSelectedItem().toString());
+                combo.getSelectionModel().getSelectedItem().toString(), 0);
             clearFields();
             initTableView();
             aceptar.setVisible(true);
@@ -154,7 +154,7 @@ public class FXMLClientViewController implements Initializable {
     @FXML
     private void getSpare(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Client c = ClientController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getDpi());
+            Client c = ClientsController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getDpi());
             if(c != null) {
                 aceptar.setVisible(false);
                 editar.setVisible(true);

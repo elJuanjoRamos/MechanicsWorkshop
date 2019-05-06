@@ -24,9 +24,6 @@ public class SparesPartsController {
     }
     /*VARIABLES*/
     private ObservableList<SpareParts> parts;
-    
-    private SpareParts[] array = new SpareParts[50];
-    private ArrayList<SpareParts> arrayList = new ArrayList<>();
     private Stack<SpareParts> stackSpareParts;
     private int count = 1;
     private SpareParts first;
@@ -190,44 +187,6 @@ public class SparesPartsController {
     }
     
     
-    
-    /////////////////////////ESTA PARTE ES DE LA VISTA DE AGREGAR PARTES AL SERVICIO//////////////////////////////////////////
-    public void clearServiceParts(){
-        for (int i = 0; i < array.length; i++) {
-            array[i] = null;
-        }
-        this.arrayList.clear();
-    }
-    
-    
-    public void addSparePartsService(String name){
-        if (searchForName(name) != null) {
-            for (int i = 0; i < array.length; i++) {
-                if (array[i] == null) {
-                    array[i] = searchForName(name);
-                    break;
-                }
-            }
-        }
-    }
-    /*METODO OBTENER LAS PARTES DE REPUESTOS PARA MOSTRARLAS EN LA TABLA*/
-    public ArrayList<SpareParts> getServiceParts() {
-        
-        this.arrayList.clear();
-        
-        for (SpareParts c : array) {
-            if (c != null) {
-                arrayList.add(c);
-            }
-        }
-        
-        return arrayList;
-    }
-    
-    /*AGREGA LOS REPUESTOS DEL SERVICIO A UNA PILA*/
-    public void addSetvicePartsToStack(){
-        
-    }
     
 }
 

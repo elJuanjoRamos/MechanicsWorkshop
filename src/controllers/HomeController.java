@@ -13,6 +13,7 @@ import java.util.ResourceBundle;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.text.Text;
+import views.Admin.AdminController;
 
 
 public class HomeController implements Initializable {
@@ -26,6 +27,11 @@ public class HomeController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         dateNow.setText(dateFormat.format(date));
     }    
+    
+    @FXML
+    public void changeToEmployee(){
+        AdminController.getInstance().changeView("/views/Admin/Employee/EmployeeView.fxml");
+    }
     
     
     

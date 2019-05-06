@@ -10,6 +10,7 @@ public class Client {
     private String username;
     private String password;
     private String role;
+    private int count;
     private Car carList;
     private Client previous;
     private Client next;
@@ -17,13 +18,16 @@ public class Client {
     public Client() {
     }
 
-    public Client(long dpi, String fullName, String username, String password, String role, Car carList) {
+    public Client(long dpi, String fullName, String username, String password, String role, Car carList, int count) {
         this.dpi = dpi;
         this.fullName = fullName;
         this.username = username;
         this.password = password;
         this.role = role;
         this.carList = carList;
+        this.count = count;
+        previous = null;
+        next = null;
     }
 
     public Client(long dpi, String fullName, String username, String password, String role) {
@@ -32,6 +36,9 @@ public class Client {
         this.username = username;
         this.password = password;
         this.role = role;
+        this.count = 0;
+        previous = null;
+        next = null;
     }
     
     /**
@@ -145,5 +152,16 @@ public class Client {
     public void setNext(Client next) {
         this.next = next;
     }
+
+    public int getCount() {
+        return count;
+    }
+
+    public void setCount(int count) {
+        this.count = count;
+    }
     
+    
+    
+      
 }

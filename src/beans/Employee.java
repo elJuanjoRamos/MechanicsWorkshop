@@ -16,6 +16,7 @@ public class Employee {
     private String role;
     private String username;
     private String password;
+    private boolean state;
     public  Employee previous;
     public  Employee next;
     
@@ -23,12 +24,13 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(int id, String name, String role, String username, String password) {
+    public Employee(int id, String name, String role, String username, String password, boolean state) {
         this.id = id;
         this.name = name;
         this.role = role;
         this.username = username;
         this.password = password;
+        this.state = state;
         this.previous = null;
         this.next = null;
     }
@@ -87,6 +89,14 @@ public class Employee {
 
     public void setNext(Employee next) {
         this.next = next;
+    }
+
+    public boolean isState() {
+        return state;
+    }
+
+    public void setState(boolean state) {
+        this.state = state;
     }
 
             

@@ -43,7 +43,9 @@ public class FXMLCarViewController implements Initializable {
     @FXML ImageView imageView;
     @FXML StackPane stackPane;
     
-    
+    /*VARIABLES*/
+    Image image = new Image("resources/img/car1.png");
+        
     /**
      * @return the instance
     **/
@@ -59,13 +61,12 @@ public class FXMLCarViewController implements Initializable {
         ePath = new TextField();
         editar.setVisible(false);
         cancelar.setVisible(false);
-        texto.setText("Add a new Spear Part");
+        texto.setText("Add a new Car");
         initTableView();
         tableColumnPlate.setCellValueFactory(new PropertyValueFactory<>("plate"));
         tableColumnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tableColumnModel.setCellValueFactory(new PropertyValueFactory<>("model"));
         tableColumnPath.setCellValueFactory(new PropertyValueFactory<>("path"));
-        Image image = new Image("resources/img/car1.png");
         imageView.setImage(image);
     }    
     
@@ -83,7 +84,7 @@ public class FXMLCarViewController implements Initializable {
    @FXML
    private void delete(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            CarController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getPlate());
+            CarController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getId());
             tableView.getSelectionModel().clearSelection();
             initTableView();
         } else {
@@ -97,7 +98,7 @@ public class FXMLCarViewController implements Initializable {
    @FXML
    private void add(ActionEvent event) {
         if (getValidations() == true) {
-            CarController.getInstance().addAtEnd(ePlate.getText(), eBrand.getText(), eModel.getText(), ePath.getText());
+            CarController.getInstance().addAtEnd(0, ePlate.getText(), eBrand.getText(), eModel.getText(), ePath.getText());
             clearFields();
             initTableView();
         }
@@ -109,7 +110,7 @@ public class FXMLCarViewController implements Initializable {
     @FXML
     private void update(ActionEvent event) {
         if (getValidations() == true) {
-            CarController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getPlate(), eBrand.getText(), eModel.getText(), ePath.getText());
+            CarController.getInstance().update(0, tableView.getSelectionModel().getSelectedItem().getPlate(), eBrand.getText(), eModel.getText(), ePath.getText());
             clearFields();
             initTableView();
             aceptar.setVisible(true);
@@ -214,6 +215,8 @@ public class FXMLCarViewController implements Initializable {
        eBrand.clear();
        eModel.clear();
        ePath.clear();
+       imageView.setImage(image);
+    
     }
     
 }

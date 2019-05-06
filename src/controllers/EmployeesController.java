@@ -10,13 +10,12 @@ public class EmployeesController {
     private ObservableList<Employee> employees;
     private int count = 1;
     private Employee first = null;
-    private Employee last= null;
     
     
     public EmployeesController() {
         employees = FXCollections.observableArrayList();
         first = null;
-        last = null;
+        
     }
     
     
@@ -30,9 +29,14 @@ public class EmployeesController {
     public void initEmployee() {
         addLast("Juan Ramos", "Administrator", "admin", "admin");
         addLast("Rafael Morente", "Administrator", "rmorente", "admin");
-        addLast("Luis Velasquez", "Administrator", "lvelasquez", "admin");
+        addLast("Luis Velasquez", "Mechanic", "lvelasquez", "admin");
+        addLast("Pedro Armas", "Mechanic", "lvelasquez", "admin");
+        addLast("Arturo Zamora", "Mechanic", "lvelasquez", "admin");
+        addLast("Luis Peresz", "Mechanic", "lvelasquez", "admin");
     }
 
+    
+    /*OBTIENE EL LISTADO DE EMPLEADOS*/
     public ObservableList<Employee> getEmployees() {
         this.employees.clear();
         Employee actual = new Employee();
@@ -43,16 +47,38 @@ public class EmployeesController {
             employees.add(actual);
             actual = actual.next;
         }
-        
         return employees;
     }
-
+    
+    /*OBTENER LISTADO DE MECANICOS*/
+    public ObservableList<String> getMechanics() {
+        ObservableList<String> mechanics = FXCollections.observableArrayList();
+        
+        
+        Employee actual = new Employee();
+        actual = first;
+        
+        while (actual != null) {
+            if (actual.getRole().equalsIgnoreCase("Mechanic") && actual.isState() == true ) {
+                    mechanics.add(actual.getName());
+            }
+            actual = actual.next;
+        }
+        if (mechanics.size() > 0) {
+            return mechanics;
+        } else {
+            mechanics.add("Waiting list");
+        }
+        return mechanics;
+    }
+    
+    
     /*-----------METODO AGREGAR------*/
     
     
     /*AGREGAR AL INICIO*/
     public void addFirst(String name, String role, String username, String password){
-            Employee e = new Employee(count, name, role, username, password);
+            Employee e = new Employee(count, name, role, username, password, true);
             
             if(first==null){
                 first=e;
@@ -67,7 +93,7 @@ public class EmployeesController {
     
     
     public void addLast(String name, String role, String username, String password){
-        Employee e = new Employee(count, name, role, username, password);
+        Employee e = new Employee(count, name, role, username, password, true);
         
         if (first == null) {
             first = e;
@@ -81,34 +107,9 @@ public class EmployeesController {
 
         }
 
-        
-        /*if (first == null) {
-            this.first = e;
-            first.next = null;
-            first.previous = null;
-            this.last = first;
-        } else {
-            this.last.next = e;
-            e.previous = last;
-            e.next = null;
-            this.last = e;
-            
-            
-        }*/
         count++;
     }
     
-    
-    
-    /*METODO MOSTRAR */
-    public void show(){
-        Employee actual = new Employee();
-        actual = last;
-        while (actual != null) {
-            System.out.println( "esto es mostrar"+ actual.getName());
-            actual = actual.previous;
-        }
-    }
     
     /*------------METODO BUSCAR---------------*/
     public Employee search(int id){
@@ -123,9 +124,22 @@ public class EmployeesController {
         return null;
     }
     
+    /*BUSCAR POR NOMBRE*/
+    public Employee searchForName(String name){
+        Employee actual = new Employee();
+        actual = first;
+        while(actual != null){
+            if (actual.getName().equals(name)) {
+                return actual;
+            }
+            actual = actual.next;
+        }
+        return null;
+    }
+    
     
     /*METODO EDITAR*/
-    public void edit(int id, String name, String role, String username, String password ){
+    public void edit(int id, String name, String role, String username, String password, boolean state ){
         Employee actual = new Employee();
         actual = first;
         while(actual != null){
@@ -134,6 +148,7 @@ public class EmployeesController {
                 actual.setPassword(password);
                 actual.setRole(role);
                 actual.setUsername(username);
+                actual.setState(state);
         
             }
             actual = actual.next;
@@ -164,41 +179,6 @@ public class EmployeesController {
                 }
             }
         }
-
-        
-        
-        
-        /*
-        
-        Employee actual = new Employee();
-        Employee temp = new Employee();
-        actual = first;
-        temp = null;
-        if (actual != null && actual.next == null && actual.previous == null) {
-                actual = null;
-                first = null;
-                last = null;
-                this.employees.clear();
-
-        } else {
-            while(actual != null){
-                if (actual.getId() == id) {
-                    if (actual == first) {
-                        first = first.next;
-                        first.previous = null;
-                    } else if(actual == last){
-                        temp = actual.previous;
-                        temp.next = null;
-                        last = temp;
-                    } else {
-                        temp.next = actual.next;
-                        actual.next.previous = actual.previous; 
-                    } 
-                }
-                temp = actual;
-                actual = actual.next;
-            }
-        }*/
         
     }
     

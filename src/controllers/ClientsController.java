@@ -14,16 +14,18 @@ import javafx.collections.ObservableList;
  *
  * @author Jose Morente
  */
-public class ClientController {
-    private static ClientController instance;
+public class ClientsController {
+    private static ClientsController instance;
     private ObservableList<Client> clients;
     private Client start;
     private Client latest;
     private int size;
     private long dpi = 201900000;
 
-    public ClientController() {
+    public ClientsController() {
         clients = FXCollections.observableArrayList();
+        start = null;
+        latest = null;
         initClient();
     }
     
@@ -31,16 +33,17 @@ public class ClientController {
      * INICIALIZAR DATOS
     **/
     public void initClient() {
-        addAtEnd("Juan Ramos", "jramos", "jramos", "Oro");
-        addAtEnd("José Morente", "jmorente", "jmorente", "Oro");
+        addAtEnd("123456", "Juan Ramos", "a", "a", "Oro");
+        addAtEnd("78910","José Morente", "s", "s", "Oro");
+        addAtEnd("78910","Pedro Morente", "d", "d", "Oro");
     }
 
     /**
      * @return the instance
      */
-    public static ClientController getInstance() {
+    public static ClientsController getInstance() {
         if(instance == null) {
-            instance = new ClientController();
+            instance = new ClientsController();
         }
         return instance;
     }
@@ -61,10 +64,10 @@ public class ClientController {
      * @param password
      * @param role
      */
-    public void addAtEnd(String fullName, String username, String password, String role) {
+    public void addAtEnd(String dpi, String fullName, String username, String password, String role) {
         
         String id = String.valueOf(dpi).concat("0101");
-        Client c = new Client(Long.parseLong(id), fullName, username, password, role);
+        Client c = new Client(Long.parseLong(dpi), fullName, username, password, role, null, 0);
         if(isEmpty()) {
             start = c;
             start.setNext(c);
@@ -78,7 +81,6 @@ public class ClientController {
             start.setPrevious(latest);
         }
         size++;
-        dpi++;
     }
     
     /**
@@ -113,6 +115,18 @@ public class ClientController {
         return false;
     }
     
+    public Client searchClient(long dpi) {
+        Client aux = latest;
+        do{
+            if (aux.getDpi() == dpi){
+                return aux;
+            } else{
+                aux = aux.getNext();
+            }
+        }while(aux != latest);
+        return null;
+    }
+    
     /**
      * BUSCAR NODO POR REFERENCIA EN LA LISTA CIRCULAR DOBLE
      * @param dpi
@@ -138,7 +152,7 @@ public class ClientController {
      * @param role
      * @param carList
      */
-    public void update(long dpi, String fullName, String username, String password, String role) {
+    public void update(long dpi, String fullName, String username, String password, String role, int count) {
         if(search(dpi)) {
             Client aux = start;
             do {
@@ -147,6 +161,10 @@ public class ClientController {
                     aux.setUsername(username);
                     aux.setPassword(password);
                     aux.setRole(role);
+                    if (count != 0) {
+                        int auxCount = aux.getCount();
+                        aux.setCount(auxCount + count);
+                    }
                 }
                 aux = aux.getNext();
             } while(aux != start);
@@ -180,5 +198,18 @@ public class ClientController {
                 current = current.getNext();
             } while(current != start);
         }
+    }
+    
+    
+    public Client authenticate(String username, String password){
+        Client aux = latest;
+        do{
+            if (aux.getUsername().equals(username) && aux.getPassword().equals(password)){
+                return aux;
+            } else{
+                aux = aux.getNext();
+            }
+        }while(aux != latest);
+        return null;
     }
 }

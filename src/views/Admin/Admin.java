@@ -22,8 +22,10 @@ public class Admin {
     public Admin() {
     }
     
-
+    /*VARIABLES*/
+    public static Stage s;
     public void start(Stage stage) {
+        s = stage;
         try {
             Parent root = FXMLLoader.load(getClass().getResource("Admin.fxml"));
             Scene scene = new Scene(root);
@@ -32,5 +34,7 @@ public class Admin {
         } catch(Exception e) {}
     }
     
-    
+    public Stage getStage(){
+        return this.s;
+    }
 }
