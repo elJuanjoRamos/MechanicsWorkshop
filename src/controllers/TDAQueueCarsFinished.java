@@ -12,12 +12,11 @@ import beans.Service;
 import beans.WorkOrder;
 import java.util.Date;
 
-/**
- *
- * @author Juan José Ramos
- */
+
+/*ESTA ES LA COLA DE CARROS QUE YA ESTAN SIENDO ATENDIDOS*/
 public class TDAQueueCarsFinished {
-     private static TDAQueueCarsFinished instance;
+    
+    private static TDAQueueCarsFinished instance;
     public static TDAQueueCarsFinished getInstance() {
         if (instance == null) {
             instance = new TDAQueueCarsFinished();
@@ -37,8 +36,9 @@ public class TDAQueueCarsFinished {
     private boolean isEmpty() {
         return firstNode == null;
     }
-
+    
     public void push(WorkOrder wo) {
+        System.out.println("el que llega a finalizar es " + wo.getClientName());
         WorkOrder node = wo;
         if (isEmpty()) {
             firstNode = node;
@@ -70,7 +70,7 @@ public class TDAQueueCarsFinished {
         }
     }
 
-    public Object getfirstNode() {
+    public WorkOrder getfirstNode() {
         if (!isEmpty()) {
             return firstNode;
         }
@@ -81,7 +81,7 @@ public class TDAQueueCarsFinished {
         return length;
     }
 
-    private WorkOrder getLastNode() {
+    public WorkOrder getLastNode() {
         WorkOrder lastNode = firstNode;
         while (lastNode.getNext() != null) {
             lastNode = lastNode.getNext();

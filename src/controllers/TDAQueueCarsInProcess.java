@@ -39,7 +39,6 @@ public class TDAQueueCarsInProcess {
     
     //int id, Car car, Client client, Employee employee, Service service,Date date,  String state
     public void push(WorkOrder wo) {
-        System.out.println("el que llega es " + wo.getCarDetails());
         WorkOrder node = wo;
         if (isEmpty()) {
             firstNode = node;
