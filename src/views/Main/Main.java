@@ -20,8 +20,8 @@ public class Main extends Application {
         ServicesController.getInstance().initServices();
         
         //Account.getInstance().start(stage);
-        Admin.getInstance().start(stage);
-        //ClientView.getInstance().start(stage, ClientsController.getInstance().searchClient(123456));
+        //Admin.getInstance().start(stage);
+        ClientView.getInstance().start(stage, ClientsController.getInstance().searchClient(1));
     }
 
     public static void main(String[] args) {

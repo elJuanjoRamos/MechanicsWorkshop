@@ -31,8 +31,6 @@ public class EmployeesController {
         addLast("Rafael Morente", "Administrator", "rmorente", "admin");
         addLast("Luis Velasquez", "Mechanic", "lvelasquez", "admin");
         addLast("Pedro Armas", "Mechanic", "lvelasquez", "admin");
-        addLast("Arturo Zamora", "Mechanic", "lvelasquez", "admin");
-        addLast("Luis Peresz", "Mechanic", "lvelasquez", "admin");
     }
 
     

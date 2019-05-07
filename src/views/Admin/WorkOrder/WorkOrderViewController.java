@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import controllers.EmployeesController;
 import controllers.TDAQueueCarsInProcess;
+import controllers.TDAQueueCarsWaiting;
 import controllers.WorkOrderController;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -102,12 +103,12 @@ public class WorkOrderViewController implements Initializable {
     @FXML 
     public void sendToService(){
         
-        
-        
-        
         String texto = "";
         if (list.getSelectionModel().getSelectedItem() != null) {
+            
+            
             if (!list.getSelectionModel().getSelectedItem().equals("Waiting list")) {
+                
                 Employee e = EmployeesController.getInstance().searchForName(list.getSelectionModel().getSelectedItem().toString());
                 EmployeesController.getInstance().edit(e.getId(), e.getName(), e.getRole(), e.getUsername(), e.getPassword(), false);
                 workOrder.setEmployee(e);
@@ -115,19 +116,45 @@ public class WorkOrderViewController implements Initializable {
                 workOrder.setState("Being attended");
                 
                 WorkOrder selected = workOrder;
+                //Crea una nueva orden de trabajo, a partir de la enviada, esto es por que
+                //si se envía la que se seleccionó, esta al ser una lista trae con siguo siguientes
+                //y se termian enviando los siguientes tambien.
                 WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), 
                         selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState());
 
 
+                //ENVÍA LAS ORDENES DE TRABAJO A LA LISTA DE CARROS EN ATENCION 
                 TDAQueueCarsInProcess.getInstance().push(te);
 
                 
                 
                 
-                texto = "The client's car is being serviced";
-                initMechanics();
-                initTableView();
+                
+            } else {
+                
+                
+                workOrder.setMechaic("----");
+                workOrder.setState("Being attended");
+                
+                WorkOrder selected = workOrder;
+                //Crea una nueva orden de trabajo, a partir de la enviada, esto es por que
+                //si se envía la que se seleccionó, esta al ser una lista trae con siguo siguientes
+                //y se termian enviando los siguientes tambien.
+                WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), 
+                        selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState());
+
+
+                //ENVÍA LAS ORDENES DE TRABAJO A LA LISTA DE CARROS EN ESPERA 
+                TDAQueueCarsWaiting.getInstance().push(te);
+
+                
+                
+                
             }
+            
+            texto = "The client's car is being serviced";
+            initMechanics();
+            initTableView();
             getAlert(texto);
             clear();
         }

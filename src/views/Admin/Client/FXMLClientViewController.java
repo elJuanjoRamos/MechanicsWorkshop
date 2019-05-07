@@ -98,7 +98,7 @@ public class FXMLClientViewController implements Initializable {
    @FXML
    private void delete(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            ClientsController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getDpi());
+            ClientsController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getId());
             tableView.getSelectionModel().clearSelection();
             initTableView();
         } else {
@@ -124,7 +124,8 @@ public class FXMLClientViewController implements Initializable {
     @FXML
     private void update(ActionEvent event) {
         if (getValidations() == true) {
-            ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getDpi(), 
+            ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getId(), 
+                Long.parseLong(eDpi.getText()),
                 eName.getText(), 
                 eUsername.getText(), 
                 ePassword.getText(), 
@@ -145,7 +146,7 @@ public class FXMLClientViewController implements Initializable {
        aceptar.setVisible(true);
        editar.setVisible(false);
        cancelar.setVisible(false);
-       texto.setText("Add a new Spare Part");
+       texto.setText("Add a new Client");
     }
    
     /**
@@ -154,12 +155,13 @@ public class FXMLClientViewController implements Initializable {
     @FXML
     private void getSpare(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Client c = ClientsController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getDpi());
+            Client c = ClientsController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getId());
             if(c != null) {
                 aceptar.setVisible(false);
                 editar.setVisible(true);
                 cancelar.setVisible(true);
-                texto.setText("Edit the Spare Part");
+                texto.setText("Edit the Client");
+                eDpi.setText(String.valueOf(c.getDpi()));
                 eName.setText(c.getFullName());
                 ePassword.setText(c.getPassword());
                 eUsername.setText(c.getUsername());

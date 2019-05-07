@@ -5,6 +5,7 @@ package beans;
  * @author Juan José Ramos
  */
 public class Client {
+    private int id;
     private long dpi;
     private String fullName;
     private String username;
@@ -18,7 +19,8 @@ public class Client {
     public Client() {
     }
 
-    public Client(long dpi, String fullName, String username, String password, String role, Car carList, int count) {
+    public Client(int id, long dpi, String fullName, String username, String password, String role, Car carList, int count) {
+        this.id = id;
         this.dpi = dpi;
         this.fullName = fullName;
         this.username = username;
@@ -30,7 +32,8 @@ public class Client {
         next = null;
     }
 
-    public Client(long dpi, String fullName, String username, String password, String role) {
+    public Client(int id, long dpi, String fullName, String username, String password, String role) {
+        this.id = id;
         this.dpi = dpi;
         this.fullName = fullName;
         this.username = username;
@@ -40,6 +43,16 @@ public class Client {
         previous = null;
         next = null;
     }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    
     
     /**
      * @return the dpi

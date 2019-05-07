@@ -14,12 +14,12 @@ import java.util.Date;
 
 
 /*ESTA ES LA COLA DE CARROS QUE YA ESTAN SIENDO ATENDIDOS*/
-public class TDAQueueCarsInProcess {
+public class TDAQueueCarsWaiting {
     
-    private static TDAQueueCarsInProcess instance;
-    public static TDAQueueCarsInProcess getInstance() {
+    private static TDAQueueCarsWaiting instance;
+    public static TDAQueueCarsWaiting getInstance() {
         if (instance == null) {
-            instance = new TDAQueueCarsInProcess();
+            instance = new TDAQueueCarsWaiting();
         }
         return instance;
     }
@@ -28,7 +28,7 @@ public class TDAQueueCarsInProcess {
     private WorkOrder firstNode;
     private int length;
 
-    public TDAQueueCarsInProcess() {
+    public TDAQueueCarsWaiting() {
         firstNode = null;
         length = 0;
     }
@@ -50,6 +50,7 @@ public class TDAQueueCarsInProcess {
 
     public void readNodes() {
         WorkOrder auxiliaryNode = firstNode;
+        System.out.println("esto es waiting list");
         while (auxiliaryNode != null) {
             System.out.print(auxiliaryNode.getClientName()+ " <-- ");
             auxiliaryNode = auxiliaryNode.getNext();

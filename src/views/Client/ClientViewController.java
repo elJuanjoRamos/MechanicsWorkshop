@@ -47,6 +47,11 @@ public class ClientViewController implements Initializable {
         changeView("/views/Client/CarToService/SendCarToService.fxml");
     }
     
+    @FXML 
+    public void open_Processes( ActionEvent event ) {
+        changeView("/views/Client/Processes/ProcessesClientView.fxml");
+    }
+    
     
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {

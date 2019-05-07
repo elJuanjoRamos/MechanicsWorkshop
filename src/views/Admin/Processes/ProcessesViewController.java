@@ -9,6 +9,7 @@ import beans.*;
 import controllers.EmployeesController;
 import controllers.TDAQueueCarsFinished;
 import controllers.TDAQueueCarsInProcess;
+import controllers.TDAQueueCarsWaiting;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -38,6 +39,20 @@ public class ProcessesViewController implements Initializable {
     @FXML TableColumn<WorkOrder, String> spPrice;
     @FXML TableColumn<WorkOrder, String> total;
     
+    //CARS WAITING
+    
+    @FXML TableView<WorkOrder> tableViewW;
+    @FXML TableColumn<WorkOrder, String> clientW;
+    @FXML TableColumn<WorkOrder, String> carW;
+    @FXML TableColumn<WorkOrder, String> serviceW;
+    @FXML TableColumn<WorkOrder, String> mechanicW;
+    @FXML TableColumn<WorkOrder, String> workPriceW;
+    @FXML TableColumn<WorkOrder, String> spPriceW;
+    @FXML TableColumn<WorkOrder, String> totalW;
+    @FXML TableColumn<WorkOrder, String> dateW;
+    
+    
+    ///CARS FINISHED
     @FXML TableView<WorkOrder> tableViewFinished;
     @FXML TableColumn<WorkOrder, String> clientFinished;
     @FXML TableColumn<WorkOrder, String> carFinished;
@@ -58,6 +73,7 @@ public class ProcessesViewController implements Initializable {
         
         initTableViewCarsInProcess();
         initTableViewCarsFinished();
+        initTableViewCarsWaiting();
         //CARS IN PROCESS
         client.setCellValueFactory(new PropertyValueFactory<>("clientName"));
         car.setCellValueFactory(new PropertyValueFactory<>("carDetails"));
@@ -66,6 +82,18 @@ public class ProcessesViewController implements Initializable {
         workPrice.setCellValueFactory(new PropertyValueFactory<>("workPrice"));
         spPrice.setCellValueFactory(new PropertyValueFactory<>("spPrice"));
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
+        
+        
+        //CARS WAITING
+        clientW.setCellValueFactory(new PropertyValueFactory<>("clientName"));
+        carW.setCellValueFactory(new PropertyValueFactory<>("carDetails"));
+        serviceW.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
+        mechanicW.setCellValueFactory(new PropertyValueFactory<>("mechaic"));
+        workPriceW.setCellValueFactory(new PropertyValueFactory<>("workPrice"));
+        spPriceW.setCellValueFactory(new PropertyValueFactory<>("spPrice"));
+        totalW.setCellValueFactory(new PropertyValueFactory<>("total"));
+        //dateW.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
         
         //CARS FINISHED
         clientFinished.setCellValueFactory(new PropertyValueFactory<>("clientName"));
@@ -87,13 +115,20 @@ public class ProcessesViewController implements Initializable {
             wo = wo.getNext();
         }
 
-        tableView.setItems(carsInProcess);
-
-
- 
+        tableView.setItems(carsInProcess); 
     }
     
-    
+    ///INIT TABLE VIEW CARS WAITING
+    public void initTableViewCarsWaiting(){
+        WorkOrder wo = TDAQueueCarsWaiting.getInstance().getTDAQueue();
+        ObservableList<WorkOrder> carsWaiting = FXCollections.observableArrayList();
+
+        while (wo != null) {
+            carsWaiting.add(wo);
+            wo = wo.getNext();
+        }
+        tableViewW.setItems(carsWaiting); 
+    }
     
     //init table view cars finished
     public void initTableViewCarsFinished(){
@@ -135,22 +170,29 @@ public class ProcessesViewController implements Initializable {
     
     @FXML
     public void endPocess(){
-        
+        //OBTIENE EL PRIMER ELEMENTO DE LA COLA
         WorkOrder w = TDAQueueCarsInProcess.getInstance().getfirstNode();
+        
+        //CREA UNA NUEVA ODEN DE TRABAJO CON ESE ELEMENTO PARA QUE NO SE ENVÍEN 
+        //LOS POSTERIORES A ESE ELEMENTO, COMO ES UNA LISTA, SI SE ENVÍA SOLO ASÍ
+        //TAMBIEN SE ENVÍAN LOS ELEMENTOS SIGUIENTES
         WorkOrder wEnd = new WorkOrder(w.getId(), w.getCar(), 
                         w.getClient(), w.getEmployee(), w.getService(), w.getDate(), w.getState());
         
+        //HACE PUSH A LA LISTA DE CARROS TERMINADOS
         TDAQueueCarsFinished.getInstance().push(wEnd);
         
+        //HACE POP A LA LISTA DE CARROS EN ATENCION
         TDAQueueCarsInProcess.getInstance().pop();
         
+        //EDITA EL EMPLEADO PARA QUE VUELVA A ESTAR DISPONIBLE
         EmployeesController.getInstance().edit(w.getEmployee().getId(), w.getEmployee().getName(), w.getEmployee().getRole(), w.getEmployee().getUsername(), w.getEmployee().getPassword(), true);
-        
         
         
         
         initTableViewCarsInProcess();
         initTableViewCarsFinished();
+        initTableViewCarsWaiting();
         cancel();
     }
 }

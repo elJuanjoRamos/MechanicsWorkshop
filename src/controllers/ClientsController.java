@@ -19,8 +19,7 @@ public class ClientsController {
     private ObservableList<Client> clients;
     private Client start;
     private Client latest;
-    private int size;
-    private long dpi = 201900000;
+    private int count  = 1 ;
 
     public ClientsController() {
         clients = FXCollections.observableArrayList();
@@ -66,8 +65,7 @@ public class ClientsController {
      */
     public void addAtEnd(String dpi, String fullName, String username, String password, String role) {
         
-        String id = String.valueOf(dpi).concat("0101");
-        Client c = new Client(Long.parseLong(dpi), fullName, username, password, role, null, 0);
+        Client c = new Client(count, Long.parseLong(dpi), fullName, username, password, role, null, 0);
         if(isEmpty()) {
             start = c;
             start.setNext(c);
@@ -80,7 +78,7 @@ public class ClientsController {
             latest = c;
             start.setPrevious(latest);
         }
-        size++;
+        count++;
     }
     
     /**
@@ -103,10 +101,10 @@ public class ClientsController {
      * BUSCAR NODO POR REFERENCIA EN LA LISTA CIRCULAR DOBLE
      * @param dpi
      */
-    public boolean search(long dpi) {
+    public boolean search(int id) {
         Client aux = latest;
         do{
-            if (aux.getDpi() == dpi){
+            if (aux.getId()== id){
                 return true;
             } else{
                 aux = aux.getNext();
@@ -115,10 +113,10 @@ public class ClientsController {
         return false;
     }
     
-    public Client searchClient(long dpi) {
+    public Client searchClient(int id) {
         Client aux = latest;
         do{
-            if (aux.getDpi() == dpi){
+            if (aux.getId() == id){
                 return aux;
             } else{
                 aux = aux.getNext();
@@ -131,10 +129,10 @@ public class ClientsController {
      * BUSCAR NODO POR REFERENCIA EN LA LISTA CIRCULAR DOBLE
      * @param dpi
      */
-    public Client getClient(long dpi) {
+    public Client getClient(int id) {
         Client aux = latest;
         do{
-            if (aux.getDpi() == dpi){
+            if (aux.getId()== id){
                 return aux;
             } else{
                 aux = aux.getNext();
@@ -152,8 +150,8 @@ public class ClientsController {
      * @param role
      * @param carList
      */
-    public void update(long dpi, String fullName, String username, String password, String role, int count) {
-        if(search(dpi)) {
+    public void update(int id, long dpi, String fullName, String username, String password, String role, int count) {
+        if(search(id)) {
             Client aux = start;
             do {
                 if(aux.getDpi() == dpi) {
@@ -175,12 +173,12 @@ public class ClientsController {
      * ELIMINAR NODO DE LA LISTA CIRCULAR SIMPLE
      * @param dpi
      */
-    public void delete(long dpi) {
+    public void delete(int id) {
         Client current = start;
         Client previous = latest;
-        if(search(dpi)) {
+        if(search(id)) {
             do {
-                if(current.getDpi() == dpi) {
+                if(current.getId()== id) {
                     if(current == start) {
                         start = start.getNext();
                         latest.setNext(start);
