@@ -73,6 +73,10 @@ public class AdminController implements Initializable {
     private void open_processesView(ActionEvent event) {
         changeView("/views/Admin/Processes/ProcessesView.fxml");
     }
+    @FXML
+    private void open_reports(ActionEvent event) {
+        changeView("/views/Admin/Report/ReportView.fxml");
+    }
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {
         Account.getInstance().start(Admin.s);

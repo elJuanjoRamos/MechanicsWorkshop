@@ -115,6 +115,15 @@
                         </Text>
                         <VBox prefHeight="388.0">
                            <children>
+                               <HBox alignment="CENTER" prefHeight="52.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="48.61669921875" />
+                                    <JFXTextField fx:id="eDpi" />
+                                 </children>
+                                 <VBox.margin>
+                                    <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
+                                 </VBox.margin>
+                              </HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="48.61669921875" />

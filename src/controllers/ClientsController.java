@@ -17,8 +17,8 @@ import javafx.collections.ObservableList;
 public class ClientsController {
     private static ClientsController instance;
     private ObservableList<Client> clients;
-    private Client start;
-    private Client latest;
+    protected Client start;
+    protected Client latest;
     private int count  = 1 ;
 
     public ClientsController() {

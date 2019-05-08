@@ -112,9 +112,13 @@ public class FXMLClientViewController implements Initializable {
    @FXML
    private void add(ActionEvent event) {
         if (getValidations() == true) {
-            ClientsController.getInstance().addAtEnd( eDpi.getText(),eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
-            clearFields();
-            initTableView();
+            if(isNumber(eDpi.getText())) {
+                ClientsController.getInstance().addAtEnd(eDpi.getText(),eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
+                clearFields();
+                initTableView();
+            } else {
+                getAlert("You can not enter text in numeric fields");
+            }
         }
     }
    
@@ -124,18 +128,22 @@ public class FXMLClientViewController implements Initializable {
     @FXML
     private void update(ActionEvent event) {
         if (getValidations() == true) {
-            ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getId(), 
-                Long.parseLong(eDpi.getText()),
-                eName.getText(), 
-                eUsername.getText(), 
-                ePassword.getText(), 
-                combo.getSelectionModel().getSelectedItem().toString(), 0);
-            clearFields();
-            initTableView();
-            aceptar.setVisible(true);
-            editar.setVisible(false);
-            cancelar.setVisible(false);
-            texto.setText("Add a new Spare Part");
+            if(isNumber(eDpi.getText())) {
+                ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getId(), 
+                    Long.parseLong(eDpi.getText()),
+                    eName.getText(), 
+                    eUsername.getText(), 
+                    ePassword.getText(), 
+                    combo.getSelectionModel().getSelectedItem().toString(), 0);
+                clearFields();
+                initTableView();
+                aceptar.setVisible(true);
+                editar.setVisible(false);
+                cancelar.setVisible(false);
+                texto.setText("Add a new Spare Part");
+            } else {
+                getAlert("You can not enter text in numeric fields");
+            }
         }
     }
    
@@ -187,17 +195,13 @@ public class FXMLClientViewController implements Initializable {
         return false;
     }
     
-    public boolean isNumber(String option, String option2){
-       /*boolean resultado;
+    public boolean isNumber(String option){
         try {
-            Double.parseDouble(option);
-            Integer.parseInt(option2);
-            resultado = true;
+            Integer.parseInt(option);
+            return true; 
         } catch (NumberFormatException e) {
-            resultado = false;
-        }*/
-        
-        return false;   
+            return false;
+        } 
     }
     
     public void getAlert(String content) {

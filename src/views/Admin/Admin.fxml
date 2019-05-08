@@ -102,6 +102,14 @@
                   <FontAwesomeIcon iconName="COG" size="1.5em" />
                </graphic>
             </JFXButton>
+            <JFXButton onAction="#open_reports" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="REPORTS">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="FILE" size="1.5em" />
+               </graphic>
+            </JFXButton>
             <JFXButton onAction="#logOut" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="LOG OUT">
                <font>
                   <Font name="Corbel" size="20.0" />
