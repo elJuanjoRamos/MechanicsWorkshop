@@ -35,7 +35,7 @@ public class WorkOrderController {
         /*VARIABLES*/
     private ObservableList<WorkOrder> observableList;
     private int count = 1;
-    private WorkOrder first;
+    protected WorkOrder first;
 
     
     public WorkOrderController() {

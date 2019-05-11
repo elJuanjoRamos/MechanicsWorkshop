@@ -6,6 +6,7 @@
 package views.Admin.Report;
 
 import controllers.ReportHTMLController;
+import controllers.ReportPDFController;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.event.ActionEvent;
@@ -37,5 +38,15 @@ public class ReportViewController implements Initializable {
     @FXML
     private void report_spare() {
         ReportHTMLController.getInstance().getTopSpareParts();
+    }
+    
+    @FXML
+    private void report_service() {
+        ReportPDFController.getInstance().getTopService();
+    }
+    
+    @FXML
+    private void report_spareParts() {
+        ReportPDFController.getInstance().getTopSpareParts();
     }
 }

@@ -23,7 +23,7 @@ public class ServicesController {
     /*VARIABLES*/
     private ObservableList<Service> services;
     private int count = 1;
-    private Service first;
+    protected Service first;
     private int aux;
     Stack a = new Stack();
         

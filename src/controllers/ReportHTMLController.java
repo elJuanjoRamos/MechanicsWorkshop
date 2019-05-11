@@ -172,7 +172,9 @@ public class ReportHTMLController {
     
     public void getTopSpareParts() {
         //IMPRIMIR LISTA SIN ORDENAR
-        SpareParts aux = SparesPartsController.getInstance().first;
+        tope = null;
+        SpareParts aux = null;
+        aux = SparesPartsController.getInstance().first;
         while (aux != null) {   
             addAssignment(new SparePartsAssignment(aux));
             aux = aux.getNext();
@@ -348,7 +350,6 @@ class SparePartsAssignment {
     public SparePartsAssignment(SpareParts sparePart) {
         this.sparePart = sparePart;
     }
-    
 
     /**
      * @return the sparePart

@@ -117,6 +117,9 @@ public class Service {
         this.state = state;
     }
 
-     
+    @Override
+    public String toString() {
+        return "Service{" + "id=" + id + ", name=" + name + ", mark=" + mark + ", model=" + model + ", sparePartList=" + sparePartList + ", workPrice=" + workPrice + ", sparePartsPrice=" + sparePartsPrice + ", state=" + state + ", total=" + total + '}';
+    }
 
 }
