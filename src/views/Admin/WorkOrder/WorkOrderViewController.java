@@ -113,14 +113,14 @@ public class WorkOrderViewController implements Initializable {
                 EmployeesController.getInstance().edit(e.getId(), e.getName(), e.getRole(), e.getUsername(), e.getPassword(), false);
                 workOrder.setEmployee(e);
                 workOrder.setMechaic(e.getName());
-                workOrder.setState("Being attended");
+                workOrder.setState("In service");
                 
                 WorkOrder selected = workOrder;
                 //Crea una nueva orden de trabajo, a partir de la enviada, esto es por que
                 //si se envía la que se seleccionó, esta al ser una lista trae con siguo siguientes
                 //y se termian enviando los siguientes tambien.
                 WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), 
-                        selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState());
+                        selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState(), selected.getPriority());
 
 
                 //ENVÍA LAS ORDENES DE TRABAJO A LA LISTA DE CARROS EN ATENCION 
@@ -140,8 +140,8 @@ public class WorkOrderViewController implements Initializable {
                 //Crea una nueva orden de trabajo, a partir de la enviada, esto es por que
                 //si se envía la que se seleccionó, esta al ser una lista trae con siguo siguientes
                 //y se termian enviando los siguientes tambien.
-                WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), 
-                        selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState());
+                WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), selected.getClient(), 
+                        selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState(), selected.getPriority());
 
 
                 //ENVÍA LAS ORDENES DE TRABAJO A LA LISTA DE CARROS EN ESPERA 

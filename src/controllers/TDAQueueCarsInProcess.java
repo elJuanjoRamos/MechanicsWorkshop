@@ -38,14 +38,37 @@ public class TDAQueueCarsInProcess {
     }
     
     public void push(WorkOrder wo) {
-        WorkOrder node = wo;
+        
+        
+        WorkOrder node = new WorkOrder();
+        node = wo;
+        
         if (isEmpty()) {
             firstNode = node;
+            firstNode.setNext(null);
+
         } else {
-            getLastNode().setNext(node);
+       
+
+            if (firstNode.getPriority() < wo.getPriority()) {
+                node.setNext(firstNode);
+                firstNode = node;
+            } else {
+                WorkOrder ant = null;
+                WorkOrder next = firstNode;
+                while (next != null && wo.getPriority() <= next.getPriority()) {
+                    ant = next;
+                    next = next.getNext();
+                }
+                node.setNext(next);
+                ant.setNext(node);
+
+            }
+
         }
-        readNodes();
-        length++;
+        
+
+        
     }
 
     public void readNodes() {

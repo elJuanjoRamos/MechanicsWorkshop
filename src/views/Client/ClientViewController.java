@@ -52,6 +52,11 @@ public class ClientViewController implements Initializable {
         changeView("/views/Client/Processes/ProcessesClientView.fxml");
     }
     
+    @FXML 
+    public void open_bill( ActionEvent event ) {
+        changeView("/views/Client/PayBill/PayBillView.fxml");
+    }
+    
     
     @FXML 
     public void logOut( ActionEvent event ) throws Exception {

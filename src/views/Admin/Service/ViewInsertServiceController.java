@@ -122,7 +122,10 @@ public class ViewInsertServiceController implements Initializable {
             if ( quantiyParts > 0 && s.getStock() >=  quantiyParts) {
                 tempStock = s.getStock();
                 tempPrice = s.getPrice();
-                stack.push(s);
+                
+                SpareParts sp = new SpareParts(s.getId(), s.getName(), s.getMark(), s.getModel(), quantiyParts, s.getPrice());
+                
+                stack.push(sp);
             
                 
                 Double price = serviceAux.getSparePartsPrice() + (s.getPrice() * quantiyParts);
@@ -155,7 +158,7 @@ public class ViewInsertServiceController implements Initializable {
                     serviceAux.getSparePartList(), Double.parseDouble(sPrice.getText()) , serviceAux.getSparePartsPrice(), false);
             
             ServicesViewController.getInstance().initTableView();
-            
+            initTableView();
         } 
     }
     
@@ -163,11 +166,14 @@ public class ViewInsertServiceController implements Initializable {
     @FXML
     public void deleteFromTable(ActionEvent event){
         Stack stackAux = serviceAux.getSparePartList();
+        Double newPrice = serviceAux.getSparePartsPrice();
         if (stackAux.size() > 1) {
+            SpareParts s = (SpareParts)stackAux.peek();
+            serviceAux.setSparePartsPrice(newPrice - (s.getStock() * s.getPrice()) );
             stackAux.pop();
             serviceAux.setSparePartList(stackAux);
         }
-        
+        initTableView();
         ServicesViewController.getInstance().initTableView();
             
         
@@ -177,7 +183,9 @@ public class ViewInsertServiceController implements Initializable {
     public boolean getValidations(){
         if(!sName.getText().isEmpty() && !sMark.getText().isEmpty() &&
                  !sModel.getText().isEmpty() && !sPrice.getText().isEmpty()){
-            if (ServicesController.getInstance().searchForName(sName.getText()) == null) {
+            
+            Service s = ServicesController.getInstance().searchForName(sName.getText());
+            if (s == null) {
                 try {
                     Double.parseDouble(sPrice.getText());
                     return true;
@@ -186,8 +194,12 @@ public class ViewInsertServiceController implements Initializable {
                     return false;
                 }
             } else {
-                textInfo.setText("There is already a service with the same name");
-                return false;
+                if (s.getMark().equalsIgnoreCase(sMark.getText()) && s.getModel().equalsIgnoreCase(sModel.getText()) ) {
+                    textInfo.setText("There is already a service with the same name");
+                    return false;
+                } else {
+                    return true;
+                }   
             }
             
         } else {

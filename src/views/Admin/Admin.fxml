@@ -59,7 +59,7 @@
                   <Font name="Corbel" size="20.0" />
                </font>
                <graphic>
-                  <FontAwesomeIcon iconName="USER" size="1.5em" />
+                  <FontAwesomeIcon iconName="USER" />
                </graphic>
             </JFXButton>
             <JFXButton onAction="#open_services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICES">
@@ -83,7 +83,7 @@
                   <Font name="Corbel" size="20.0" />
                </font>
                <graphic>
-                  <FontAwesomeIcon iconName="USERS" size="1.5em" />
+                  <FontAwesomeIcon iconName="USERS" />
                </graphic>
             </JFXButton>
             <JFXButton onAction="#open_workOrder" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="WORK ORDERS">
@@ -91,7 +91,7 @@
                   <Font name="Corbel" size="20.0" />
                </font>
                <graphic>
-                  <FontAwesomeIcon iconName="FILE" size="1.5em" />
+                  <FontAwesomeIcon iconName="FILE" />
                </graphic>
             </JFXButton>
             <JFXButton onAction="#open_processesView" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="PROCESSES">
@@ -99,7 +99,7 @@
                   <Font name="Corbel" size="20.0" />
                </font>
                <graphic>
-                  <FontAwesomeIcon iconName="COG" size="1.5em" />
+                  <FontAwesomeIcon iconName="COG" />
                </graphic>
             </JFXButton>
             <JFXButton onAction="#open_reports" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="REPORTS">
@@ -107,7 +107,7 @@
                   <Font name="Corbel" size="20.0" />
                </font>
                <graphic>
-                  <FontAwesomeIcon iconName="FILE" size="1.5em" />
+                  <FontAwesomeIcon iconName="FILE" />
                </graphic>
             </JFXButton>
             <JFXButton onAction="#logOut" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="LOG OUT">

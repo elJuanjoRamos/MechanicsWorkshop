@@ -11,8 +11,22 @@
 <?import javafx.scene.control.*?>
 <?import javafx.scene.layout.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="736.0" prefWidth="506.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Account.AuthController">
+<AnchorPane id="AnchorPane" prefHeight="736.0" prefWidth="506.0" stylesheets="@../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Account.AuthController">
        <children>
+      <VBox alignment="CENTER" prefHeight="201.0" prefWidth="506.0">
+         <children>
+            <ImageView fitHeight="182.0" fitWidth="248.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../resources/logo.png" />
+               </image>
+            </ImageView>
+            <Label prefHeight="21.0" prefWidth="192.0" text="      Create a new Account">
+               <font>
+                  <Font size="20.0" />
+               </font>
+            </Label>
+         </children>
+      </VBox>
       <HBox layoutX="41.0" layoutY="234.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
          <children>
             <TextField fx:id="name" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="Name" styleClass="tf">
@@ -41,17 +55,6 @@
             </FontAwesomeIcon>
          </children>
       </HBox>
-      <JFXButton layoutX="189.0" layoutY="553.0" onAction="#getAccess" prefHeight="49.0" prefWidth="121.0" styleClass="newaccount-buttton" text="Get Access" />
-      <ImageView fitHeight="182.0" fitWidth="248.0" layoutX="113.0" layoutY="14.0" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../../resources/logo.png" />
-         </image>
-      </ImageView>
-      <Label layoutX="171.0" layoutY="195.0" prefHeight="39.0" prefWidth="157.0" text="Create a new Account">
-         <font>
-            <Font size="20.0" />
-         </font>
-      </Label>
       <HBox layoutX="48.0" layoutY="376.0" prefHeight="50.0" prefWidth="384.0" styleClass="tf-box">
          <children>
             <TextField fx:id="user2" maxHeight="-Infinity" prefHeight="49.0" prefWidth="357.0" promptText="User name" styleClass="tf">
@@ -80,5 +83,7 @@
             </FontAwesomeIcon>
          </children>
       </HBox>
+      <JFXButton layoutX="193.0" layoutY="505.0" onAction="#getAccess" prefHeight="49.0" prefWidth="121.0" styleClass="primary-buttton" text="Get Access" />
+      <Text fx:id="text" layoutX="138.0" layoutY="584.0" strokeType="OUTSIDE" strokeWidth="0.0" wrappingWidth="205.0" />
    </children>
 </AnchorPane>

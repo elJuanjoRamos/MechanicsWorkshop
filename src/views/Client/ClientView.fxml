@@ -78,7 +78,7 @@
                   <FontAwesomeIcon iconName="COG" size="1.5em" />
                </graphic>
             </JFXButton>
-            <JFXButton prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="PAY BILL">
+            <JFXButton onAction="#open_bill" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="PAY BILL">
                <font>
                   <Font name="Corbel" size="20.0" />
                </font>

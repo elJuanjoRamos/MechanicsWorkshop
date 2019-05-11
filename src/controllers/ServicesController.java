@@ -80,6 +80,8 @@ public class ServicesController {
         }
         return this.services;
     }
+    
+    
     /*BUSCAR SERVICIO*/
     public Service search(int id){
         Service aux = first;
@@ -92,12 +94,14 @@ public class ServicesController {
         }
         return null;
     }
+    
+    
     /*BUSCAR SERVICIO*/
     public Service searchForName(String name){
         Service aux = first;
     
         while (aux != null) {
-            if (aux.getName().equals(name)) {
+            if (aux.getName().equalsIgnoreCase(name)) {
                 return aux;
             }
             aux = aux.getNext();
@@ -172,9 +176,6 @@ public class ServicesController {
         }
         return serviceName;
     }
-    
-    
-
     
     public void change(int id){
         this.aux = id;

@@ -10,6 +10,7 @@ import beans.WorkOrder;
 import controllers.EmployeesController;
 import controllers.TDAQueueCarsFinished;
 import controllers.TDAQueueCarsInProcess;
+import controllers.TDAQueueCarsWaiting;
 import java.net.URL;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
@@ -27,7 +28,7 @@ import views.Client.ClientView;
 
 public class ProcessesClientViewController implements Initializable {
 
-    
+    //CARS IN SERVICE
     @FXML TableView<WorkOrder> tableView;
     @FXML TableColumn<WorkOrder, String> car;
     @FXML TableColumn<WorkOrder, String> service;
@@ -36,6 +37,18 @@ public class ProcessesClientViewController implements Initializable {
     @FXML TableColumn<WorkOrder, String> spPrice;
     @FXML TableColumn<WorkOrder, String> total;
     
+    //CARS WAITING   
+    @FXML TableView<WorkOrder> tableViewW;
+    @FXML TableColumn<WorkOrder, String> carW;
+    @FXML TableColumn<WorkOrder, String> serviceW;
+    @FXML TableColumn<WorkOrder, String> mechanicW;
+    @FXML TableColumn<WorkOrder, String> workPriceW;
+    @FXML TableColumn<WorkOrder, String> spPriceW;
+    @FXML TableColumn<WorkOrder, String> totalW;
+    @FXML TableColumn<WorkOrder, String> dateW;
+    
+    
+    //CARS FINISHED
     @FXML TableView<WorkOrder> tableViewFinished;
     @FXML TableColumn<WorkOrder, String> carFinished;
     @FXML TableColumn<WorkOrder, String> serviceFinished;
@@ -44,6 +57,7 @@ public class ProcessesClientViewController implements Initializable {
     @FXML TableColumn<WorkOrder, String> spPriceFinished;
     @FXML TableColumn<WorkOrder, String> totalFinished;
     @FXML TableColumn<WorkOrder, String> dateFinished;
+    @FXML TableColumn<WorkOrder, String> stateFinished;
     
     @FXML ImageView imageView;
     
@@ -61,6 +75,7 @@ public class ProcessesClientViewController implements Initializable {
         
         initTableViewCarsInProcess();
         initTableViewCarsFinished();
+        initTableViewCarsWaiting();
         //CARS IN PROCESS
         car.setCellValueFactory(new PropertyValueFactory<>("carDetails"));
         service.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
@@ -69,6 +84,16 @@ public class ProcessesClientViewController implements Initializable {
         spPrice.setCellValueFactory(new PropertyValueFactory<>("spPrice"));
         total.setCellValueFactory(new PropertyValueFactory<>("total"));
         
+        ////CARS WAITING
+        carW.setCellValueFactory(new PropertyValueFactory<>("carDetails"));
+        serviceW.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
+        mechanicW.setCellValueFactory(new PropertyValueFactory<>("mechaic"));
+        workPriceW.setCellValueFactory(new PropertyValueFactory<>("workPrice"));
+        spPriceW.setCellValueFactory(new PropertyValueFactory<>("spPrice"));
+        totalW.setCellValueFactory(new PropertyValueFactory<>("total"));
+        dateW.setCellValueFactory(new PropertyValueFactory<>("date"));
+        
+    
         //CARS FINISHED
         carFinished.setCellValueFactory(new PropertyValueFactory<>("carDetails"));
         serviceFinished.setCellValueFactory(new PropertyValueFactory<>("serviceName"));
@@ -77,6 +102,7 @@ public class ProcessesClientViewController implements Initializable {
         spPriceFinished.setCellValueFactory(new PropertyValueFactory<>("spPrice"));
         totalFinished.setCellValueFactory(new PropertyValueFactory<>("total"));
         dateFinished.setCellValueFactory(new PropertyValueFactory<>("date"));
+        stateFinished.setCellValueFactory(new PropertyValueFactory<>("state"));
     }   
     
     public void initTableViewCarsInProcess(){
@@ -114,4 +140,16 @@ public class ProcessesClientViewController implements Initializable {
     }
     
     
+        //init table view cars finished
+    public void initTableViewCarsWaiting(){
+        WorkOrder wol = TDAQueueCarsWaiting.getInstance().getTDAQueue();
+        ObservableList<WorkOrder> carsWaiting = FXCollections.observableArrayList();
+        while (wol != null) {
+            if (wol.getClient().getId() == client.getId()) {
+                carsWaiting.add(wol);
+            }
+            wol = wol.getNext();
+        }
+        tableViewW.setItems(carsWaiting);
+    } 
 }

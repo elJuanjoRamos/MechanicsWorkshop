@@ -175,6 +175,7 @@ public class CarController {
      * @param plate
      */
     public void delete(int id) {
+        
         if(search(id)) {
             if(start.getId() == id) {
                 start = start.getNext();

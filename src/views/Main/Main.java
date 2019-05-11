@@ -1,5 +1,6 @@
 package views.Main;
 
+import beans.ColaPrioridad;
 import controllers.ClientsController;
 import controllers.EmployeesController;
 import controllers.ServicesController;
@@ -15,6 +16,8 @@ public class Main extends Application {
     
     @Override
     public void start(Stage stage) throws Exception {
+        
+        
         EmployeesController.getInstance().initEmployee();
         SparesPartsController.getInstance().initSpareParts();
         ServicesController.getInstance().initServices();

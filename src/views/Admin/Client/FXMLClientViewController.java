@@ -61,7 +61,7 @@ public class FXMLClientViewController implements Initializable {
     }
 
     public ObservableList<String> getObservableRoles() {
-        String[] array = {"Oro", "Normal"};
+        String[] array = {"Gold", "Normal"};
         observableRoles = FXCollections.observableArrayList(array);
         return observableRoles;
     }

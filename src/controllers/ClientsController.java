@@ -32,9 +32,11 @@ public class ClientsController {
      * INICIALIZAR DATOS
     **/
     public void initClient() {
-        addAtEnd("123456", "Juan Ramos", "a", "a", "Oro");
-        addAtEnd("78910","José Morente", "s", "s", "Oro");
-        addAtEnd("78910","Pedro Morente", "d", "d", "Oro");
+        addAtEnd("123456", "Juan Ramos", "a", "a", "Gold");
+        addAtEnd("78910","José Morente", "s", "s", "Normal");
+        addAtEnd("656565","Pedro Morente", "d", "d", "Normal");
+        addAtEnd("898987","Alex Castro", "f", "f", "Gold");
+    
     }
 
     /**
@@ -111,6 +113,17 @@ public class ClientsController {
             }
         }while(aux != latest);
         return false;
+    }
+    public Client searchForUserName(String username) {
+        Client aux = latest;
+        do{
+            if (aux.getUsername().equals(username)){
+                return aux;
+            } else{
+                aux = aux.getNext();
+            }
+        }while(aux != latest);
+        return null;
     }
     
     public Client searchClient(int id) {
@@ -198,6 +211,17 @@ public class ClientsController {
         }
     }
     
+    public boolean verifications(String username){
+        Client aux = latest;
+        do{
+            if (aux.getUsername().equals(username)){
+                return true;
+            } else{
+                aux = aux.getNext();
+            }
+        }while(aux != latest);
+        return false;
+    }
     
     public Client authenticate(String username, String password){
         Client aux = latest;

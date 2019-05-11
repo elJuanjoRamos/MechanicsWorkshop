@@ -50,10 +50,17 @@ public class WorkOrderController {
     
      /*METODO AGREGAR A LISTA LISTA SIMPLE*/
     public void add(Car car, Client client, Service service, Employee employee, String state) {
-        WorkOrder newWorkOrder = new WorkOrder(count, car, client, employee, service,new Date(), state);
-        if (isNull()) {
+        int priority;
+        if (client.getRole().equalsIgnoreCase("gold")) {
+            priority = 1;
+        } else {
+            priority = 0;
+        }
         
-            first = newWorkOrder;
+        WorkOrder newWorkOrder = new WorkOrder(count, car, client, employee, service,new Date(), state, priority);
+        if (isNull()) {
+                first = newWorkOrder;
+            
         
         } else {
             WorkOrder aux = first;
@@ -64,6 +71,7 @@ public class WorkOrderController {
             
             aux.setNext(newWorkOrder);
         }
+        
         count++;
     }
 
@@ -71,6 +79,15 @@ public class WorkOrderController {
         return first;
     }
     
+    
+    public void show(){
+        WorkOrder aux = first;
+        
+        while(aux != null){
+            System.out.println("el cliente es " + aux.getClientName() +" y su rol es "  + aux.getClient().getRole());
+            aux = aux.getNext();
+        }
+    }
     
     /*OBTIENE EL LISTADO DE EMPLEADOS*/
     public ObservableList<WorkOrder> getOrders() {
@@ -87,7 +104,8 @@ public class WorkOrderController {
         
         return observableList;
     }
-
+    
+    
     
     
    

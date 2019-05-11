@@ -31,6 +31,7 @@ public class EmployeesController {
         addLast("Rafael Morente", "Administrator", "rmorente", "admin");
         addLast("Luis Velasquez", "Mechanic", "lvelasquez", "admin");
         addLast("Pedro Armas", "Mechanic", "lvelasquez", "admin");
+        addLast("Alex Castro", "Mechanic", "123", "112");
     }
 
     
@@ -72,22 +73,6 @@ public class EmployeesController {
     
     
     /*-----------METODO AGREGAR------*/
-    
-    
-    /*AGREGAR AL INICIO*/
-    public void addFirst(String name, String role, String username, String password){
-            Employee e = new Employee(count, name, role, username, password, true);
-            
-            if(first==null){
-                first=e;
-            }else{
-                e.setNext(first);
-                first.setPrevious(e);
-                first=e;
-            }
-            
-    }
-    
     
     
     public void addLast(String name, String role, String username, String password){

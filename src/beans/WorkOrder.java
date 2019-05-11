@@ -13,6 +13,7 @@ import java.util.Date;
  */
 public class WorkOrder {
     private int id;
+    private int priority;
     private Car car;
     private Client client;
     private Employee employee;
@@ -20,6 +21,7 @@ public class WorkOrder {
     private Service service;
     private String state;
     private String clientName;
+    private String clientRole;
     private String carDetails;
     private String serviceName;
     private String mechaic;
@@ -32,8 +34,9 @@ public class WorkOrder {
     public WorkOrder() {
     }
 
-    public WorkOrder(int id, Car car, Client client, Employee employee, Service service,Date date,  String state) {
+    public WorkOrder(int id, Car car, Client client, Employee employee, Service service,Date date,  String state, int priority) {
         this.id = id;
+        this.priority = priority;
         this.car = car;
         this.client = client;
         this.employee = employee;
@@ -41,6 +44,7 @@ public class WorkOrder {
         this.service = service;
         this.state = state;
         this.clientName = client.getFullName();
+        this.clientRole = client.getRole();
         this.carDetails = car.getBrand()+ "/" + car.getModel();
         this.imagePath = car.getPath();
         this.serviceName = service.getName();
@@ -179,6 +183,18 @@ public class WorkOrder {
 
     public void setTotal(Double total) {
         this.total = total;
+    }
+
+    public int getPriority() {
+        return priority;
+    }
+
+    public String getClientRole() {
+        return clientRole;
+    }
+
+    public void setClientRole(String clientRole) {
+        this.clientRole = clientRole;
     }
     
     

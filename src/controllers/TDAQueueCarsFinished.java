@@ -96,4 +96,19 @@ public class TDAQueueCarsFinished {
         }
         return auxiliaryNode;
     }
+    
+    public void editNodeWorkOrder(String d, int id){
+        System.out.println(d);
+        System.out.println(id);
+        WorkOrder actual = new WorkOrder();
+        actual = firstNode;
+        
+        while (actual != null) {
+            if (actual.getId() == id) {
+                actual.setState(d);
+            }
+            actual = actual.getNext();
+        }
+        
+    }
 }

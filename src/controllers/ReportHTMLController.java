@@ -64,7 +64,7 @@ public class ReportHTMLController {
         "    var myChart = new Chart(ctx, {\n" +
         "        type: 'pie',\n" +
         "        data: {\n" +
-        "            labels: ['Oro', 'Normal'],\n" +
+        "            labels: ['Gold', 'Normal'],\n" +
         "            datasets: [{\n" +
         "                label: '# of Votes',\n" +
         "                data: [" + oro + ", " + normal + "],\n" +
@@ -130,7 +130,7 @@ public class ReportHTMLController {
             if(!ClientsController.getInstance().isEmpty()) {
                 Client aux = ClientsController.getInstance().start;
                 do {
-                    if(aux.getRole().equalsIgnoreCase("oro")) {
+                    if(aux.getRole().equalsIgnoreCase("gold")) {
                         oro++;
                     } else if(aux.getRole().equalsIgnoreCase("normal")) {
                         normal++;
@@ -163,4 +163,13 @@ public class ReportHTMLController {
             }
         }
     }
+    
+    
+
+public void n(){
+    
+
+
 }
+}
+

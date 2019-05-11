@@ -48,7 +48,7 @@
                     <tabs>
                       <Tab text="List of cars in attention">
                            <content>
-                              <StackPane prefHeight="641.0">
+                              <StackPane fx:id="stackPane" prefHeight="641.0">
                                  <children>
                                     <HBox>
                                        <children>
@@ -65,17 +65,22 @@
                                                 </HBox>
                                                 <TableView fx:id="tableView" prefHeight="601.0" prefWidth="1060.0">
                                                   <columns>
-                                                    <TableColumn fx:id="client" minWidth="0.0" prefWidth="165.0" text="CLIENT" />
-                                                      <TableColumn fx:id="car" prefWidth="193.0" text="CAR" />
-                                                      <TableColumn fx:id="service" prefWidth="199.0" text="SERVICE" />
-                                                      <TableColumn fx:id="mechanic" prefWidth="162.0" text="MECHANIC" />
-                                                      <TableColumn maxWidth="301.0" minWidth="0.0" prefWidth="169.0" text="PRICES">
+                                                      <TableColumn prefWidth="75.0" text="CLIENT DETAILS">
                                                          <columns>
-                                                            <TableColumn fx:id="workPrice" prefWidth="126.0" text="WP" />
-                                                            <TableColumn fx:id="spPrice" prefWidth="99.0" text="PP" />
+                                                          <TableColumn fx:id="client" minWidth="0.0" prefWidth="165.0" text="NAME" />
+                                                            <TableColumn fx:id="clientRole" prefWidth="75.0" text="ROLE" />
                                                          </columns>
                                                       </TableColumn>
-                                                      <TableColumn fx:id="total" prefWidth="156.0" text="TOTAL" />
+                                                      <TableColumn fx:id="car" prefWidth="193.0" text="CAR" />
+                                                      <TableColumn fx:id="service" prefWidth="199.0" text="SERVICE" />
+                                                      <TableColumn fx:id="mechanic" prefWidth="184.0" text="MECHANIC" />
+                                                      <TableColumn maxWidth="386.0" minWidth="0.0" prefWidth="129.0" text="PRICES">
+                                                         <columns>
+                                                            <TableColumn fx:id="workPrice" prefWidth="78.0" text="WP" />
+                                                            <TableColumn fx:id="spPrice" prefWidth="65.0" text="PP" />
+                                                            <TableColumn fx:id="total" prefWidth="96.0" text="TOTAL" />
+                                                         </columns>
+                                                      </TableColumn>
                                                   </columns>
                                                    <VBox.margin>
                                                       <Insets />
@@ -189,7 +194,7 @@
                       </Tab>
                       <Tab text="List of cars in wait">
                            <content>
-                              <StackPane prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: white;">
+                              <StackPane fx:id="stackPane2" prefHeight="150.0" prefWidth="200.0" style="-fx-background-color: white;">
                                  <children>
                                     <HBox>
                                        <children>
@@ -197,7 +202,7 @@
                                              <children>
                                                 <HBox alignment="CENTER_RIGHT" prefHeight="100.0" prefWidth="200.0">
                                                    <children>
-                                                      <JFXButton alignment="CENTER" onAction="#getNextCliet" prefHeight="33.0" prefWidth="236.0" styleClass="primary-buttton" text="GET NEXT WORK ORDER">
+                                                      <JFXButton alignment="CENTER" onAction="#getNextWaitingOrder" prefHeight="33.0" prefWidth="236.0" styleClass="primary-buttton" text="GET NEXT WORK ORDER">
                                                          <graphic>
                                                             <FontAwesomeIcon glyphStyle="-fx-fill:#007bff" glyphStyleClass="" iconName="PLUS" />
                                                          </graphic>
@@ -207,16 +212,17 @@
                                                 <TableView fx:id="tableViewW" prefHeight="601.0" prefWidth="1060.0">
                                                    <columns>
                                                       <TableColumn fx:id="clientW" minWidth="0.0" prefWidth="165.0" text="CLIENT" />
-                                                      <TableColumn fx:id="carW" prefWidth="193.0" text="CAR" />
-                                                      <TableColumn fx:id="serviceW" prefWidth="199.0" text="SERVICE" />
-                                                      <TableColumn fx:id="mechanicW" prefWidth="162.0" text="MECHANIC" />
-                                                      <TableColumn maxWidth="301.0" minWidth="0.0" prefWidth="169.0" text="PRICES">
+                                                      <TableColumn fx:id="roleW" prefWidth="101.0" text="ROLE" />
+                                                      <TableColumn fx:id="carW" prefWidth="198.0" text="CAR" />
+                                                      <TableColumn fx:id="serviceW" prefWidth="186.0" text="SERVICE" />
+                                                      <TableColumn fx:id="dateW" prefWidth="190.0" text="DATE" />
+                                                      <TableColumn maxWidth="301.0" minWidth="0.0" prefWidth="166.0" text="PRICES">
                                                          <columns>
-                                                            <TableColumn fx:id="workPriceW" prefWidth="126.0" text="WP" />
-                                                            <TableColumn fx:id="spPriceW" prefWidth="99.0" text="PP" />
+                                                            <TableColumn fx:id="workPriceW" prefWidth="90.0" text="WP" />
+                                                            <TableColumn fx:id="spPriceW" prefWidth="91.0" text="PP" />
+                                                            <TableColumn fx:id="totalW" prefWidth="82.0" text="TOTAL" />
                                                          </columns>
                                                       </TableColumn>
-                                                      <TableColumn fx:id="totalW" prefWidth="156.0" text="TOTAL" />
                                                    </columns>
                                                    <VBox.margin>
                                                       <Insets />
@@ -238,7 +244,7 @@
                                                    <children>
                                                       <HBox alignment="CENTER" prefHeight="103.0" prefWidth="483.0">
                                                          <children>
-                                                            <ImageView fx:id="imageView1" fitHeight="132.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true">
+                                                            <ImageView fx:id="wImageView" fitHeight="132.0" fitWidth="178.0" pickOnBounds="true" preserveRatio="true">
                                                                <image>
                                                                   <Image url="@../../../resources/img/car2.png" />
                                                                </image>
@@ -251,7 +257,7 @@
                                                       <HBox alignment="CENTER" prefHeight="52.0">
                                                          <children>
                                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Client:" wrappingWidth="115.61669921875" />
-                                                            <JFXTextField fx:id="eClient1" />
+                                                            <JFXTextField fx:id="wClient" />
                                                          </children>
                                                          <VBox.margin>
                                                             <Insets />
@@ -260,7 +266,7 @@
                                                       <HBox alignment="CENTER" prefHeight="52.0">
                                                          <children>
                                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Car:" wrappingWidth="113.61669921875" />
-                                                            <JFXTextField fx:id="eCar1" />
+                                                            <JFXTextField fx:id="wCar" />
                                                          </children>
                                                          <VBox.margin>
                                                             <Insets />
@@ -269,20 +275,20 @@
                                                       <HBox alignment="CENTER" prefHeight="52.0">
                                                          <children>
                                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service:" wrappingWidth="116.61669921875" />
-                                                            <JFXTextField fx:id="eService1" />
+                                                            <JFXTextField fx:id="wService" />
                                                          </children>
                                                       </HBox>
                                                       <HBox alignment="CENTER" prefHeight="52.0">
                                                          <children>
                                                             <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Mechanic" wrappingWidth="117.61669921875" />
-                                                            <JFXTextField fx:id="eMechanic1" />
+                                                            <JFXComboBox fx:id="list" prefHeight="41.0" prefWidth="174.0" />
                                                          </children>
                                                       </HBox>
                                                    </children>
                                                 </VBox>
                                                 <HBox alignment="CENTER" prefHeight="52.0">
                                                    <children>
-                                                      <JFXButton onAction="#endPocess" prefHeight="52.0" prefWidth="116.0" styleClass="danget-buttton" text="End Process" />
+                                                      <JFXButton onAction="#sendToService" prefHeight="52.0" prefWidth="154.0" styleClass="danget-buttton" text="Send to Service" />
                                                       <JFXButton fx:id="cancelar1" onAction="#cancel" prefHeight="53.0" prefWidth="116.0" styleClass="warning-buttton" text="Cancel">
                                                          <HBox.margin>
                                                             <Insets left="20.0" />
@@ -322,16 +328,18 @@
                                                    <columns>
                                                       <TableColumn fx:id="clientFinished" minWidth="0.0" prefWidth="165.0" text="CLIENT" />
                                                       <TableColumn fx:id="carFinished" prefWidth="193.0" text="CAR" />
-                                                      <TableColumn fx:id="serviceFinished" prefWidth="199.0" text="SERVICE" />
-                                                      <TableColumn fx:id="mechanicFinished" prefWidth="162.0" text="MECHANIC" />
-                                                      <TableColumn fx:id="dateFinished" prefWidth="182.0" text="DATE" />
-                                                      <TableColumn maxWidth="301.0" minWidth="0.0" prefWidth="118.0" text="PRICES">
+                                                      <TableColumn fx:id="roleFinished" prefWidth="168.0" text="ROLE" />
+                                                      <TableColumn fx:id="mechanicFinished" prefWidth="189.0" text="MECHANIC" />
+                                                      <TableColumn fx:id="serviceFinished" prefWidth="235.0" text="SERVICE" />
+                                                      <TableColumn fx:id="dateFinished" prefWidth="177.0" text="DATE" />
+                                                      <TableColumn maxWidth="305.0" minWidth="0.0" prefWidth="285.0" text="PRICES">
                                                          <columns>
                                                             <TableColumn fx:id="workPriceFinished" prefWidth="126.0" text="WP" />
                                                             <TableColumn fx:id="spPriceFinished" prefWidth="99.0" text="PP" />
                                                          </columns>
                                                       </TableColumn>
-                                                      <TableColumn fx:id="totalFinished" prefWidth="156.0" text="TOTAL" />
+                                                      <TableColumn fx:id="totalFinished" prefWidth="119.0" text="TOTAL" />
+                                                      <TableColumn fx:id="stateFinished" prefWidth="110.0" text="STATE" />
                                                    </columns>
                                                    <VBox.margin>
                                                       <Insets />
