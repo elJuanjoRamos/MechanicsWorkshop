@@ -31,7 +31,11 @@ public class ReportViewController implements Initializable {
     
     @FXML
     private void report_client() {
-        System.out.println("ABC");
         ReportHTMLController.getInstance().getReportClient();
+    }
+    
+    @FXML
+    private void report_spare() {
+        ReportHTMLController.getInstance().getTopSpareParts();
     }
 }

@@ -10,6 +10,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
+
 <StackPane fx:id="stackPane" stylesheets="@../../../resources/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.Report.ReportViewController">
    <children>
       <VBox prefHeight="853.0" prefWidth="1278.0" style="-fx-background-color: white;" stylesheets="@../../../resources/main.css">
@@ -72,7 +73,7 @@
                               <DropShadow color="#bbbbbb" height="10.0" radius="4.5" width="10.0" />
                            </effect>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: WHITE;" styleClass="hoover_fade" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" onMouseClicked="#report_spare" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: WHITE;" styleClass="hoover_fade" HBox.hgrow="ALWAYS">
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>

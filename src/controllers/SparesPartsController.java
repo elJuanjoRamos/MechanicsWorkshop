@@ -24,9 +24,8 @@ public class SparesPartsController {
     }
     /*VARIABLES*/
     private ObservableList<SpareParts> parts;
-    private Stack<SpareParts> stackSpareParts;
     private int count = 1;
-    private SpareParts first;
+    protected SpareParts first;
 
     public SparesPartsController() {
         parts = FXCollections.observableArrayList();
@@ -40,11 +39,12 @@ public class SparesPartsController {
     
 
     public void initSpareParts() {
-        add("a", "Toyota", "Corolla", 10, 150.5);
-        add("b", "Audi", "A3", 10, 150.5);
-        add("c", "v", "a", 10, 150.5);
-        add("d", "d", "a", 10, 150.5);
-
+        add("a", "Toyota", "Corolla", 10, 145.5);
+        add("b", "Audi", "A3", 10, 100.5);
+        add("c", "v", "a", 10, 130.5);
+        add("d", "d", "a", 10, 150.51);
+        add("sa", "Honda", "Hi", 10, 140.5);
+        add("dx", "ABC", "def", 10, 250.51);
     }
 
     /*METODO AGREGAR*/

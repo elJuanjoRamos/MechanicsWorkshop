@@ -86,7 +86,10 @@ public class SpareParts {
     public void setNext(SpareParts next) {
         this.next = next;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "SpareParts{" + "id=" + id + ", name=" + name + ", mark=" + mark + ", model=" + model + ", stock=" + stock + ", price=" + price + '}';
+    }
+        
 }
