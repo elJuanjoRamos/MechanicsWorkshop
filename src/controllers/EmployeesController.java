@@ -27,11 +27,15 @@ public class EmployeesController {
     }
     
     public void initEmployee() {
-        addLast("Juan Ramos", "Administrator", "admin", "admin");
-        addLast("Rafael Morente", "Administrator", "rmorente", "admin");
-        addLast("Luis Velasquez", "Mechanic", "lvelasquez", "admin");
-        addLast("Pedro Armas", "Mechanic", "lvelasquez", "admin");
-        addLast("Alex Castro", "Mechanic", "123", "112");
+        addLast("Empleado 5", "Administrator", "admin", "admin");
+        addLast("Empleado 4", "Administrator", "rmorente", "admin");
+        addLast("Empleado 6", "Mechanic", "lvelasquez", "admin");
+        addLast("Empleado 7", "Mechanic", "lvelasquez", "admin");
+        addLast("Empleado 8", "Mechanic", "123", "112");
+        addLast("Empleado 1", "Mechanic", "123", "112");
+        addLast("Empleado 2", "Mechanic", "123", "112");
+        addLast("Empleado 3", "Mechanic", "123", "112");
+    
     }
 
     

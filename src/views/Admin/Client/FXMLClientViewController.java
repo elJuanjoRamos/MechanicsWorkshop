@@ -1,4 +1,3 @@
-
 package views.Admin.Client;
 
 import beans.Client;
@@ -29,32 +28,45 @@ import javafx.scene.text.Text;
  *
  * @author Jose Morente
  */
-public class FXMLClientViewController implements Initializable {    
+public class FXMLClientViewController implements Initializable {
+
     private static FXMLClientViewController instance;
     private ObservableList<String> observableRoles;
-    @FXML TableView<Client> tableView;
-    @FXML TableColumn<Client, Long> dpi;
-    @FXML TableColumn<Client, String> fullname;
-    @FXML TableColumn<Client, String> username;
-    @FXML TableColumn<Client, String> password;
-    @FXML TableColumn<Client, String> role;
-    
-    @FXML ComboBox combo;
-    @FXML TextField ePlate, eBrand, eModel, ePath, filter;
-    @FXML TextField eName, eUsername, ePassword, eDpi;
-    @FXML Button aceptar, editar, eliminar, cancelar, subir;
-    @FXML Text texto;
-    @FXML StackPane stackPane;
+    @FXML
+    TableView<Client> tableView;
+    @FXML
+    TableColumn<Client, Long> dpi;
+    @FXML
+    TableColumn<Client, String> fullname;
+    @FXML
+    TableColumn<Client, String> username;
+    @FXML
+    TableColumn<Client, String> password;
+    @FXML
+    TableColumn<Client, String> role;
+
+    @FXML
+    ComboBox combo;
+    @FXML
+    TextField ePlate, eBrand, eModel, ePath, filter;
+    @FXML
+    TextField eName, eUsername, ePassword, eDpi;
+    @FXML
+    Button aceptar, editar, eliminar, cancelar, subir;
+    @FXML
+    Text texto;
+    @FXML
+    StackPane stackPane;
 
     public FXMLClientViewController() {
     }
-    
-    
+
     /**
      * @return the instance
-    **/
-    public static FXMLClientViewController getInstance(){
-        if(instance == null){
+    *
+     */
+    public static FXMLClientViewController getInstance() {
+        if (instance == null) {
             instance = new FXMLClientViewController();
         }
         return instance;
@@ -65,7 +77,7 @@ public class FXMLClientViewController implements Initializable {
         observableRoles = FXCollections.observableArrayList(array);
         return observableRoles;
     }
-        
+
     /**
      * Initializes the controller class.
      */
@@ -82,21 +94,21 @@ public class FXMLClientViewController implements Initializable {
         username.setCellValueFactory(new PropertyValueFactory<>("username"));
         password.setCellValueFactory(new PropertyValueFactory<>("password"));
         role.setCellValueFactory(new PropertyValueFactory<>("role"));
-    }    
-    
+    }
+
     /**
-     * INICIALIZAR DATOS EN TABLA 
+     * INICIALIZAR DATOS EN TABLA
      */
     public void initTableView() {
         ObservableList<Client> observableList = ClientsController.getInstance().getClients();
         tableView.setItems(observableList);
     }
-    
+
     /**
      * ELIMINAR DATOS
-     */        
-   @FXML
-   private void delete(ActionEvent event) {
+     */
+    @FXML
+    private void delete(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             ClientsController.getInstance().delete(tableView.getSelectionModel().getSelectedItem().getId());
             tableView.getSelectionModel().clearSelection();
@@ -104,16 +116,16 @@ public class FXMLClientViewController implements Initializable {
         } else {
             getAlert(" No items have been selected.");
         }
-    } 
-    
+    }
+
     /**
      * AGREGAR DATOS
-     */ 
-   @FXML
-   private void add(ActionEvent event) {
+     */
+    @FXML
+    private void add(ActionEvent event) {
         if (getValidations() == true) {
-            if(isNumber(eDpi.getText())) {
-                ClientsController.getInstance().addAtEnd(eDpi.getText(),eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
+            if (isNumber(eDpi.getText())) {
+                ClientsController.getInstance().addAtEnd(eDpi.getText(), eName.getText(), eUsername.getText(), ePassword.getText(), combo.getSelectionModel().getSelectedItem().toString());
                 clearFields();
                 initTableView();
             } else {
@@ -121,20 +133,20 @@ public class FXMLClientViewController implements Initializable {
             }
         }
     }
-   
+
     /**
      * ACTUALIZAR DATOS
-     */ 
+     */
     @FXML
     private void update(ActionEvent event) {
         if (getValidations() == true) {
-            if(isNumber(eDpi.getText())) {
-                ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getId(), 
-                    Long.parseLong(eDpi.getText()),
-                    eName.getText(), 
-                    eUsername.getText(), 
-                    ePassword.getText(), 
-                    combo.getSelectionModel().getSelectedItem().toString(), 0);
+            if (isNumber(eDpi.getText())) {
+                ClientsController.getInstance().update(tableView.getSelectionModel().getSelectedItem().getId(),
+                        Long.parseLong(eDpi.getText()),
+                        eName.getText(),
+                        eUsername.getText(),
+                        ePassword.getText(),
+                        combo.getSelectionModel().getSelectedItem().toString(), 0);
                 clearFields();
                 initTableView();
                 aceptar.setVisible(true);
@@ -146,25 +158,25 @@ public class FXMLClientViewController implements Initializable {
             }
         }
     }
-   
+
     @FXML
     private void cancel(ActionEvent event) {
-       clearFields();
-       initTableView();
-       aceptar.setVisible(true);
-       editar.setVisible(false);
-       cancelar.setVisible(false);
-       texto.setText("Add a new Client");
+        clearFields();
+        initTableView();
+        aceptar.setVisible(true);
+        editar.setVisible(false);
+        cancelar.setVisible(false);
+        texto.setText("Add a new Client");
     }
-   
+
     /**
      * OBTENER DATOS
-     */ 
+     */
     @FXML
     private void getSpare(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Client c = ClientsController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getId());
-            if(c != null) {
+            if (c != null) {
                 aceptar.setVisible(false);
                 editar.setVisible(true);
                 cancelar.setVisible(true);
@@ -176,36 +188,36 @@ public class FXMLClientViewController implements Initializable {
                 combo.getSelectionModel().select(c.getRole());
             }
         } else {
-           getAlert(" No items have been selected.");
-       }
+            getAlert(" No items have been selected.");
+        }
     }
-    
+
     @FXML
     public void bulkLoad(ActionEvent event) {
         InterpreterController.getInstance().openSelecFile("*.tmca");
     }
-    
+
     /*VALIDA SI YA EXISTE EL NOMBRE DE USUARIO O SI DEJA CAMPOS EN BLANCO*/
-    public boolean getValidations(){
-        if(!eName.getText().isEmpty() && !eUsername.getText().isEmpty() &&
-            !ePassword.getText().isEmpty() && combo.getSelectionModel().getSelectedItem() != null){
+    public boolean getValidations() {
+        if (!eName.getText().isEmpty() && !eUsername.getText().isEmpty()
+                && !ePassword.getText().isEmpty() && combo.getSelectionModel().getSelectedItem() != null) {
             return true;
         }
         getAlert("You can not leave fields blank.");
         return false;
     }
-    
-    public boolean isNumber(String option){
+
+    public boolean isNumber(String option) {
         try {
-            Integer.parseInt(option);
-            return true; 
+            Long.parseLong(option);
+            return true;
         } catch (NumberFormatException e) {
             return false;
-        } 
+        }
     }
-    
+
     public void getAlert(String content) {
-        JFXDialogLayout c = new JFXDialogLayout(); 
+        JFXDialogLayout c = new JFXDialogLayout();
         JFXDialog dialog = new JFXDialog(stackPane, c, JFXDialog.DialogTransition.CENTER);
         c.setHeading(new Text("Error!"));
         c.setBody(new Text(content));
@@ -216,15 +228,16 @@ public class FXMLClientViewController implements Initializable {
         c.setActions(button);
         dialog.show();
     }
-    
+
     /**
      * LIMPIAR CAMPOS DE TEXTO
      */
-    public void clearFields(){
-       eName.clear();
-       ePassword.clear();
-       eUsername.clear();
-       combo.getSelectionModel().clearSelection();
+    public void clearFields() {
+        eDpi.clear();
+        eName.clear();
+        ePassword.clear();
+        eUsername.clear();
+        combo.getSelectionModel().clearSelection();
     }
-    
-  }
+
+}

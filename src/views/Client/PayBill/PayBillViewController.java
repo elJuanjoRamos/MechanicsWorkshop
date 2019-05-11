@@ -112,6 +112,7 @@ public class PayBillViewController implements Initializable {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Bill b = tableView.getSelectionModel().getSelectedItem();
             TDAQueueCarsFinished.getInstance().editNodeWorkOrder("Payed", b.getIdWorkOrder());
+            initTableView();
         } else {
             getAlert("No invoice has been selected.");
         }

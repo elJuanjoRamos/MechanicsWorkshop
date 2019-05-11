@@ -37,16 +37,6 @@ public class TDAQueueCarsWaiting {
         return firstNode == null;
     }
     
-    public void pushd(WorkOrder wo) {
-        /*WorkOrder node = wo;
-        if (isEmpty()) {
-            firstNode = node;
-        } else {
-            getLastNode().setNext(node);
-        }
-        readNodes();
-        length++;*/
-    }
     
     public void push(WorkOrder w){
         WorkOrder node = new WorkOrder();

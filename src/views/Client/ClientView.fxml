@@ -43,7 +43,7 @@
    <left>
       <VBox prefWidth="197.0" style="-fx-background-color: white;" BorderPane.alignment="CENTER">
          <children>
-            <JFXButton prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="DASHBOARD">
+            <JFXButton onAction="#open_Dash" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="DASHBOARD">
                <font>
                   <Font name="Corbel" size="20.0" />
                </font>

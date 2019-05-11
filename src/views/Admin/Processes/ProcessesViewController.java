@@ -10,6 +10,7 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXDialog;
 import com.jfoenix.controls.JFXDialogLayout;
 import controllers.BillController;
+import controllers.ClientsController;
 import controllers.EmployeesController;
 import controllers.TDAQueueCarsFinished;
 import controllers.TDAQueueCarsInProcess;
@@ -270,6 +271,10 @@ public class ProcessesViewController implements Initializable {
         
         //ENVÍA UNA FACTURA AL CLIENTE
         BillController.getInstance().add(w.getId(), w.getClient(), w.getCarDetails(), w.getCar().getPath(), w.getServiceName(), w.getTotal(), w.getDate());
+        
+        Client c = w.getClient();
+        ClientsController.getInstance().update(c.getId(), c.getDpi(), c.getFullName(), c.getUsername(), c.getPassword(), c.getRole(), 1);
+        
         
         
         getAlert("The car was sent to the list of services completed.", stackPane);

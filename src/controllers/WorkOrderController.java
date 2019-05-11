@@ -49,6 +49,9 @@ public class WorkOrderController {
     }
     
      /*METODO AGREGAR A LISTA LISTA SIMPLE*/
+    
+    
+    
     public void add(Car car, Client client, Service service, Employee employee, String state) {
         int priority;
         if (client.getRole().equalsIgnoreCase("gold")) {
@@ -103,6 +106,22 @@ public class WorkOrderController {
         }
         
         return observableList;
+    }
+    
+    //BUSCAR
+    public WorkOrder getWO(int id) {
+        WorkOrder actual = new WorkOrder();
+        actual = first;
+        
+        while (actual != null) {
+            
+            if (actual.getId() == id) {
+                return actual;
+            }
+            actual = actual.getNext();
+        }
+        
+        return null;
     }
     
     

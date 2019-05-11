@@ -29,20 +29,6 @@
           <th scope="col">PRICE</th>
         </tr>
       </thead><tbody><tr>
-     <th scope="row">7</th>
-     <td>Toyota ABC</td>
-     <td>ADSAA</td>
-     <td>DASDAS</td>
-     <td>15</td>
-     <td>950.0</td>
-</tr><tr>
-     <th scope="row">6</th>
-     <td>dx</td>
-     <td>ABC</td>
-     <td>def</td>
-     <td>10</td>
-     <td>250.51</td>
-</tr><tr>
      <th scope="row">6</th>
      <td>dx</td>
      <td>ABC</td>
@@ -57,12 +43,26 @@
      <td>10</td>
      <td>150.51</td>
 </tr><tr>
-     <th scope="row">4</th>
-     <td>d</td>
-     <td>d</td>
+     <th scope="row">1</th>
+     <td>a</td>
+     <td>Toyota</td>
+     <td>Corolla</td>
+     <td>10</td>
+     <td>145.5</td>
+</tr><tr>
+     <th scope="row">5</th>
+     <td>sa</td>
+     <td>Honda</td>
+     <td>Hi</td>
+     <td>10</td>
+     <td>140.5</td>
+</tr><tr>
+     <th scope="row">3</th>
+     <td>c</td>
+     <td>v</td>
      <td>a</td>
      <td>10</td>
-     <td>150.51</td>
+     <td>130.5</td>
 </tr></tbody>
     </table>
     <canvas id="myChart" style="height:400; width:800"></canvas>
@@ -73,19 +73,19 @@
     var myChart = new Chart(ctx, {
         type: 'bar',
         data: {
-            labels: ['Toyota ABC',
-'dx',
-'dx',
+            labels: ['dx',
 'd',
-'d',
+'a',
+'sa',
+'c',
 ],
             datasets: [{
                 label: '# of Votes',
-                data: [950.0,
-250.51,
-250.51,
+                data: [250.51,
 150.51,
-150.51,
+145.5,
+140.5,
+130.5,
 ],
                 backgroundColor: [
                     'rgba(0, 59, 121, 0.6)',

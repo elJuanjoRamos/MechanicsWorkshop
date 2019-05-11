@@ -98,8 +98,6 @@ public class TDAQueueCarsFinished {
     }
     
     public void editNodeWorkOrder(String d, int id){
-        System.out.println(d);
-        System.out.println(id);
         WorkOrder actual = new WorkOrder();
         actual = firstNode;
         

@@ -16,6 +16,7 @@ public class Client {
     private Client previous;
     private Client next;
 
+    
     public Client() {
     }
 

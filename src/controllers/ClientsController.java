@@ -33,9 +33,9 @@ public class ClientsController {
     **/
     public void initClient() {
         addAtEnd("123456", "Juan Ramos", "a", "a", "Gold");
-        addAtEnd("78910","José Morente", "s", "s", "Normal");
+        addAtEnd("78910","José Morente", "s", "s", "Gold");
         addAtEnd("656565","Pedro Morente", "d", "d", "Normal");
-        addAtEnd("898987","Alex Castro", "f", "f", "Gold");
+        addAtEnd("898987","Alex Castro", "f", "f", "Normal");
     
     }
 
@@ -175,6 +175,9 @@ public class ClientsController {
                     if (count != 0) {
                         int auxCount = aux.getCount();
                         aux.setCount(auxCount + count);
+                    }
+                    if (aux.getCount() >=3 ) {
+                        aux.setRole("Gold");
                     }
                 }
                 aux = aux.getNext();

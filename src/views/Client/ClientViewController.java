@@ -5,6 +5,7 @@
  */
 package views.Client;
 
+import beans.Client;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -16,6 +17,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
 import views.Account.Account;
 import views.Account.AccountController;
 
@@ -33,10 +35,18 @@ public class ClientViewController implements Initializable {
     private Parent fxml;
     
     
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         changeView("/views/Client/DashboardView.fxml");
     }  
+    
+    @FXML
+    public void open_Dash(){
+        changeView("/views/Client/DashboardView.fxml");
+    
+    }
     
     @FXML 
     public void add_myCars( ActionEvent event ) {

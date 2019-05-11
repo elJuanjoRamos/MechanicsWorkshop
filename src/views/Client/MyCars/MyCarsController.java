@@ -64,7 +64,7 @@ public class MyCarsController implements Initializable {
     Car start;
     Car aux;
     int count = 1;
-
+    ObservableList observableList;
     /**
      * @return the instance
      *
@@ -80,7 +80,7 @@ public class MyCarsController implements Initializable {
         client = ClientView.client;
         start = client.getCarList();
         CarController.getInstance().setCarClient(start);
-
+        observableList = FXCollections.observableArrayList();
     }
 
     @Override
@@ -88,28 +88,31 @@ public class MyCarsController implements Initializable {
         ePath = new TextField();
         editar.setVisible(false);
         cancelar.setVisible(false);
-        texto.setText("Add a new Spear Part");
-        initTableView();
+        texto.setText("Add a new Car");
         tableColumnPlate.setCellValueFactory(new PropertyValueFactory<>("plate"));
         tableColumnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tableColumnModel.setCellValueFactory(new PropertyValueFactory<>("model"));
         tableColumnPath.setCellValueFactory(new PropertyValueFactory<>("path"));
         imageView.setImage(image);
+        initTableView();
     }
 
     /**
      * INICIALIZAR DATOS EN TABLA
      */
     public void initTableView() {
-        ObservableList<Car> observableList = FXCollections.observableArrayList();
-
+        tableView.setItems(null);
+        client.setCarList(null);
+        client.setCarList(CarController.getInstance().returnCars());
+       
+        observableList.add(null);
+        observableList.clear();
+        
         if (client.getCarList() != null) {
-
             Car aux = client.getCarList();
             do {
                 observableList.add(aux);
                 aux = aux.getNext();
-
             } while (aux != client.getCarList());
         }
         tableView.setItems(observableList);
@@ -123,16 +126,13 @@ public class MyCarsController implements Initializable {
      */
     @FXML
     private void add(ActionEvent event) {
-
-        //if (getValidations() == true) {
-            CarController.getInstance().addAtEnd(count, "fadfad", "dfaddsa", "dfafdafadf", ePath.getText());
-            //CarController.getInstance().addAtEnd(count, ePlate.getText(), eBrand.getText(), eModel.getText(), ePath.getText());
-            initCarList();
+        if (getValidations() == true) {
+            CarController.getInstance().addAtEnd(ePlate.getText(), eBrand.getText(), eModel.getText(), ePath.getText());
             count++;
             initTableView();
             clearFields();
 
-        //}
+        }
     }
 
     /**
@@ -145,15 +145,14 @@ public class MyCarsController implements Initializable {
                 int id = tableView.getSelectionModel().getSelectedItem().getId();
 
                 CarController.getInstance().update(id, ePlate.getText(), eBrand.getText(), eModel.getText(), ePath.getText());
-                initCarList();
-                clearFields();
-                initTableView();
-
             }
             aceptar.setVisible(true);
             editar.setVisible(false);
             cancelar.setVisible(false);
             texto.setText("Add a new Car");
+            initTableView();
+            clearFields();
+                
         }
     }
 
@@ -162,7 +161,6 @@ public class MyCarsController implements Initializable {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             int id = tableView.getSelectionModel().getSelectedItem().getId();
             CarController.getInstance().delete(id);
-            initCarList();
             initTableView();
         } else {
             getAlert(" No items have been selected.");
@@ -250,12 +248,5 @@ public class MyCarsController implements Initializable {
         imageView.setImage(image);
     }
 
-    /*
-     ACTUALIZA LA LISTA DE CARROS DEL CLIENTE;
-     */
-    public void initCarList() {
-        client.setCarList(null);
-        client.setCarList(CarController.getInstance().returnCars());
-
-    }
+    
 }

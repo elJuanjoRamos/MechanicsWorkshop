@@ -5,9 +5,12 @@
  */
 package views.Client;
 
+import beans.Client;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.text.Text;
 
 /**
  * FXML Controller class
@@ -16,12 +19,18 @@ import javafx.fxml.Initializable;
  */
 public class DashboardViewController implements Initializable {
 
-    /**
-     * Initializes the controller class.
-     */
+    @FXML Text name, role, passwor, username, count;
+    Client client;
+
+    public DashboardViewController() {
+        client = ClientView.client;
+    }
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        // TODO
+        name.setText(client.getFullName());
+        count.setText(String.valueOf(client.getCount()));
     }    
     
 }

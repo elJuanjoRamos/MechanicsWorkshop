@@ -17,13 +17,14 @@ import javafx.collections.ObservableList;
 public class CarController {
     private static CarController instance;
     private ObservableList<Car> cars;
-    private int size;
+    private int size = 1;
     public Car carClient;
     private Car start;
     private Car latest;
     
     public CarController() {
-        cars = FXCollections.observableArrayList();   
+        cars = FXCollections.observableArrayList();
+        
     }
 
     /**
@@ -43,8 +44,6 @@ public class CarController {
     
     
     public Car returnCars(){
-        getAll();
-        
         return start;
         
     }
@@ -97,8 +96,8 @@ public class CarController {
      * @param model
      * @param path
      */
-    public void addAtEnd(int id, String plate, String brand, String model, String path) {
-        Car c = new Car(id, plate, brand, model, path);
+    public void addAtEnd(String plate, String brand, String model, String path) {
+        Car c = new Car(size, plate, brand, model, path);
         if(isEmpty()) {
             start = c;
             latest = c;
@@ -112,27 +111,7 @@ public class CarController {
     }
 
 
-    /**
-     * AGREGAR NUEVO NODO AL INICIO DE LA LISTA CIRCULAR SIMPLE
-     * @param plate
-     * @param brand
-     * @param model
-     * @param path
-     */
-    public void addAtStart(String plate, String brand, String model, String path) {
-        /*Car c = new Car(plate, brand, model, path);
-        if(isEmpty()) {
-            start = c;
-            latest = c;
-            latest.setNext(start);
-        } else {
-            c.setNext(start);
-            start = c;
-            latest.setNext(start);
-        }
-        size++;*/
-    }
-    
+
     /**
      * BUSCAR NODO POR REFERENCIA EN LA LISTA CIRCULAR SIMPLE
      * @param plate
@@ -142,7 +121,6 @@ public class CarController {
         Car aux = start;
         do{
             if (aux.getId() == id){
-                System.out.println("lo encontro");
                 return true;
             }
             else{
@@ -193,7 +171,6 @@ public class CarController {
                     aux.setNext(next.getNext());
                 }
             }
-            size--;
         }
     }
     

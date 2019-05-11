@@ -117,7 +117,7 @@
                            <children>
                                <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Name:" wrappingWidth="48.61669921875" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="DPI:" wrappingWidth="48.61669921875" />
                                     <JFXTextField fx:id="eDpi" />
                                  </children>
                                  <VBox.margin>
@@ -140,7 +140,7 @@
                                           <Insets />
                                        </HBox.margin>
                                     </Text>
-                                    <JFXComboBox fx:id="combo" />
+                                    <JFXComboBox fx:id="combo" prefHeight="41.0" prefWidth="168.0" />
                                  </children>
                                  <VBox.margin>
                                     <Insets bottom="20.0" left="20.0" right="20.0" top="20.0" />
