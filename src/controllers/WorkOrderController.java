@@ -76,6 +76,7 @@ public class WorkOrderController {
         }
         
         count++;
+        show();
     }
 
     public WorkOrder get(){
@@ -88,6 +89,7 @@ public class WorkOrderController {
         
         while(aux != null){
             System.out.println("el cliente es " + aux.getClientName() +" y su rol es "  + aux.getClient().getRole());
+            System.out.println("el servicio es"  + aux.getService().getName()) ;
             aux = aux.getNext();
         }
     }

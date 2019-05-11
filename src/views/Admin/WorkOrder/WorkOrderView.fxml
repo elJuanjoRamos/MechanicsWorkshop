@@ -113,18 +113,18 @@
                                  </VBox.margin>
                                  <children>
                                     <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Client:" wrappingWidth="63.96875" />
-                                    <Text fx:id="clientName" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                    <JFXTextField fx:id="clientName" />
                                  </children>
                               </HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Car Details: " wrappingWidth="100.310546875" />
-                                    <Text fx:id="carD" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Car Details: " wrappingWidth="89.310546875" />
+                                    <JFXTextField fx:id="carD" prefHeight="31.0" prefWidth="154.0" />
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>
-                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service:" wrappingWidth="108.59619140625" />
-                                    <Text fx:id="serviceName" strokeType="OUTSIDE" strokeWidth="0.0" />
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Service:" wrappingWidth="67.59619140625" />
+                                    <JFXTextField fx:id="serviceName" />
                                  </children></HBox>
                               <HBox alignment="CENTER" prefHeight="52.0">
                                  <children>

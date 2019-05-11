@@ -25,6 +25,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
@@ -38,7 +39,7 @@ public class WorkOrderViewController implements Initializable {
     /*VARIABLES*/
     private ObservableList<String> employees;
     @FXML ComboBox list;
-    @FXML Text clientName, carD, serviceName;
+    @FXML TextField clientName, carD, serviceName;
     @FXML TableView<WorkOrder> tableView;
     @FXML TableColumn<WorkOrder, Integer> id;
     @FXML TableColumn<WorkOrder, String> client;
@@ -104,13 +105,18 @@ public class WorkOrderViewController implements Initializable {
     public void sendToService(){
         
         String texto = "";
-        if (list.getSelectionModel().getSelectedItem() != null) {
+        
+        if (tableView.getSelectionModel().getSelectedItem() != null) {
+            
+            
+        if (list.getSelectionModel().getSelectedItem() != null  ) {
             
             
             if (!list.getSelectionModel().getSelectedItem().equals("Waiting list")) {
                 
                 Employee e = EmployeesController.getInstance().searchForName(list.getSelectionModel().getSelectedItem().toString());
                 EmployeesController.getInstance().edit(e.getId(), e.getName(), e.getRole(), e.getUsername(), e.getPassword(), false);
+                workOrder = tableView.getSelectionModel().getSelectedItem();
                 workOrder.setEmployee(e);
                 workOrder.setMechaic(e.getName());
                 workOrder.setState("In service");
@@ -121,8 +127,6 @@ public class WorkOrderViewController implements Initializable {
                 //y se termian enviando los siguientes tambien.
                 WorkOrder te = new WorkOrder(selected.getId(), selected.getCar(), 
                         selected.getClient(), selected.getEmployee(), selected.getService(), selected.getDate(), selected.getState(), selected.getPriority());
-
-
                 //ENVÍA LAS ORDENES DE TRABAJO A LA LISTA DE CARROS EN ATENCION 
                 TDAQueueCarsInProcess.getInstance().push(te);
 
@@ -151,12 +155,14 @@ public class WorkOrderViewController implements Initializable {
                 
                 
             }
-            
-            texto = "The client's car is being serviced";
             initMechanics();
             initTableView();
-            getAlert(texto);
+            getAlert("The client's car is being serviced");
             clear();
+        }
+            
+        } else {
+            getAlert("No item has been selected");
         }
         
         

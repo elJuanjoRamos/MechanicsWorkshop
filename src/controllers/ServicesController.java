@@ -111,7 +111,8 @@ public class ServicesController {
     
     /*MODIFICAR SERVICIO*/
     public void edit(int id, String name, String mark, String model, Stack list, Double workPrice, Double spPrice, boolean state) {
-        //System.out.println(id + " " + name + " " +  mark + " " +  model + " " +  list.size() + " " + workPrice + " " + spPrice );
+        
+        
         Service actual = new Service();
         actual = first;
         while( actual != null ) {
@@ -131,7 +132,6 @@ public class ServicesController {
             }
             actual = actual.next;
         }
-        
     }
     
     /*ELIMINAR SERVICIO*/

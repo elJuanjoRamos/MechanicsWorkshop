@@ -99,11 +99,12 @@ public class InterpreterController {
                             for (int j = 0; j < parts.length; j++) {
                                 SpareParts s = SparesPartsController.getInstance().search(Integer.parseInt(parts[j]));
                                 if (s != null) {
-                                    a.add(s);
+                                    SpareParts temp = new SpareParts(s.getId(), s.getName(), s.getMark(), s.getModel(), 1, s.getPrice());
+                                    a.add(temp);
                                     sPrice = sPrice + s.getPrice();
                                 }
                             }
-                            ServicesController.getInstance().add(fields[i], fields[i+1], fields[i+2],  a, Double.parseDouble(fields[i+4]), sPrice, false);
+                            ServicesController.getInstance().add(fields[i], fields[i+1], fields[i+2],  a, Double.parseDouble(fields[i+4]), sPrice, true);
                             ServicesViewController.getInstance().initTableView();
             
                         } else if(text.equals("*.tmca")){

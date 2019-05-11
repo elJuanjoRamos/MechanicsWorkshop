@@ -12,6 +12,7 @@ import com.jfoenix.controls.JFXDialogLayout;
 import controllers.BillController;
 import controllers.ClientsController;
 import controllers.EmployeesController;
+import controllers.ServicesController;
 import controllers.TDAQueueCarsFinished;
 import controllers.TDAQueueCarsInProcess;
 import controllers.TDAQueueCarsWaiting;
@@ -211,7 +212,7 @@ public class ProcessesViewController implements Initializable {
                 WorkOrder wo = TDAQueueCarsWaiting.getInstance().getfirstNode();
                 if (wo != null) {
                      Employee e= EmployeesController.getInstance().searchForName(list.getSelectionModel().getSelectedItem().toString());
-
+                     
                     WorkOrder w = new WorkOrder(wo.getId(), wo.getCar(), wo.getClient(), e, wo.getService(),wo.getDate(), "In service", wo.getPriority());
                     TDAQueueCarsInProcess.getInstance().push(w);
                     TDAQueueCarsWaiting.getInstance().pop();
@@ -230,29 +231,15 @@ public class ProcessesViewController implements Initializable {
     }
     
     
-    @FXML
-    public void cancel(){
-        eClient.setText("");
-        eCar.setText("");
-        eService.setText("");
-        eMechanic.setText("");
-        eSP.setText("");
-        eWP.setText("");
-        eTotal.setText("");
-        wClient.setText("");
-        wCar.setText("");
-        wService.setText("");
-        imageView.setImage(new Image("resources/img/car2.png"));
-        wImageView.setImage(new Image("resources/img/car2.png"));
-    }
-    
     
     @FXML
     public void endPocess(){
         //OBTIENE EL PRIMER ELEMENTO DE LA COLA
         WorkOrder w = TDAQueueCarsInProcess.getInstance().getfirstNode();
         if (w != null) {
-            
+        
+        ServicesController.getInstance().edit(w.getService().getId(), w.getService().getName(), w.getService().getMark(), w.getService().getModel(), w.getService().getSparePartList(), w.getService().getWorkPrice(), w.getService().getSparePartsPrice(), true);
+        
         //CREA UNA NUEVA ODEN DE TRABAJO CON ESE ELEMENTO PARA QUE NO SE ENVÍEN 
         //LOS POSTERIORES A ESE ELEMENTO, COMO ES UNA LISTA, SI SE ENVÍA SOLO ASÍ
         //TAMBIEN SE ENVÍAN LOS ELEMENTOS SIGUIENTES
@@ -274,8 +261,6 @@ public class ProcessesViewController implements Initializable {
         
         Client c = w.getClient();
         ClientsController.getInstance().update(c.getId(), c.getDpi(), c.getFullName(), c.getUsername(), c.getPassword(), c.getRole(), 1);
-        
-        
         
         getAlert("The car was sent to the list of services completed.", stackPane);
         initTableViewCarsInProcess();
@@ -306,4 +291,26 @@ public class ProcessesViewController implements Initializable {
 
         dialog.show();
     }
+    
+    
+    
+    
+    
+    
+    @FXML
+    public void cancel(){
+        eClient.setText("");
+        eCar.setText("");
+        eService.setText("");
+        eMechanic.setText("");
+        eSP.setText("");
+        eWP.setText("");
+        eTotal.setText("");
+        wClient.setText("");
+        wCar.setText("");
+        wService.setText("");
+        imageView.setImage(new Image("resources/img/car2.png"));
+        wImageView.setImage(new Image("resources/img/car2.png"));
+    }
+    
 }
