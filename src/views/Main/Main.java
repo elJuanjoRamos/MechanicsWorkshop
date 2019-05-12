@@ -121,8 +121,8 @@ public class Main extends Application {
         
         
         
-        //Account.getInstance().start(stage);
-        Admin.getInstance().start(stage);
+        Account.getInstance().start(stage);
+        //Admin.getInstance().start(stage);
         //ClientView.getInstance().start(stage, ClientsController.getInstance().searchClient(1));
     }
 

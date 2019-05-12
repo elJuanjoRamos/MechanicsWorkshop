@@ -35,7 +35,7 @@ import org.jfree.data.category.DefaultCategoryDataset;
 import org.jfree.data.general.DefaultPieDataset;
 /**
  *
- * @author Jose Morente
+ * @author Juan José Ramos
  */
 public class ReportPDFController {
     private static ReportPDFController instance;
@@ -99,7 +99,7 @@ public class ReportPDFController {
         Document document = new Document();
         try {
             writer = PdfWriter.getInstance(document,
-                new FileOutputStream("C:\\Users\\Jose Morente\\Documents\\top5-service.pdf"));
+                new FileOutputStream("C:\\Users\\Juan José Ramos\\Documents\\top5-service.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
             PdfTemplate template = contentByte.createTemplate(500, 400);
@@ -159,7 +159,7 @@ public class ReportPDFController {
         }
         document.close();
         try {
-            File path = new File ("C:\\Users\\Jose Morente\\Documents\\top5-service.pdf");
+            File path = new File ("C:\\Users\\Juan José Ramos\\Documents\\top5-service.pdf");
             Desktop.getDesktop().open(path);
         }catch (IOException ex) {
             ex.printStackTrace();
@@ -222,7 +222,7 @@ public class ReportPDFController {
         Document document = new Document();
         try {
             writer = PdfWriter.getInstance(document,
-                new FileOutputStream("C:\\Users\\Jose Morente\\Documents\\addingTable.pdf"));
+                new FileOutputStream("C:\\Users\\Juan José Ramos\\Documents\\addingTable.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
             PdfTemplate template = contentByte.createTemplate(500, 400);
@@ -282,7 +282,7 @@ public class ReportPDFController {
         }
         document.close();
         try {
-            File path = new File ("C:\\Users\\Jose Morente\\Documents\\addingTable.pdf");
+            File path = new File ("C:\\Users\\Juan José Ramos\\Documents\\addingTable.pdf");
             Desktop.getDesktop().open(path);
         }catch (IOException ex) {
             ex.printStackTrace();
