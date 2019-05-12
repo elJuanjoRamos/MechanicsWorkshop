@@ -84,6 +84,27 @@ public class ClientsController {
     }
     
     /**
+     * AGREGAR NUEVO NODO AL FINAL DE LA LISTA CIRCULAR DOBLE
+     * @param client
+     */
+    public void add(Client client) {
+        Client c = new Client(count, client.getDpi(), client.getFullName(), client.getUsername(), client.getPassword(), client.getRole(), client.getCarList(), 0);
+        if(isEmpty()) {
+            start = c;
+            start.setNext(c);
+            c.setPrevious(start);
+            latest = c;
+        } else {
+            latest.setNext(c);
+            c.setNext(start);
+            c.setPrevious(latest);
+            latest = c;
+            start.setPrevious(latest);
+        }
+        count++;
+    }
+    
+    /**
      * MÉTODO PARA RETORNAR LOS NODOS DE LA LISTA CIRUCLAR DOBLE
      * @return the clients
      */

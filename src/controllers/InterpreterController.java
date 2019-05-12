@@ -1,20 +1,16 @@
 
 package controllers;
 
-import beans.Employee;
+import beans.Car;
+import beans.Client;
 import beans.SpareParts;
 import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.FileReader;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
 import java.util.Stack;
-import java.util.StringTokenizer;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import javax.swing.filechooser.FileNameExtensionFilter;
+import views.Admin.Client.FXMLClientViewController;
 import views.Admin.Employee.EmployeeViewController;
 import views.Admin.Service.ServicesViewController;
 import views.Admin.SpareParts.SparePartsViewController;
@@ -114,23 +110,30 @@ public class InterpreterController {
                             System.out.println("username "  + fields[i+2]);
                             System.out.println("password " + fields[i+3]);
                             System.out.println("tipo " + fields[i+4]);
-                            
+                            Client c = new Client(0, Long.parseLong(fields[i]), fields[i+1], fields[i+2], fields[i+3], fields[i+4]);
+                            Car start = c.getCarList();
+                            CarController.getInstance().setCarClient(start);
                             String[] cars = fields[i+5].split(";");
                             for (int j = 0; j < cars.length; j++) {
                                 System.out.println( "car " + j + " " + cars[j]);
                                 String[] detailsCar = cars[j].split(",");
                                 System.out.println("Details Car");
-                                for (int k = 0; k < detailsCar.length; k++) {
-                                    System.out.println(detailsCar[k]);
-                                }
-                                
+                                System.out.println("PLACA" + detailsCar[0]);
+                                System.out.println("MARCA" + detailsCar[1]);
+                                System.out.println("MODELO" + detailsCar[2]);
+                                System.out.println("PATH" + detailsCar[3]);
+                                CarController.getInstance().addAtEnd(detailsCar[0], detailsCar[1], detailsCar[2], detailsCar[3]);
                             }
-                            
+                            c.setCarList(CarController.getInstance().returnCars());
+                            /*Car aux = c.getCarList();
+                            while(aux!=null) {
+                                System.out.println(aux);
+                                aux = aux.getNext();
+                            }*/
+                            ClientsController.getInstance().add(c);
                             System.out.println("---------------------");
-                            
+                            FXMLClientViewController.getInstance().initTableView();
                         }
-                        
-                        
                   }
                     break;
                 }   

@@ -100,8 +100,12 @@ public class FXMLClientViewController implements Initializable {
      * INICIALIZAR DATOS EN TABLA
      */
     public void initTableView() {
-        ObservableList<Client> observableList = ClientsController.getInstance().getClients();
-        tableView.setItems(observableList);
+        try{
+            ObservableList<Client> observableList = ClientsController.getInstance().getClients();
+            tableView.setItems(observableList);
+        } catch(Exception e){
+            System.out.println(e);
+        }
     }
 
     /**
