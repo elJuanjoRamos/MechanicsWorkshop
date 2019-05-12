@@ -41,12 +41,10 @@
             </HBox>
             <HBox prefHeight="723.0" prefWidth="1278.0">
                <children>
-                  <VBox alignment="CENTER" prefHeight="500.0" prefWidth="1216.0" HBox.hgrow="ALWAYS">
+                  <VBox alignment="CENTER" prefHeight="500.0" HBox.hgrow="ALWAYS">
                      <children>
                         <HBox prefHeight="32.0" prefWidth="814.0">
                            <children>
-                              <JFXTextField fx:id="filter" prefHeight="31.0" prefWidth="315.0" promptText="Search" style="-: red;" />
-                              <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="SEARCH" size="1.5em" />
                               <HBox prefHeight="53.0" prefWidth="473.0">
                                  <children>
                                     <JFXButton fx:id="eliminar" onAction="#delete" prefHeight="31.0" prefWidth="117.0" styleClass="danget-buttton" text="Delete">
@@ -88,11 +86,11 @@
                         </HBox>
                         <TableView fx:id="tableView" prefHeight="556.0" VBox.vgrow="ALWAYS">
                            <columns>
-                              <TableColumn fx:id="dpi" prefWidth="150" text="DPI" />
-                              <TableColumn fx:id="fullname" prefWidth="250" text="NAME" />
-                              <TableColumn fx:id="role" prefWidth="100" text="ROLE" />
-                              <TableColumn fx:id="username" prefWidth="100" text="USERNAME" />
-                              <TableColumn fx:id="password" prefWidth="100" text="PASSWORD" />
+                              <TableColumn fx:id="dpi" maxWidth="-1.0" minWidth="180.0" prefWidth="180.0" text="DPI" />
+                              <TableColumn fx:id="fullname" maxWidth="-1.0" minWidth="319.0" prefWidth="319.0" text="NAME" />
+                              <TableColumn fx:id="role" maxWidth="-1.0" minWidth="129.0" prefWidth="129.0" text="ROLE" />
+                              <TableColumn fx:id="username" maxWidth="-1.0" minWidth="129.0" prefWidth="129.0" text="USERNAME" />
+                              <TableColumn fx:id="password" maxWidth="-1.0" minWidth="129.0" prefWidth="129.0" text="PASSWORD" />
                            </columns>
                         </TableView>
                      </children>
@@ -106,7 +104,7 @@
                         <Insets bottom="30.0" left="30.0" top="30.0" />
                      </HBox.margin>
                   </VBox>
-                  <VBox alignment="CENTER" prefHeight="547.0" prefWidth="727.0" style="-fx-background-color: white;">
+                  <VBox alignment="CENTER" minWidth="455.0" prefHeight="660.0" style="-fx-background-color: white;">
                      <children>
                         <Text fx:id="texto" strokeType="OUTSIDE" strokeWidth="0.0">
                            <font>

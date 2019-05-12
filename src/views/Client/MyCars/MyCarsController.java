@@ -101,21 +101,18 @@ public class MyCarsController implements Initializable {
      * INICIALIZAR DATOS EN TABLA
      */
     public void initTableView() {
-        tableView.setItems(null);
-        client.setCarList(null);
-        client.setCarList(CarController.getInstance().returnCars());
-       
-        observableList.add(null);
         observableList.clear();
         
-        if (client.getCarList() != null) {
-            Car aux = client.getCarList();
+        Car c = CarController.getInstance().returnCars();
+        if (c != null) {
+            Car aux = c;
             do {
                 observableList.add(aux);
                 aux = aux.getNext();
-            } while (aux != client.getCarList());
+            } while (aux != c);
         }
         tableView.setItems(observableList);
+        client.setCarList(c);
     }
 
     /**

@@ -107,9 +107,9 @@ public class ServicesViewController implements Initializable {
     @FXML
     private void add_Service() {
         if (getValidations()) {
-            
             ServicesController.getInstance().add(sName.getText(), sMark.getText(), sModel.getText(),new Stack() ,  Double.parseDouble(sPrice.getText()), 0.0, false);
             initTableView();
+            clearFields();
         }
     }
 
@@ -193,5 +193,12 @@ public class ServicesViewController implements Initializable {
         c.setActions(button);
 
         dialog.show();
+    }
+    public void clearFields(){
+        this.sName.clear();
+        this.sMark.clear();
+        this.sModel.clear();
+        this.sPrice.clear();
+    
     }
 }

@@ -72,18 +72,7 @@ public class PayBillViewController implements Initializable {
     }
     
     public void initTableView() {
-        ObservableList<Bill> observableList = FXCollections.observableArrayList();
-        Bill actual = new Bill();
-        actual = BillController.getInstance().getBills();
-        while (actual != null) {
-            if (actual.getClient().getId() == client.getId()) {
-                observableList.add(actual);
-            }
-            actual = actual.getNext();
-        }
-        
-        
-        tableView.setItems(observableList);
+        tableView.setItems(BillController.getInstance().getBills(client.getId()));
     }
     
     
@@ -95,7 +84,7 @@ public class PayBillViewController implements Initializable {
                 eService.setText(bill.getService());
                 eDate.setText(String.valueOf(bill.getDate()));
                 eTotal.setText(String.valueOf(bill.getTotal()));
-                imageView.setImage(new Image(bill.getPath()));
+                //imageView.setImage(new Image(bill.getPath()));
                 aceptar.setDisable(false);
             } else {
                 getAlert("That bill has already been paid.");
@@ -112,10 +101,11 @@ public class PayBillViewController implements Initializable {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             Bill b = tableView.getSelectionModel().getSelectedItem();
             TDAQueueCarsFinished.getInstance().editNodeWorkOrder("Payed", b.getIdWorkOrder());
-            initTableView();
+            BillController.getInstance().editNodeBill("Payed", b.getId());
         } else {
             getAlert("No invoice has been selected.");
         }
+        initTableView();
         
     }
     

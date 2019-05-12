@@ -151,8 +151,8 @@ public class FXMLClientViewController implements Initializable {
                         eUsername.getText(),
                         ePassword.getText(),
                         combo.getSelectionModel().getSelectedItem().toString(), 0);
-                clearFields();
-                initTableView();
+                System.out.println("esta entrando");
+                
                 aceptar.setVisible(true);
                 editar.setVisible(false);
                 cancelar.setVisible(false);
@@ -161,6 +161,9 @@ public class FXMLClientViewController implements Initializable {
                 getAlert("You can not enter text in numeric fields");
             }
         }
+        clearFields();
+        initTableView();
+                
     }
 
     @FXML

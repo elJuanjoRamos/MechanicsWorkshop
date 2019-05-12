@@ -188,7 +188,7 @@ public class ClientsController {
         if(search(id)) {
             Client aux = start;
             do {
-                if(aux.getDpi() == dpi) {
+                if(aux.getId() == id) {
                     aux.setFullName(fullName);
                     aux.setUsername(username);
                     aux.setPassword(password);

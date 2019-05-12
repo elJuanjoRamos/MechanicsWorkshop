@@ -45,8 +45,6 @@
                      <children>
                         <HBox prefHeight="32.0" prefWidth="814.0">
                            <children>
-                              <JFXTextField fx:id="filter" prefHeight="31.0" prefWidth="315.0" promptText="Search" style="-: red;" />
-                              <FontAwesomeIcon glyphStyle="-fx-fill:DEDEE4" iconName="SEARCH" size="1.5em" />
                               <HBox alignment="CENTER_RIGHT" prefHeight="53.0" prefWidth="473.0" HBox.hgrow="ALWAYS">
                                  <children>
                                     <JFXButton onAction="#open_Dialog" prefHeight="31.0" prefWidth="117.0" styleClass="success-buttton" text="Details">

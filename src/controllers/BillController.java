@@ -28,6 +28,7 @@ public class BillController {
     }
     
     private ObservableList<Bill> bills;
+        
     private int count = 1;
     private Bill first;
     
@@ -69,8 +70,17 @@ public class BillController {
     
     
     /*METODO MOSTRAR */
-    public Bill getBills(){
-        return first;
+    public ObservableList<Bill> getBills(int id){
+        bills.clear();
+        Bill b = first;
+        while(b!=null){
+            if (b.getClient().getId() == id) {
+                bills.add(b);
+            }
+            b = b.getNext();
+        }
+        return bills;
+        
     }
     
     
@@ -87,5 +97,18 @@ public class BillController {
         return null;
     }
     
+    //EDITA LA ORDEN Y LA VUELVE PAGADA
+    public void editNodeBill(String d, int id){
+        Bill actual = new Bill();
+        actual = first;
+        
+        while (actual != null) {
+            if (actual.getId() == id) {
+                actual.setState(d);
+            }
+            actual = actual.getNext();
+        }
+        
+    }
     
 }

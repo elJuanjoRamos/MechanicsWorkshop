@@ -70,15 +70,13 @@ public class ViewInsertServiceController implements Initializable {
     
     @Override
     public void initialize(URL url, ResourceBundle rb) {
-        list.setItems(null);
-        
-        list.setItems(SparesPartsController.getInstance().getSparePartsName(serviceAux.getModel(), serviceAux.getMark()));
         id.setCellValueFactory(new PropertyValueFactory<>("id"));
         name.setCellValueFactory(new PropertyValueFactory<>("name"));
         price.setCellValueFactory(new PropertyValueFactory<>("price"));
         quantity.setCellValueFactory(new PropertyValueFactory<>("stock"));
         initTableView();
         loadService();
+        loadParts();
     }    
     
     /*CARGA EL SERVICIO Y SUS PARTES*/
@@ -90,7 +88,12 @@ public class ViewInsertServiceController implements Initializable {
         sModel.setText(serviceAux.getModel());
     }
     
-    
+    //INICIALIZAR LOS VALORES DE EL CONBO
+    public void loadParts(){
+        list.setItems(null);
+        list.setItems(SparesPartsController.getInstance().getSparePartsName(serviceAux.getModel(), serviceAux.getMark()));
+        
+    }
     
      /*INICIALIZAR TABLA*/
     public void initTableView() {
@@ -148,6 +151,7 @@ public class ViewInsertServiceController implements Initializable {
         } 
                 
         initTableView();
+        loadParts();
     } 
 
     
@@ -159,6 +163,7 @@ public class ViewInsertServiceController implements Initializable {
             
             ServicesViewController.getInstance().initTableView();
             initTableView();
+            loadParts();
         } 
     }
     

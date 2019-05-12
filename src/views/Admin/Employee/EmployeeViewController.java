@@ -159,7 +159,7 @@ public class EmployeeViewController implements Initializable {
                 aceptar.setVisible(false);
                 editar.setVisible(true);
                 cancelar.setVisible(true);
-                texto.setText("Edit a user");
+                texto.setText("Edit the Employee");
 
                 eName.setText(e.getName());
                 eUsername.setText(e.getUsername());

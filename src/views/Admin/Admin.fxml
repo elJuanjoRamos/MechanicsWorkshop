@@ -62,14 +62,6 @@
                   <FontAwesomeIcon iconName="USER" />
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#open_services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICES">
-               <font>
-                  <Font name="Corbel" size="20.0" />
-               </font>
-               <graphic>
-                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
-               </graphic>
-            </JFXButton>
             <JFXButton onAction="#open_parts" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SPARE PARTS">
                <font>
                   <Font name="Corbel" size="20.0" />
@@ -78,12 +70,20 @@
                   <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
                </graphic>
             </JFXButton>
-            <JFXButton onAction="#open_clients" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="CLIENTES">
+            <JFXButton onAction="#open_clients" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="CLIENTS">
                <font>
                   <Font name="Corbel" size="20.0" />
                </font>
                <graphic>
                   <FontAwesomeIcon iconName="USERS" />
+               </graphic>
+            </JFXButton>
+            <JFXButton onAction="#open_services" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="SERVICES">
+               <font>
+                  <Font name="Corbel" size="20.0" />
+               </font>
+               <graphic>
+                  <FontAwesomeIcon iconName="WRENCH" size="1.5em" />
                </graphic>
             </JFXButton>
             <JFXButton onAction="#open_workOrder" prefHeight="95.0" prefWidth="200.0" styleClass="hoover_border" text="WORK ORDERS">
