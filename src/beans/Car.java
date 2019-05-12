@@ -102,7 +102,7 @@ public class Car {
 
     @Override
     public String toString() {
-        return "Car{" + "plate=" + plate + ", brand=" + brand + ", model=" + model + ", path=" + path + ", next=" + next + '}';
+        return "Car{" + "plate=" + plate + ", brand=" + brand + ", model=" + model + ", path=" + path +'}';
     }
 
     public int getId() {

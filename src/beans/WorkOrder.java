@@ -199,7 +199,7 @@ public class WorkOrder {
 
     @Override
     public String toString() {
-        return "WorkOrder{" + "id=" + id + ", priority=" + priority + ", car=" + car + ", client=" + client + ", employee=" + employee + ", date=" + date + ", service=" + service + ", state=" + state + ", clientName=" + clientName + ", clientRole=" + clientRole + ", carDetails=" + carDetails + ", serviceName=" + serviceName + ", mechaic=" + mechaic + ", imagePath=" + imagePath + ", workPrice=" + workPrice + ", spPrice=" + spPrice + ", total=" + total + '}';
+        return "WorkOrder{" + "id=" + id + ", priority=" + priority + ", client=" + client + ", employee=" + employee + ", date=" + date + ", service=" + service + ", state=" + state + ", clientName=" + clientName + ", clientRole=" + clientRole + ", carDetails=" + carDetails + ", serviceName=" + serviceName + ", mechaic=" + mechaic + ", imagePath=" + imagePath + ", workPrice=" + workPrice + ", spPrice=" + spPrice + ", total=" + total + '}';
     }
     
     
