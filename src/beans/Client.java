@@ -174,8 +174,10 @@ public class Client {
     public void setCount(int count) {
         this.count = count;
     }
-    
-    
-    
+
+    @Override
+    public String toString() {
+        return "Client{" + "id=" + id + ", dpi=" + dpi + ", fullName=" + fullName + ", username=" + username + ", password=" + password + ", role=" + role + ", count=" + count + '}';
+    }
       
 }

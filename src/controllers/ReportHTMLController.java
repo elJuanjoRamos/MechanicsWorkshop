@@ -7,6 +7,7 @@ package controllers;
 
 import beans.Client;
 import beans.SpareParts;
+import beans.WorkOrder;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
@@ -28,6 +29,7 @@ public class ReportHTMLController {
      * VARIABLES
      */
     private SparePartsAssignment tope;
+    private CarAssignament end;
     private FileWriter reporte;
     private PrintWriter rep;
     
@@ -322,8 +324,209 @@ public class ReportHTMLController {
             }
         }
     }
+    
+    public void getTop5Cars() {
+        WorkOrder work;
+        work = WorkOrderController.getInstance().first;
         
-    //ADD SPARE PART ASSIGNAMENT
+        while(work != null) {
+            WorkOrder work2;
+            work2 = WorkOrderController.getInstance().first;
+            int quantity = 0;
+            System.out.println(work.getCar());
+            while(work2 != null) {
+                if(work.getCar().getBrand().equalsIgnoreCase(work2.getCar().getBrand())
+                && work.getCar().getModel().equalsIgnoreCase(work2.getCar().getModel())) {
+                    quantity++;
+                }
+                work2 = work2.getNext();
+            }
+            System.out.println(quantity);
+            addAssignmentCar(new CarAssignament(work, quantity));
+            work = work.getNext();
+        }
+        
+        CarAssignament c;
+        c = end;
+        System.out.println("SIN REPETIR");
+        while(c != null) {
+            System.out.println(c.getCar().getCar());
+            System.out.println(c.getQuantity());
+            c = c.getNext();
+        }
+        
+        //MÉTODO DE BURBUJA
+        CarAssignament aux1, aux2;
+        aux2 = end;
+        while (aux2 != null) {
+            aux1 = aux2.getNext();
+            while (aux1 != null) {
+                if (aux1.getQuantity() > aux2.getQuantity()) {
+                    WorkOrder auxiliar = aux2.getCar();
+                    int auxiliar1 = aux2.getQuantity();
+                    
+                    aux2.setCar(aux1.getCar());
+                    aux2.setQuantity(aux1.getQuantity());
+                    
+                    aux1.setCar(auxiliar);
+                    aux1.setQuantity(auxiliar1);
+                }
+                aux1 = aux1.getNext();
+            }
+            aux2 = aux2.getNext();
+        }
+        
+        CarAssignament d;
+        d = end;
+        System.out.println("SIN REPETIR");
+        while(d != null) {
+            System.out.println(d.getCar().getCar());
+            System.out.println(d.getQuantity());
+            WorkOrder work3;
+            work3 = WorkOrderController.getInstance().first;
+            while(work3 != null) {
+                if(work3.getCar().getBrand().equalsIgnoreCase(d.getCar().getCar().getBrand())
+                && work3.getCar().getModel().equalsIgnoreCase(d.getCar().getCar().getModel())) {
+                    System.out.println(work3.getClient());
+                }
+                work3 = work3.getNext();
+            }
+            d = d.getNext();
+        }
+        try {
+            reporte = new FileWriter("top5-cars.html");
+            rep = new PrintWriter(reporte);
+            rep.print(getHeader("Spare Parts"));
+            rep.print("<div class=\"container\">\n" +
+            "    <div class=\"jumbotron jumbotron-fluid\">\n" +
+            "      <div class=\"container\">\n" +
+            "        <h1 class=\"display-4\">Clientes</h1>\n" +
+            "        <p class=\"lead\">Top 5 de los repuestos mas caros.</p>\n" +
+            "      </div>\n" +
+            "    </div>\n");
+            int contador1 = 1;
+            CarAssignament a;
+            a = end;
+            System.out.println("SIN REPETIR");
+            while(a != null) {
+                if(contador1 <= 5) {
+                    rep.print("<nav aria-label=\"breadcrumb\">\n" +
+                    "      <ol class=\"breadcrumb\">\n" +
+                    "        <h6>" + a.getCar().getCar().getBrand() + " - " +a.getCar().getCar().getModel() + "   <span class=\"badge badge-secondary\">"+a.getQuantity()+"</span></h6>\n" +
+                    "      </ol>\n" +
+                    "    </nav>");
+                    rep.print("    <table class=\"table\">\n" +
+                    "      <thead class=\"thead-dark\">\n" +
+                    "        <tr>\n" +
+                    "          <th scope=\"col\">ID</th>\n" +
+                    "          <th scope=\"col\">NAME</th>\n" +
+                    "          <th scope=\"col\">USERNAME</th>\n" +
+                    "          <th scope=\"col\">ROLE</th>\n" +
+                    "        </tr>\n" +
+                    "      </thead>"+ 
+                    "<tbody>");
+                    WorkOrder work4;
+                    work4 = WorkOrderController.getInstance().first;
+                    while(work4 != null) {
+                        if(work4.getCar().getBrand().equalsIgnoreCase(a.getCar().getCar().getBrand())
+                        && work4.getCar().getModel().equalsIgnoreCase(a.getCar().getCar().getModel())) {
+                            System.out.println(work4.getClient());
+                            rep.print("<tr>\n" +
+                            "     <th scope=\"row\">" + work4.getClient().getId() + "</th>\n" +
+                            "     <td>" + work4.getClient().getFullName() + "</td>\n" +
+                            "     <td>" + work4.getClient().getUsername() + "</td>\n" +
+                            "     <td>" + work4.getClient().getRole() + "</td>\n" +
+                            "</tr>");
+                        }
+                        work4 = work4.getNext();
+                    }
+                    rep.print("</tbody>\n" +
+                    "    </table>\n");
+                    contador1++;
+                }
+                a = a.getNext();
+            }
+            rep.print("    <canvas id=\"myChart\" style=\"height:400; width:800\"></canvas>\n" +
+            "  </div>\n" +
+            "<script src=\"https://cdn.jsdelivr.net/npm/chart.js@2.8.0\"></script>\n" +
+            "  <script>\n" +
+            "    var ctx = document.getElementById('myChart').getContext('2d');\n" +
+            "    var myChart = new Chart(ctx, {\n" +
+            "        type: 'bar',\n" +
+            "        data: {\n" +
+            "            labels: [");
+            int contador2 = 1;
+            CarAssignament e;
+            e = end;
+            System.out.println("SIN REPETIR");
+            while(e != null) {
+                if(contador2 <= 2) {
+                    rep.print("'" + e.getCar().getCar().getBrand()+ " - " + e.getCar().getCar().getModel() +"',\n");
+                    contador2++;
+                }
+                e = e.getNext();
+            }
+            rep.print("],\n" +
+            "            datasets: [{\n" +
+            "                label: '# of Cars',\n" +
+            "                data: [");
+            int contador3 = 1;
+            CarAssignament f;
+            f = end;
+            System.out.println("SIN REPETIR");
+            while(f != null) {
+                if(contador3 <= 2) {
+                    rep.print(f.getQuantity() + ",\n");
+                    contador3++;
+                }
+                f = f.getNext();
+            }
+            rep.print("],\n" +
+            "                backgroundColor: [\n" +
+            "                    'rgba(0, 59, 121, 0.6)',\n" +
+            "                    'rgba(0, 59, 121, 0.6)',\n" +
+            "                ],\n" +
+            "                borderColor: [\n" +
+            "                    'rgba(0, 59, 121, 0.8)',\n" +
+            "                    'rgba(0, 59, 121, 0.8)',\n" +
+            "                ],\n" +
+            "                borderWidth: 1\n" +
+            "            }]\n" +
+            "        },\n" +
+            "        options: {\n" +
+            "            scales: {\n" +
+            "                yAxes: [{\n" +
+            "                    ticks: {\n" +
+            "                        beginAtZero: true\n" +
+            "                    }\n" +
+            "                }]\n" +
+            "            }\n" +
+            "        }\n" +
+            "    });\n" +
+            "  </script>\n" +
+            "  <script src=\"https://code.jquery.com/jquery-3.3.1.slim.min.js\"></script>\n" +
+            "  <script src=\"https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js\"></script>\n" +
+            "  <script src=\"https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js\"></script>\n" +
+            "</body>\n" +
+            "</html>");
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "top5-cars.html"); 
+        } catch (IOException e) {
+            System.err.println(e);
+        } finally {
+            try {
+                if(reporte != null) {
+                    reporte.close();
+                }
+            } catch (IOException e) {
+                System.err.println("e");
+            }
+        }
+    }
+    
+        
+    /**
+     * ASIGNAR SPARE PARTS
+     */
     void addAssignment(SparePartsAssignment temp){
         if(tope == null){
             tope = temp;
@@ -337,6 +540,41 @@ public class ReportHTMLController {
             }
             aux2.setNext(temp);
         }
+    }
+    
+    /**
+     * ASIGNAR CARROS 
+     */
+    void addAssignmentCar(CarAssignament temp) {
+        if(!isExist(temp.getCar().getCar().getBrand(), temp.getCar().getCar().getModel())) {
+            if(end == null){
+                end = temp;
+            }else{
+                CarAssignament aux1, aux2;
+                aux2 = end;
+                aux1 = end.getNext();
+                while(aux1!=null){
+                    aux1 = aux1.getNext();
+                    aux2 = aux2.getNext();
+                }
+                aux2.setNext(temp);
+            }
+        }
+    }
+    
+    /**
+     * CONFIRMAR SI EXISTE 
+     */
+    public boolean isExist(String mark, String model) {
+        CarAssignament aux = end;
+        while(aux != null) {
+            if(aux.getCar().getCar().getBrand().equalsIgnoreCase(mark)
+                && aux.getCar().getCar().getModel().equalsIgnoreCase(model)) {
+                    return true;
+            }
+            aux = aux.getNext();
+        }
+        return false;
     }
 }
 
@@ -381,3 +619,56 @@ class SparePartsAssignment {
     
 }
 
+class CarAssignament {
+    private WorkOrder car;
+    private int quantity;
+    private CarAssignament next;
+
+    public CarAssignament(WorkOrder car, int quantity) {
+        this.car = car;
+        this.quantity = quantity;
+    }
+
+    /**
+     * @return the car
+     */
+    public WorkOrder getCar() {
+        return car;
+    }
+
+    /**
+     * @param car the car to set
+     */
+    public void setCar(WorkOrder car) {
+        this.car = car;
+    }
+
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
+    }
+
+    /**
+     * @return the next
+     */
+    public CarAssignament getNext() {
+        return next;
+    }
+
+    /**
+     * @param next the next to set
+     */
+    public void setNext(CarAssignament next) {
+        this.next = next;
+    }
+    
+}
