@@ -49,4 +49,9 @@ public class ReportViewController implements Initializable {
     private void report_spareParts() {
         ReportPDFController.getInstance().getTopSpareParts();
     }
+    
+    @FXML
+    private void report_cars() {
+        ReportHTMLController.getInstance().getTop5Cars();
+    }
 }
