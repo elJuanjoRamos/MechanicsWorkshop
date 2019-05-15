@@ -36,11 +36,6 @@ public class ServicesController {
     
     public void initServices(){
         add("Diagnostic", "Any", "Any", a, 500.00, 0.0, true);
-        //add("Motor: Engine oil and refill", "Toyota", "Corolla", a, 150.5, 0.0, false);
-        //add("Motor: Replace oil filter.", "Audi", "A3",a, 10.5, 0.00, false);
-        //add("Motor: Check for general oil leaks.", "Toyota", "Corolla",a, 150.5, 0.0, false);
-        //add("Motor: Check radiator condition, security and report any leaks", "Honda", "Civic 2005", a, 1000.0, 0.0, false);
-
     }
     /*CONSULTA SI ESTA VACIA LA LISTA*/
     public boolean isNull() {

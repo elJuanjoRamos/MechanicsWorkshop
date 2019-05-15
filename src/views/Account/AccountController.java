@@ -13,6 +13,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.control.TextField;
+import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.VBox;
 import javafx.util.Duration;
 
@@ -23,10 +24,15 @@ public class AccountController implements Initializable {
     
     @FXML
     private Parent fxml;
+    
+    @FXML AnchorPane pane;
+    
+    
     @Override
     public void initialize(URL url, ResourceBundle rb) {
         int a = (int) vbox.getLayoutX() * 31;
         transition("/views/Account/Login.fxml", (a));
+        
     }    
     @FXML
     private void open_logIn(ActionEvent event) {

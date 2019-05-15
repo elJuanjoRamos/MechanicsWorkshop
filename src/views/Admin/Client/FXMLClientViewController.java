@@ -182,7 +182,7 @@ public class FXMLClientViewController implements Initializable {
     @FXML
     private void getSpare(ActionEvent event) {
         if (tableView.getSelectionModel().getSelectedItem() != null) {
-            Client c = ClientsController.getInstance().getClient(tableView.getSelectionModel().getSelectedItem().getId());
+            Client c = ClientsController.getInstance().searchClient(tableView.getSelectionModel().getSelectedItem().getId());
             if (c != null) {
                 aceptar.setVisible(false);
                 editar.setVisible(true);

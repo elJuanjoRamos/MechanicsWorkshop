@@ -38,6 +38,8 @@ public class MyCarsController implements Initializable {
     @FXML
     TableView<Car> tableView;
     @FXML
+    TableColumn<Car, String> tableColumnId;
+    @FXML
     TableColumn<Car, String> tableColumnPlate;
     @FXML
     TableColumn<Car, String> tableColumnBrand;
@@ -89,6 +91,7 @@ public class MyCarsController implements Initializable {
         editar.setVisible(false);
         cancelar.setVisible(false);
         texto.setText("Add a new Car");
+        tableColumnId.setCellValueFactory(new PropertyValueFactory<>("id"));
         tableColumnPlate.setCellValueFactory(new PropertyValueFactory<>("plate"));
         tableColumnBrand.setCellValueFactory(new PropertyValueFactory<>("brand"));
         tableColumnModel.setCellValueFactory(new PropertyValueFactory<>("model"));
@@ -104,15 +107,10 @@ public class MyCarsController implements Initializable {
         observableList.clear();
         
         Car c = CarController.getInstance().returnCars();
-        if (c != null) {
-            Car aux = c;
-            do {
-                observableList.add(aux);
-                aux = aux.getNext();
-            } while (aux != c);
-        }
-        tableView.setItems(observableList);
+        tableView.setItems(CarController.getInstance().getCars());
+        client.setCarList(null);
         client.setCarList(c);
+        //CarController.getInstance().cleanList();
     }
 
     /**
@@ -128,7 +126,6 @@ public class MyCarsController implements Initializable {
             count++;
             initTableView();
             clearFields();
-
         }
     }
 

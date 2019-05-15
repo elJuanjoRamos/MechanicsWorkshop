@@ -29,8 +29,8 @@ public class Client {
         this.role = role;
         this.carList = carList;
         this.count = count;
-        previous = null;
-        next = null;
+        previous = this;
+        next = this;
     }
 
     public Client(int id, long dpi, String fullName, String username, String password, String role) {

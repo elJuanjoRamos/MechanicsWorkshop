@@ -32,7 +32,9 @@ public class ReportHTMLController {
     private CarAssignament end;
     private FileWriter reporte;
     private PrintWriter rep;
-    
+    /*RUTAS*/
+    public String ruta = String.valueOf(System.getProperty("user.dir")) + "\\dist";
+
     /**
      * HEADER
      * @return header
@@ -43,7 +45,7 @@ public class ReportHTMLController {
         "<head>\n" +
         "    <meta charset='utf-8'>\n" +
         "    <meta http-equiv='X-UA-Compatible' content='IE=edge'>\n" +
-        "    <title>Reporte "+title+"</title>\n" +
+        "    <title>Report "+title+"</title>\n" +
         "    <meta name='viewport' content='width=device-width, initial-scale=1'>\n" +
         "    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>\n" +
         "    <script src='main.js'></script>\n" +
@@ -110,28 +112,27 @@ public class ReportHTMLController {
      * REPORTE DE CLIENTES
      */
     public void getReportClient() {
-        System.out.println("SI ENTRO");
         try {
             int oro = 0;
             int normal = 0;
-            reporte = new FileWriter("clientes.html");
+            reporte = new FileWriter("client.html");
             rep = new PrintWriter(reporte);
-            rep.print(getHeader("Clientes"));
+            rep.print(getHeader("Clients"));
             rep.print("<div class=\"container\">\n" +
             "    <div class=\"jumbotron jumbotron-fluid\">\n" +
             "      <div class=\"container\">\n" +
-            "        <h1 class=\"display-4\">Clientes</h1>\n" +
-            "        <p class=\"lead\">Reporte de todos los clientes.</p>\n" +
+            "        <h1 class=\"display-4\">Clients</h1>\n" +
+            "        <p class=\"lead\">Report of all clients.</p>\n" +
             "      </div>\n" +
             "    </div>\n" +
             "    <table class=\"table\">\n" +
             "      <thead class=\"thead-dark\">\n" +
             "        <tr>\n" +
             "          <th scope=\"col\">DPI</th>\n" +
-            "          <th scope=\"col\">NOMBRE</th>\n" +
-            "          <th scope=\"col\">USUARIO</th>\n" +
-            "          <th scope=\"col\">CONTRASEÑA</th>\n" +
-            "          <th scope=\"col\">TIPO CLIENTE</th>\n" +
+            "          <th scope=\"col\">NAME</th>\n" +
+            "          <th scope=\"col\">USERNAME</th>\n" +
+            "          <th scope=\"col\">PASSWORD</th>\n" +
+            "          <th scope=\"col\">ROLE</th>\n" +
             "        </tr>\n" +
             "      </thead>"+ 
             "<tbody>");
@@ -158,7 +159,7 @@ public class ReportHTMLController {
             "    <canvas id=\"myChart\" style=\"height:400; width:800\"></canvas>\n" +
             "  </div>");
             rep.print(getFooterPie(oro, normal));
-            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "clientes.html"); 
+            Runtime.getRuntime().exec("rundll32 url.dll,FileProtocolHandler " + "client.html"); 
         } catch (IOException e) {
             System.err.println(e);
         } finally {
@@ -204,8 +205,8 @@ public class ReportHTMLController {
             rep.print("<div class=\"container\">\n" +
             "    <div class=\"jumbotron jumbotron-fluid\">\n" +
             "      <div class=\"container\">\n" +
-            "        <h1 class=\"display-4\">Clientes</h1>\n" +
-            "        <p class=\"lead\">Top 5 de los repuestos mas caros.</p>\n" +
+            "        <h1 class=\"display-4\">Spare Parts</h1>\n" +
+            "        <p class=\"lead\">Top 5 of the most expensive spare parts.</p>\n" +
             "      </div>\n" +
             "    </div>\n" +
             "    <table class=\"table\">\n" +
@@ -396,7 +397,7 @@ public class ReportHTMLController {
         try {
             reporte = new FileWriter("top5-cars.html");
             rep = new PrintWriter(reporte);
-            rep.print(getHeader("Spare Parts"));
+            rep.print(getHeader("Cars"));
             rep.print("<div class=\"container\">\n" +
             "    <div class=\"jumbotron jumbotron-fluid\">\n" +
             "      <div class=\"container\">\n" +
@@ -407,7 +408,6 @@ public class ReportHTMLController {
             int contador1 = 1;
             CarAssignament a;
             a = end;
-            System.out.println("SIN REPETIR");
             while(a != null) {
                 if(contador1 <= 5) {
                     rep.print("<nav aria-label=\"breadcrumb\">\n" +
@@ -430,7 +430,6 @@ public class ReportHTMLController {
                     while(work4 != null) {
                         if(work4.getCar().getBrand().equalsIgnoreCase(a.getCar().getCar().getBrand())
                         && work4.getCar().getModel().equalsIgnoreCase(a.getCar().getCar().getModel())) {
-                            System.out.println(work4.getClient());
                             rep.print("<tr>\n" +
                             "     <th scope=\"row\">" + work4.getClient().getId() + "</th>\n" +
                             "     <td>" + work4.getClient().getFullName() + "</td>\n" +

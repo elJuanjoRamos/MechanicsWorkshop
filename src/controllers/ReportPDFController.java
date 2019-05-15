@@ -46,6 +46,9 @@ public class ReportPDFController {
      */
     private ServiceAssignament tope;
     private SparePartTopAssignament end;
+    /*RUTAS*/
+    public String ruta = String.valueOf(System.getProperty("user.dir")) + "\\dist";
+
     
     public void getTopService() {
         //IMPRIMIR SERVICIOS SIN ORDENAR Y ASIGNARLO
@@ -94,7 +97,7 @@ public class ReportPDFController {
         Document document = new Document();
         try {
             writer = PdfWriter.getInstance(document,
-                new FileOutputStream("C:\\Users\\Juan José Ramos\\Documents\\top5-service.pdf"));
+                new FileOutputStream(ruta + "\\top5-service.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
             PdfTemplate template = contentByte.createTemplate(500, 400);
@@ -154,7 +157,7 @@ public class ReportPDFController {
         }
         document.close();
         try {
-            File path = new File ("C:\\Users\\Juan José Ramos\\Documents\\top5-service.pdf");
+            File path = new File (ruta + "\\top5-service.pdf");
             Desktop.getDesktop().open(path);
         }catch (IOException ex) {
             ex.printStackTrace();
@@ -217,7 +220,7 @@ public class ReportPDFController {
         Document document = new Document();
         try {
             writer = PdfWriter.getInstance(document,
-                new FileOutputStream("C:\\Users\\Juan José Ramos\\Documents\\addingTable.pdf"));
+                new FileOutputStream(ruta + "\\getTopSpareParts.pdf"));
             document.open();
             PdfContentByte contentByte = writer.getDirectContent();
             PdfTemplate template = contentByte.createTemplate(500, 400);
@@ -277,7 +280,7 @@ public class ReportPDFController {
         }
         document.close();
         try {
-            File path = new File ("C:\\Users\\Juan José Ramos\\Documents\\addingTable.pdf");
+            File path = new File (ruta+ "\\getTopSpareParts.pdf");
             Desktop.getDesktop().open(path);
         }catch (IOException ex) {
             ex.printStackTrace();
@@ -285,11 +288,15 @@ public class ReportPDFController {
         
         SparePartTopAssignament asistente = end;
         while(asistente != null) {
-            System.out.println("CANTIDAD" + asistente.getQuantity() + "SERVICIO" + asistente.getService().getName());
             asistente = asistente.getNext();
         }
     }
-        
+    
+    
+    
+    
+    
+    
     /**
      * ASIGNAR SERVICIO 
      */

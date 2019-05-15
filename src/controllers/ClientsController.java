@@ -18,13 +18,11 @@ public class ClientsController {
     private static ClientsController instance;
     private ObservableList<Client> clients;
     protected Client start;
-    protected Client latest;
     private int count  = 1 ;
 
     public ClientsController() {
         clients = FXCollections.observableArrayList();
         start = null;
-        latest = null;
         initClient();
     }
     
@@ -32,10 +30,8 @@ public class ClientsController {
      * INICIALIZAR DATOS
     **/
     public void initClient() {
-        addAtEnd("123456", "Juan Ramos", "a", "a", "Gold");
-        addAtEnd("78910","José Morente", "s", "s", "Gold");
-        addAtEnd("656565","Pedro Morente", "d", "d", "Normal");
-        addAtEnd("898987","Alex Castro", "f", "f", "Normal");
+        addAtEnd("123456", "Cliente 1", "c1", "c1", "Normal");
+        addAtEnd("998982", "Cliente 2", "c2", "c2", "Normal");
     
     }
 
@@ -68,7 +64,23 @@ public class ClientsController {
     public void addAtEnd(String dpi, String fullName, String username, String password, String role) {
         
         Client c = new Client(count, Long.parseLong(dpi), fullName, username, password, role, null, 0);
-        if(isEmpty()) {
+        
+        Client aux;
+        if (start != null) {
+            c.setNext(start.getNext());
+            c.setPrevious(start);
+            start.setNext(c);
+        }
+        start = c;
+
+        aux = verifyLastClient();
+        if (aux != null) {
+            aux.getNext().setPrevious(c);
+        }
+        
+ 
+        
+       /* if(isEmpty()) {
             start = c;
             start.setNext(c);
             c.setPrevious(start);
@@ -79,7 +91,8 @@ public class ClientsController {
             c.setPrevious(latest);
             latest = c;
             start.setPrevious(latest);
-        }
+        }*/
+        
         count++;
     }
     
@@ -88,8 +101,26 @@ public class ClientsController {
      * @param client
      */
     public void add(Client client) {
+        
         Client c = new Client(count, client.getDpi(), client.getFullName(), client.getUsername(), client.getPassword(), client.getRole(), client.getCarList(), 0);
-        if(isEmpty()) {
+        
+        
+        
+        Client aux;
+        if (start != null) {
+            c.setNext(start.getNext());
+            c.setPrevious(start);
+            start.setNext(c);
+        }
+        start = c;
+
+        aux = verifyLastClient();
+        if (aux != null) {
+            aux.getNext().setPrevious(c);
+        }
+        
+        
+        /*if(isEmpty()) {
             start = c;
             start.setNext(c);
             c.setPrevious(start);
@@ -100,7 +131,7 @@ public class ClientsController {
             c.setPrevious(latest);
             latest = c;
             start.setPrevious(latest);
-        }
+        }*/
         count++;
     }
     
@@ -110,13 +141,18 @@ public class ClientsController {
      */
     public ObservableList<Client> getClients() {
         this.clients.clear();
-        if(!isEmpty()) {
-            Client aux = start;
+        
+        
+        if (!isEmpty()) {
+            Client aux = start.getNext();
             do {
                 clients.add(aux);
+                
                 aux = aux.getNext();
-            } while(aux != start);
+            } while (aux != start.getNext());
+            System.out.println();
         }
+        
         return clients;
     }
     
@@ -125,7 +161,16 @@ public class ClientsController {
      * @param dpi
      */
     public boolean search(int id) {
-        Client aux = latest;
+        Client aux = start;
+        do {
+            if (aux.getId()== id) {
+                return true;
+            } else {
+                aux = aux.getNext();
+            }
+        } while (aux != start);
+        
+        /*Client aux = latest;
         do{
             if (aux.getId()== id){
                 return true;
@@ -133,47 +178,37 @@ public class ClientsController {
                 aux = aux.getNext();
             }
         }while(aux != latest);
+        */
+        
+        
         return false;
     }
+    
+    /*aqui*/
     public Client searchForUserName(String username) {
-        Client aux = latest;
+        Client aux = verifyLastClient();
         do{
             if (aux.getUsername().equals(username)){
                 return aux;
             } else{
                 aux = aux.getNext();
             }
-        }while(aux != latest);
+        }while(aux != verifyLastClient());
         return null;
     }
-    
+    /*aqui*/
     public Client searchClient(int id) {
-        Client aux = latest;
+        Client aux = verifyLastClient();
         do{
             if (aux.getId() == id){
                 return aux;
             } else{
                 aux = aux.getNext();
             }
-        }while(aux != latest);
+        }while(aux != verifyLastClient());
         return null;
     }
     
-    /**
-     * BUSCAR NODO POR REFERENCIA EN LA LISTA CIRCULAR DOBLE
-     * @param dpi
-     */
-    public Client getClient(int id) {
-        Client aux = latest;
-        do{
-            if (aux.getId()== id){
-                return aux;
-            } else{
-                aux = aux.getNext();
-            }
-        }while(aux != latest);
-        return null;
-    }
     
     /**
      * ACTUALIZAR NODO DE LA LISTA CIRCULAR DOBLE
@@ -211,7 +246,32 @@ public class ClientsController {
      * @param dpi
      */
     public void delete(int id) {
-        Client current = start;
+        
+        
+        
+        if (!isEmpty()) {
+            Client aux = searchClient(id);
+            if (aux != null) {
+                Client previous = aux.getPrevious();
+                Client next = aux.getNext();
+
+                previous.setNext(aux.getNext());
+                next.setPrevious(aux.getPrevious());
+
+                if (start == aux) {
+                    if (start == previous && start == next) {
+                        start = null;
+                    } else {
+                        start = start.getPrevious();
+                        start.setNext(next);
+                    }
+                }
+            }
+        }
+        
+        
+        
+        /*Client current = start;
         Client previous = latest;
         if(search(id)) {
             do {
@@ -232,30 +292,43 @@ public class ClientsController {
                 previous = current;
                 current = current.getNext();
             } while(current != start);
-        }
+        }*/
     }
-    
+    /*aqui*/
     public boolean verifications(String username){
-        Client aux = latest;
+        Client aux = verifyLastClient();
         do{
             if (aux.getUsername().equals(username)){
                 return true;
             } else{
                 aux = aux.getNext();
             }
-        }while(aux != latest);
+        }while(aux != verifyLastClient());
         return false;
     }
-    
+    /*aqui*/
     public Client authenticate(String username, String password){
-        Client aux = latest;
+        Client aux = verifyLastClient();
         do{
             if (aux.getUsername().equals(username) && aux.getPassword().equals(password)){
                 return aux;
             } else{
                 aux = aux.getNext();
             }
-        }while(aux != latest);
+        }while(aux != verifyLastClient());
         return null;
     }
+    
+    
+    private Client verifyLastClient() {
+        Client lastClient = start;
+        if (start != null) {
+            do {
+                lastClient = lastClient.getNext();
+            } while (lastClient != start);
+        }
+        return lastClient;
+    }
+    
+    
 }

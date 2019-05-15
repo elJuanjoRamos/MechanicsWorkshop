@@ -31,6 +31,7 @@ public class DashboardViewController implements Initializable {
     public void initialize(URL url, ResourceBundle rb) {
         name.setText(client.getFullName());
         count.setText(String.valueOf(client.getCount()));
+        role.setText(client.getRole());
     }    
     
 }

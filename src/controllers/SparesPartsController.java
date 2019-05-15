@@ -38,14 +38,7 @@ public class SparesPartsController {
     }
     
 
-    public void initSpareParts() {
-        add("a", "Toyota", "Corolla", 10, 145.5);
-        add("b", "Audi", "A3", 10, 100.5);
-        add("c", "v", "a", 10, 130.5);
-        add("d", "d", "a", 10, 150.51);
-        add("sa", "Honda", "Hi", 10, 140.5);
-        add("dx", "ABC", "def", 10, 250.51);
-    }
+    
 
     /*METODO AGREGAR*/
     public void add(String name, String mark, String model, int stock, Double price) {

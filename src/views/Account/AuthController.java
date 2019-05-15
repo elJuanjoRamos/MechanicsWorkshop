@@ -46,9 +46,7 @@ public class AuthController implements Initializable {
         Client cln = ClientsController.getInstance().authenticate(user.getText(), pass.getText());
         
         if (emp != null && cln == null) {
-            if (emp.getRole().equals("Administrator")) {
-                Admin.getInstance().start(Account.s);
-            }
+            Admin.getInstance().start(Account.s);
         } else if(emp == null && cln != null){
             ClientView.getInstance().start(Account.s, cln);
         } 

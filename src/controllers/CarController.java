@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package controllers;
 
 import beans.*;
@@ -10,21 +5,17 @@ import beans.Employee;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
-/**
- *
- * @author Jose Morente
- */
+
 public class CarController {
     private static CarController instance;
     private ObservableList<Car> cars;
     private int size = 1;
     public Car carClient;
     private Car start;
-    private Car latest;
     
     public CarController() {
         cars = FXCollections.observableArrayList();
-        
+        start = null;
     }
 
     /**
@@ -68,27 +59,20 @@ public class CarController {
      */
     public ObservableList<Car> getCars() {
         this.cars.clear();
-        if(!isEmpty()) {
-            Car aux = start;
+
+        if (!isEmpty()) {
+            Car auxiliaryNode = start.getNext();
             do {
-                cars.add(aux);
-                aux = aux.getNext();
-            } while(aux != start);
+                cars.add(auxiliaryNode);
+                auxiliaryNode = auxiliaryNode.getNext();
+            } while (auxiliaryNode != start.getNext());
+            System.out.println();
         }
+        
         return cars;
     }
     
-    /**
-     * OBTENER LISTA
-     */
-    public void getAll() {
-        if(!isEmpty()) {
-            Car aux = start;
-            do {
-                aux = aux.getNext();
-            } while(aux != start);
-        }
-    }
+    
     /**
      * AGREGAR NUEVO NODO AL FINAL DE LA LISTA CIRCULAR SIMPLE
      * @param plate
@@ -98,18 +82,28 @@ public class CarController {
      */
     public void addAtEnd(String plate, String brand, String model, String path) {
         Car c = new Car(size, plate, brand, model, path);
-        if(isEmpty()) {
-            start = c;
-            latest = c;
-            latest.setNext(start);
-        } else {
-            latest.setNext(c);
-            c.setNext(start);
-            latest = c;
+        if (start != null) {
+            c.setNext(start.getNext());
+            start.setNext(c);
         }
+        start = c;
+        
         size++;
     }
 
+
+
+    public void readNodes() {
+        if (!isEmpty()) {
+            Car auxiliaryNode = start.getNext();
+            do {
+                System.out.print(auxiliaryNode.getModel()+ " --> ");
+                // System.out.println(auxiliaryNode.getNextNode().getObject());
+                auxiliaryNode = auxiliaryNode.getNext();
+            } while (auxiliaryNode != start.getNext());
+            System.out.println();
+        }
+    }
 
 
     /**
@@ -154,22 +148,24 @@ public class CarController {
      */
     public void delete(int id) {
         
-        if(search(id)) {
-            if(start.getId() == id) {
-                start = start.getNext();
-                latest.setNext(start);
+        Car actual = start;
+        boolean found = false;
+        while (actual.getNext() != start && !found) {
+            found = (actual.getNext().getId()== id);
+            if (!found) {
+                actual = actual.getNext();
+            }
+        }
+        found = (actual.getNext().getId()== id);
+        if (found) {
+            Car aux = actual.getNext();
+            if (start == start.getNext()) {
+                start = null;
             } else {
-                Car aux = start;
-                while(aux.getNext().getId() != id) {
-                    aux = aux.getNext();
+                if (aux == start) {
+                    start = actual;
                 }
-                if(aux.getNext() == latest) {
-                    aux.setNext(start);
-                    latest = aux;
-                } else {
-                    Car next = aux.getNext();
-                    aux.setNext(next.getNext());
-                }
+                actual.setNext(aux.getNext());
             }
         }
     }
@@ -200,7 +196,6 @@ public class CarController {
     
     public void cleanList(){
         start = null;
-        latest = null;
     }
 
 }

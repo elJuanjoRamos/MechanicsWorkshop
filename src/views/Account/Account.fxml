@@ -9,7 +9,7 @@
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 <?import com.jfoenix.controls.*?>
 
-<AnchorPane id="AnchorPane" prefHeight="774" prefWidth="946" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Account.AccountController">
+<AnchorPane id="AnchorPane" prefHeight="774.0" prefWidth="946.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Account.AccountController">
     <children>
       <Pane layoutY="188.0" prefHeight="400.0" prefWidth="980.0" styleClass="pane" stylesheets="@../../resources/main.css">
          <children>

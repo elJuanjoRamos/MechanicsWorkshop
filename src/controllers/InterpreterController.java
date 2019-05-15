@@ -89,19 +89,26 @@ public class InterpreterController {
                             SparePartsViewController.getInstance().initTableView();
              
                         } else if(text.equals("*.tms")) {
-                            String[] parts = fields[i+3].split(";");
-                            Stack a = new Stack();
-                            Double sPrice = 00.0;
-                            for (int j = 0; j < parts.length; j++) {
-                                SpareParts s = SparesPartsController.getInstance().search(Integer.parseInt(parts[j]));
-                                if (s != null) {
-                                    SpareParts temp = new SpareParts(s.getId(), s.getName(), s.getMark(), s.getModel(), 1, s.getPrice());
-                                    a.add(temp);
-                                    sPrice = sPrice + s.getPrice();
+                            try{
+                                String[] parts = fields[i+3].split(";");
+
+
+                                Stack a = new Stack();
+                                Double sPrice = 00.0;
+                                for (int j = 0; j < parts.length; j++) {
+                                    SpareParts s = SparesPartsController.getInstance().search(Integer.parseInt(parts[j]));
+                                    if (s != null) {
+                                        SpareParts temp = new SpareParts(s.getId(), s.getName(), s.getMark(), s.getModel(), 1, s.getPrice());
+                                        a.add(temp);
+                                        sPrice = sPrice + s.getPrice();
+                                    }
                                 }
+                                ServicesController.getInstance().add(fields[i], fields[i+1], fields[i+2],  a, Double.parseDouble(fields[i+4]), sPrice, true);
+                                ServicesViewController.getInstance().initTableView();
+
+                            } catch(Exception e){
+                                System.out.println(e.getCause());
                             }
-                            ServicesController.getInstance().add(fields[i], fields[i+1], fields[i+2],  a, Double.parseDouble(fields[i+4]), sPrice, true);
-                            ServicesViewController.getInstance().initTableView();
             
                         } else if(text.equals("*.tmca")){
                             System.out.println("---------------------");
@@ -122,14 +129,9 @@ public class InterpreterController {
                                 System.out.println("MARCA" + detailsCar[1]);
                                 System.out.println("MODELO" + detailsCar[2]);
                                 System.out.println("PATH" + detailsCar[3]);
-                                CarController.getInstance().addAtEnd(detailsCar[0], detailsCar[1], detailsCar[2], detailsCar[3]);
+                                CarController.getInstance().addAtEnd(detailsCar[0], detailsCar[1], detailsCar[2], "file:///" + detailsCar[3]);
                             }
                             c.setCarList(CarController.getInstance().returnCars());
-                            /*Car aux = c.getCarList();
-                            while(aux!=null) {
-                                System.out.println(aux);
-                                aux = aux.getNext();
-                            }*/
                             ClientsController.getInstance().add(c);
                             System.out.println("---------------------");
                             FXMLClientViewController.getInstance().initTableView();

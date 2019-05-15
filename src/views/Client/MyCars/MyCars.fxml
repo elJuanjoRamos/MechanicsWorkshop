@@ -78,6 +78,7 @@
                         </HBox>
                         <TableView fx:id="tableView" prefHeight="556.0" VBox.vgrow="ALWAYS">
                            <columns>
+                              <TableColumn fx:id="tableColumnId" prefWidth="75.0" text="ID" />
                               <TableColumn fx:id="tableColumnPlate" prefWidth="169.0" text="PLATE" />
                               <TableColumn fx:id="tableColumnBrand" prefWidth="221.0" text="BRAND" />
                               <TableColumn fx:id="tableColumnModel" prefWidth="255.0" text="MODEL" />

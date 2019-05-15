@@ -28,6 +28,7 @@ public class Car {
         this.brand = brand;
         this.model = model;
         this.path = path;
+        next = this;
     }
 
     /**
