@@ -161,7 +161,9 @@ public class ProcessesViewController implements Initializable {
         WorkOrder wol = TDAQueueCarsFinished.getInstance().getTDAQueue();
         ObservableList<WorkOrder> carsFinished = FXCollections.observableArrayList();
         while (wol != null) {
-            carsFinished.add(wol);
+            if (!wol.getState().equalsIgnoreCase("Payed")) {
+                carsFinished.add(wol);
+            }
             wol = wol.getNext();
         }
         tableViewFinished.setItems(carsFinished);

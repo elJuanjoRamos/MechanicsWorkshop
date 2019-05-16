@@ -10,6 +10,7 @@ import beans.SpareParts;
 import beans.WorkOrder;
 import com.lowagie.text.Cell;
 import com.lowagie.text.Document;
+import com.lowagie.text.PageSize;
 import com.lowagie.text.Table;
 import com.lowagie.text.pdf.DefaultFontMapper;
 import com.lowagie.text.pdf.PdfContentByte;
@@ -109,7 +110,7 @@ public class ReportPDFController {
             int quantity = 1;
             while(asistente != null) {
                 System.out.println(asistente);
-                if(quantity <= 5) {
+                if(quantity <= 10) {
                     if(asistente.getQuantity()!=0) {
                         dataSet.setValue(asistente.getService().getName(), asistente.getQuantity());
                         quantity++;
@@ -117,20 +118,16 @@ public class ReportPDFController {
                 }
                 asistente = asistente.getNext();
             }
-            JFreeChart chart = ChartFactory.createPieChart("TOP 5 SERVICES", dataSet, true, true, false);
+            JFreeChart chart = ChartFactory.createPieChart("TOP 10 SERVICES", dataSet, true, true, false);
             chart.draw(graphics2d, rectangle2d);
             graphics2d.dispose();
             contentByte.addTemplate(template, 0, 0);
             
             //CARGAR DATOS TABLA
             Table table = new Table(5);
-            table.setBorderWidth(1);
-            table.setBorderColor(new Color(0, 0, 255));
-            table.setPadding(5);
-            table.setSpacing(5);
-            Cell cell = new Cell("SPARE PARTS TOP 5");
+            Cell cell = new Cell("SPARE PARTS TOP 10");
             cell.setHeader(true);
-            cell.setColspan(5);
+            table.setPadding(1);
             table.addCell("ID");
             table.addCell("NAME");
             table.addCell("MARK");
@@ -139,7 +136,7 @@ public class ReportPDFController {
             ServiceAssignament asistente2 = tope;
             int quantity2 = 1;
             while(asistente2 != null) {
-                if(quantity2 <= 5) {
+                if(quantity2 <= 10) {
                     if(asistente2.getQuantity() != 0) {
                         table.addCell(String.valueOf(asistente2.getService().getId()));
                         table.addCell(String.valueOf(asistente2.getService().getName()));
@@ -217,53 +214,24 @@ public class ReportPDFController {
         }
         
         PdfWriter writer = null;
-        Document document = new Document();
+        Document document = new Document(PageSize.A4.rotate());
         try {
             writer = PdfWriter.getInstance(document,
                 new FileOutputStream(ruta + "\\getTopSpareParts.pdf"));
             document.open();
-            PdfContentByte contentByte = writer.getDirectContent();
-            PdfTemplate template = contentByte.createTemplate(500, 400);
-            Graphics2D graphics2d = template.createGraphics(500, 400, new DefaultFontMapper());
-            Rectangle2D rectangle2d = new Rectangle2D.Double(0, 0, 500, 400);
-            //CARGAR GRAFICA
-            DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
-            SparePartTopAssignament asistente = end;
-            int quantity = 1;
-            while(asistente != null) {
-                if(quantity <= 5) {
-                    dataSet.setValue(asistente.getQuantity(), "Population", asistente.getService().getName());
-                    quantity++;
-                }
-                asistente = asistente.getNext();
-            }
-            JFreeChart chart = ChartFactory.createBarChart(
-                "TOP 5 SPARE PARTS", 
-                "NAME", 
-                "QUANTITY",
-            dataSet, PlotOrientation.VERTICAL, false, true, false);
-            chart.draw(graphics2d, rectangle2d);
-            graphics2d.dispose();
-            contentByte.addTemplate(template, 0, 0);
-            
             //CARGAR DATOS TABLA
-            Table table = new Table(5);
-            table.setBorderWidth(1);
-            table.setBorderColor(new Color(0, 0, 255));
-            table.setPadding(5);
-            table.setSpacing(5);
-            Cell cell = new Cell("TOP 5 SPARE PARTS");
-            cell.setHeader(true);
-            cell.setColspan(5);
-            table.addCell("ID");
-            table.addCell("NAME");
-            table.addCell("MARK");
-            table.addCell("MODEL");
-            table.addCell("QUANTITY");
+            
+            Table table = new Table(5);    
+            table.setPadding(1);
+            table.addCell("ID");       
+            table.addCell(new Cell("NAME"));       
+            table.addCell(new Cell("MARK"));       
+            table.addCell(new Cell("MODEL"));       
+            table.addCell(new Cell("QUANTITY"));       
             SparePartTopAssignament asistente2 = end;
             int quantity2 = 1;
             while(asistente2 != null) {
-                if(quantity2 <= 5) {
+                if(quantity2 <= 10) {
                     table.addCell(String.valueOf(asistente2.getService().getId()));
                     table.addCell(String.valueOf(asistente2.getService().getName()));
                     table.addCell(String.valueOf(asistente2.getService().getMark()));
@@ -273,8 +241,33 @@ public class ReportPDFController {
                 }
                 asistente2 = asistente2.getNext();
             }
-                
             document.add(table);
+            
+            PdfContentByte contentByte = writer.getDirectContent();
+            PdfTemplate template = contentByte.createTemplate(800, 200);
+            Graphics2D graphics2d = template.createGraphics(800, 200, new DefaultFontMapper());
+            Rectangle2D rectangle2d = new Rectangle2D.Double(0, 00, 1000, 200);
+            //CARGAR GRAFICA
+            DefaultCategoryDataset dataSet = new DefaultCategoryDataset();
+            SparePartTopAssignament asistente = end;
+            int quantity = 1;
+            while(asistente != null) {
+                if(quantity <= 10) {
+                    dataSet.setValue(asistente.getQuantity(), "Population", asistente.getService().getName());
+                    quantity++;
+                }
+                asistente = asistente.getNext();
+            }
+            JFreeChart chart = ChartFactory.createBarChart(
+                "TOP 10 SPARE PARTS", 
+                "NAME", 
+                "QUANTITY",
+            dataSet, PlotOrientation.VERTICAL, false, true, false);
+            chart.draw(graphics2d, rectangle2d);
+            graphics2d.dispose();
+            contentByte.addTemplate(template, 0, 0);
+            
+            
         } catch (Exception e) {
             e.printStackTrace();
         }

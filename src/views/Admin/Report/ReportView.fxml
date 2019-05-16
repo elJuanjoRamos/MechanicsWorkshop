@@ -1,5 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.effect.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.effect.DropShadow?>
 <?import javafx.scene.image.Image?>
@@ -11,7 +17,7 @@
 <?import javafx.scene.text.Text?>
 <?import de.jensd.fx.glyphs.fontawesome.*?>
 
-<StackPane fx:id="stackPane" stylesheets="@../../../resources/main.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.Report.ReportViewController">
+<StackPane fx:id="stackPane" stylesheets="@../../../resources/main.css" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="views.Admin.Report.ReportViewController">
    <children>
       <VBox prefHeight="853.0" prefWidth="1278.0" style="-fx-background-color: white;" stylesheets="@../../../resources/main.css">
          <children>
@@ -89,7 +95,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 Spare Parts">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Top 10 Spare Parts">
                                  <font>
                                     <Font name="Corbel" size="20.0" />
                                  </font>
@@ -106,7 +112,7 @@
                               <Insets bottom="30.0" left="30.0" right="30.0" top="30.0" />
                            </HBox.margin>
                         </VBox>
-                        <VBox alignment="CENTER" prefHeight="200.0" onMouseClicked="#report_spareParts" prefWidth="100.0" style="-fx-background-color: WHITE;" styleClass="hoover_fade" HBox.hgrow="ALWAYS">
+                        <VBox alignment="CENTER" onMouseClicked="#report_spareParts" prefHeight="200.0" prefWidth="100.0" style="-fx-background-color: WHITE;" styleClass="hoover_fade" HBox.hgrow="ALWAYS">
                            <children>
                               <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
                                  <children>
@@ -122,7 +128,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 Spare Parts">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Top 10 Spare Parts">
                                  <font>
                                     <Font name="Corbel" size="20.0" />
                                  </font>
@@ -159,7 +165,7 @@
                                     <Insets bottom="5.0" left="5.0" right="5.0" top="5.0" />
                                  </VBox.margin>
                               </ImageView>
-                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Top 5 Services">
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Top 10 Services">
                                  <font>
                                     <Font name="Corbel" size="20.0" />
                                  </font>

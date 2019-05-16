@@ -32,6 +32,8 @@ public class ClientsController {
     public void initClient() {
         addAtEnd("123456", "Cliente 1", "c1", "c1", "Normal");
         addAtEnd("998982", "Cliente 2", "c2", "c2", "Normal");
+    addAtEnd("43234", "Cliente 3", "c3", "c3", "Normal");
+    addAtEnd("434434", "Cliente 4", "c4", "c4", "Normal");
     
     }
 
@@ -77,22 +79,7 @@ public class ClientsController {
         if (aux != null) {
             aux.getNext().setPrevious(c);
         }
-        
- 
-        
-       /* if(isEmpty()) {
-            start = c;
-            start.setNext(c);
-            c.setPrevious(start);
-            latest = c;
-        } else {
-            latest.setNext(c);
-            c.setNext(start);
-            c.setPrevious(latest);
-            latest = c;
-            start.setPrevious(latest);
-        }*/
-        
+
         count++;
     }
     
@@ -103,9 +90,7 @@ public class ClientsController {
     public void add(Client client) {
         
         Client c = new Client(count, client.getDpi(), client.getFullName(), client.getUsername(), client.getPassword(), client.getRole(), client.getCarList(), 0);
-        
-        
-        
+          
         Client aux;
         if (start != null) {
             c.setNext(start.getNext());
@@ -118,20 +103,7 @@ public class ClientsController {
         if (aux != null) {
             aux.getNext().setPrevious(c);
         }
-        
-        
-        /*if(isEmpty()) {
-            start = c;
-            start.setNext(c);
-            c.setPrevious(start);
-            latest = c;
-        } else {
-            latest.setNext(c);
-            c.setNext(start);
-            c.setPrevious(latest);
-            latest = c;
-            start.setPrevious(latest);
-        }*/
+
         count++;
     }
     
@@ -169,17 +141,7 @@ public class ClientsController {
                 aux = aux.getNext();
             }
         } while (aux != start);
-        
-        /*Client aux = latest;
-        do{
-            if (aux.getId()== id){
-                return true;
-            } else{
-                aux = aux.getNext();
-            }
-        }while(aux != latest);
-        */
-        
+
         
         return false;
     }
@@ -224,6 +186,7 @@ public class ClientsController {
             Client aux = start;
             do {
                 if(aux.getId() == id) {
+                    aux.setDpi(dpi);
                     aux.setFullName(fullName);
                     aux.setUsername(username);
                     aux.setPassword(password);

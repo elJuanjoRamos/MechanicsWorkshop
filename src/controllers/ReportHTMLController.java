@@ -206,7 +206,7 @@ public class ReportHTMLController {
             "    <div class=\"jumbotron jumbotron-fluid\">\n" +
             "      <div class=\"container\">\n" +
             "        <h1 class=\"display-4\">Spare Parts</h1>\n" +
-            "        <p class=\"lead\">Top 5 of the most expensive spare parts.</p>\n" +
+            "        <p class=\"lead\">Top 10 of the most expensive spare parts.</p>\n" +
             "      </div>\n" +
             "    </div>\n" +
             "    <table class=\"table\">\n" +
@@ -225,7 +225,7 @@ public class ReportHTMLController {
             SparePartsAssignment auxiliar1 = tope;
             if(auxiliar1 != null) {
                 while(auxiliar1 != null) {
-                    if(contador <= 5) {
+                    if(contador <= 10) {
                         System.out.println(contador);
                         rep.print("<tr>\n" +
                         "     <th scope=\"row\">" + auxiliar1.getSparePart().getId() + "</th>\n" +
@@ -256,7 +256,7 @@ public class ReportHTMLController {
             if(auxiliar2 != null) {
                 while(auxiliar2 != null) {
                     System.out.println(contador2);
-                    if(contador2 <= 5) {
+                    if(contador2 <= 10) {
                         rep.print("'" + auxiliar2.getSparePart().getName() + "',\n");
                         contador2++;
                     }
@@ -271,7 +271,7 @@ public class ReportHTMLController {
             SparePartsAssignment auxiliar3 = tope;
             if(auxiliar3 != null) {
                 while(auxiliar3 != null) {
-                    if(contador3 <= 5) {
+                    if(contador3 <= 10) {
                         rep.print(auxiliar3.getSparePart().getPrice() + ",\n");
                         contador3++;
                     }
@@ -402,14 +402,14 @@ public class ReportHTMLController {
             "    <div class=\"jumbotron jumbotron-fluid\">\n" +
             "      <div class=\"container\">\n" +
             "        <h1 class=\"display-4\">Clientes</h1>\n" +
-            "        <p class=\"lead\">Top 5 de los repuestos mas caros.</p>\n" +
+            "        <p class=\"lead\">Top 5 Cars that repeat between clients.</p>\n" +
             "      </div>\n" +
             "    </div>\n");
             int contador1 = 1;
             CarAssignament a;
             a = end;
             while(a != null) {
-                if(contador1 <= 5) {
+                if(contador1 <= 10) {
                     rep.print("<nav aria-label=\"breadcrumb\">\n" +
                     "      <ol class=\"breadcrumb\">\n" +
                     "        <h6>" + a.getCar().getCar().getBrand() + " - " +a.getCar().getCar().getModel() + "   <span class=\"badge badge-secondary\">"+a.getQuantity()+"</span></h6>\n" +

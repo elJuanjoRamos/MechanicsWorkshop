@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset='utf-8'>
+    <meta http-equiv='X-UA-Compatible' content='IE=edge'>
+    <title>Report Clients</title>
+    <meta name='viewport' content='width=device-width, initial-scale=1'>
+    <link rel='stylesheet' type='text/css' media='screen' href='main.css'>
+    <script src='main.js'></script>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+</head><body>
+  <nav class="navbar navbar-light bg-light">
+    <span class="navbar-brand mb-0 h1">Mechanics Workshop</span>
+  </nav><div class="container">
+    <div class="jumbotron jumbotron-fluid">
+      <div class="container">
+        <h1 class="display-4">Clients</h1>
+        <p class="lead">Report of all clients.</p>
+      </div>
+    </div>
+    <table class="table">
+      <thead class="thead-dark">
+        <tr>
+          <th scope="col">DPI</th>
+          <th scope="col">NAME</th>
+          <th scope="col">USERNAME</th>
+          <th scope="col">PASSWORD</th>
+          <th scope="col">ROLE</th>
+        </tr>
+      </thead><tbody><tr>
+     <th scope="row">998982</th>
+     <td>Cliente 2</td>
+     <td>c2</td>
+     <td>c2</td>
+     <td>Normal</td>
+</tr><tr>
+     <th scope="row">123456</th>
+     <td>Cliente 1</td>
+     <td>c1</td>
+     <td>c1</td>
+     <td>Normal</td>
+</tr></tbody>
+    </table>
+    <canvas id="myChart" style="height:400; width:800"></canvas>
+  </div>  <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0"></script>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(ctx, {
+        type: 'pie',
+        data: {
+            labels: ['Gold', 'Normal'],
+            datasets: [{
+                label: '# of Votes',
+                data: [0, 2],
+                backgroundColor: [
+                    'rgba(212, 175, 57, 0.8)',
+                    'rgba(0, 59, 121, 0.8)'
+                ],
+                borderColor: [
+                    'rgba(212, 175, 57, 0.8)',
+                    'rgba(0, 59, 121, 0.8)'
+                ],
+                borderWidth: 1
+            }]
+        },
+        options: {
+            scales: {
+                yAxes: [{
+                    ticks: {
+                        beginAtZero: true
+                    }
+                }]
+            }
+        }
+    });
+  </script>
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+</body>
+</html>
