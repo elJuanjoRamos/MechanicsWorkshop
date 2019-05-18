@@ -31,10 +31,7 @@ public class ClientsController {
     **/
     public void initClient() {
         addAtEnd("123456", "Cliente 1", "c1", "c1", "Normal");
-        addAtEnd("998982", "Cliente 2", "c2", "c2", "Normal");
-    addAtEnd("43234", "Cliente 3", "c3", "c3", "Normal");
-    addAtEnd("434434", "Cliente 4", "c4", "c4", "Normal");
-    
+        addAtEnd("998982", "Cliente 2", "c2", "c2", "Normal"); 
     }
 
     /**
