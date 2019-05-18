@@ -24,6 +24,7 @@ public class ServicesController {
     private ObservableList<Service> services;
     private int count = 1;
     protected Service first;
+    protected ServiceRandom firstRandom;
     private int aux;
     Stack a = new Stack();
         
@@ -180,6 +181,122 @@ public class ServicesController {
         return aux;
     }
     
+    /**
+     * OBTENER SERVICIO ALEATORIO
+     */
+    public Service getServiceRandom(String model, String mark) {
+        firstRandom = null;
+        Service aux = first;
+        int quantity = 1;
+        
+        //SI ES CERO DEJARLO COMO DIAGNOSTICO
+        while (aux != null) {
+            if (aux.getModel().equalsIgnoreCase(model) && aux.getMark().equalsIgnoreCase(mark) || aux.getModel().equals("Any")   ) {
+                if (aux.getState() == true) {
+                    System.out.println("ESTADO 2" + aux);
+                    quantity++;
+                    System.out.println(quantity);
+                    add(quantity, aux);
+                }
+            }
+            aux = aux.getNext();
+        }
+        int numeroRandom = valorAleatorio(quantity-1);
+        System.out.println("ID RANDOM" + numeroRandom);
+        return searchRandom(numeroRandom);
+    }
+        
+    public int valorAleatorio(int n) {
+        return (int) (Math.random() * n) + 1;
+    }
     
+    
+    /***
+     * BUSCAR EN LA LISTA DE SERVICIO RANDOM 
+     */
+    public Service searchRandom(int id){
+        ServiceRandom aux = firstRandom;
+        
+        while (aux != null) {
+            System.out.println(aux.getService());
+            if (aux.getId() == id) {
+                System.out.println("SERVICIO ENCONTRADO" +aux.getService());
+                return aux.getService();
+            }
+            aux = aux.getNext();
+        }
+        return null;
+    }
+    
+    /**
+     * AGREGAR A LA LISTA DE SERVICIOS RANDOM 
+     */
+    public void add(int id, Service service){
+        ServiceRandom sr = new ServiceRandom(id, service);
+         if (firstRandom == null) {
+            firstRandom = sr;
+        } else {
+            ServiceRandom aux = firstRandom;
+            while (aux.getNext() != null) {
+                aux = aux.getNext();
+            }
+            aux.setNext(sr);
+        }
+    }
+    
+}
+
+
+class ServiceRandom {
+    private int id;
+    private Service service;
+    private ServiceRandom next;
+
+    public ServiceRandom(int id, Service service) {
+        this.id = id;
+        this.service = service;
+    }
+
+    /**
+     * @return the id
+     */
+    public int getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    /**
+     * @return the service
+     */
+    public Service getService() {
+        return service;
+    }
+
+    /**
+     * @param service the service to set
+     */
+    public void setService(Service service) {
+        this.service = service;
+    }
+
+    /**
+     * @return the next
+     */
+    public ServiceRandom getNext() {
+        return next;
+    }
+
+    /**
+     * @param next the next to set
+     */
+    public void setNext(ServiceRandom next) {
+        this.next = next;
+    }
     
 }

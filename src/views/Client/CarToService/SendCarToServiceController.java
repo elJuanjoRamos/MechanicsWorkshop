@@ -15,6 +15,7 @@ import controllers.CarController;
 import controllers.ServicesController;
 import controllers.WorkOrderController;
 import java.net.URL;
+import java.util.Optional;
 import java.util.ResourceBundle;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -22,7 +23,9 @@ import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -137,11 +140,43 @@ public class SendCarToServiceController implements Initializable {
 
         if (tableView.getSelectionModel().getSelectedItem() != null) {
             if (comboService.getSelectionModel().getSelectedItem() != null) {
-                Car car = tableView.getSelectionModel().getSelectedItem();
+                //METODO RANDOM
+                if(comboService.getSelectionModel().getSelectedItem().toString().equalsIgnoreCase("Diagnostic")) {
+                    Service service = ServicesController.getInstance().searchForName(comboService.getSelectionModel().getSelectedItem().toString());
+                    Service serviceRandom = ServicesController.getInstance().getServiceRandom(eModel.getText(), eBrand.getText());
+                    if(serviceRandom!=null) {
+                        if(!serviceRandom.getName().equalsIgnoreCase("Diagnostico")) {
+                            Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                            alert.setTitle("Detalles");
+                            alert.setHeaderText(service.getName());
+                            alert.setContentText("¿Desea que se le realice un servicio de " + serviceRandom.getName() + "?");
+
+                            Optional<ButtonType> result = alert.showAndWait();
+                            if (result.get() == ButtonType.OK){
+                                WorkOrderController.getInstance().add(tableView.getSelectionModel().getSelectedItem(), client, serviceRandom, null, "UNATTENDED");
+                                getAlert("Work order generated successfully.", "Details");
+                                cancel();
+                            } else {
+                                cancel();
+                            }
+                        } else {
+                            getAlert("Error de sistema intente nuevamente.", "Details");
+                        }
+                    } else {
+                        getAlert("No se encontro un servicio adecuado para su vehículo.", "Details.");
+                        cancel();
+                    }
+                } else {
+                    Service service = ServicesController.getInstance().searchForName(comboService.getSelectionModel().getSelectedItem().toString());
+                    WorkOrderController.getInstance().add(tableView.getSelectionModel().getSelectedItem(), client, service, null, "UNATTENDED");
+                    getAlert("Work order generated successfully.", "Details");
+                    cancel();
+                }
+                /*Car car = tableView.getSelectionModel().getSelectedItem();
                 Service service = ServicesController.getInstance().searchForName(comboService.getSelectionModel().getSelectedItem().toString());
                 WorkOrderController.getInstance().add(car, client, service, null, "UNATTENDED");
                 getAlert("Work order generated successfully", "Details");
-                cancel();
+                cancel();*/
             } else {
                 getAlert("Please, select a service for your car.", "Error!");
             }
